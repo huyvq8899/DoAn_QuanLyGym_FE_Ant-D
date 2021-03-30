@@ -1,0 +1,63 @@
+<form class="f-form" nz-form [formGroup]="myFormGroup" class="login-form">
+  <div>
+      <nz-form-item>
+          <nz-form-label class="flabel" nzRequired nzFor="facilityName">Tên cơ sở</nz-form-label>
+          <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+              <input nz-input nzSize="small" formControlName="facilityName" />
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+  <div>
+    <nz-form-item>
+        <nz-form-label class="flabel" nzRequired nzFor="taxCode">Mã số thuế</nz-form-label>
+        <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+            <input nz-input nzSize="small" formControlName="taxCode" />
+        </nz-form-control>
+    </nz-form-item>
+</div>
+  <div>
+      <nz-form-item>
+          <nz-form-label class="flabel" nzRequired nzFor="address">Địa chỉ</nz-form-label>
+          <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+              <input nz-input nzSize="small" formControlName="address" />
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+  <div>
+    <nz-form-item>
+        <nz-form-label class="flabel" nzRequired nzFor="numberPhone">Số điện thoại</nz-form-label>
+        <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+            <input nz-input nzSize="small" formControlName="numberPhone" />
+        </nz-form-control>
+    </nz-form-item>
+</div>
+  <div>
+    <nz-form-item>
+        <nz-form-label class="flabel" nzRequired nzFor="fax">Số Fax</nz-form-label>
+        <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+            <input nz-input nzSize="small" formControlName="fax" />
+        </nz-form-control>
+    </nz-form-item>
+</div>
+<div>
+  <nz-form-item>
+      <nz-form-label class="flabel" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+          <input nz-input nzSize="small" formControlName="email" />
+      </nz-form-control>
+  </nz-form-item>
+</div>
+<div>
+  <nz-form-item>
+      <nz-form-label class="flabel" nzRequired nzFor="establishedDay">Ngày thành lập</nz-form-label>
+      <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
+          <input nz-input nzSize="small" formControlName="establishedDay" />
+      </nz-form-control>
+  </nz-form-item>
+</div>
+</form>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+  <button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

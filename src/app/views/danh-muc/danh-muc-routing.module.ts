@@ -6,6 +6,7 @@ import { NganhNgheComponent } from './nganh-nghe/nganh-nghe.component';
 import { PhuongAnNhapComponent } from './phuong-an-nhap/phuong-an-nhap.component';
 import { VungComponent } from './vung/vung.component';
 import { CardTypeComponent } from './card-type/card-type.component';
+import { FacilityComponent } from './facility/facility.component';
 
 const routes: Routes = [
     {
@@ -66,6 +67,11 @@ const routes: Routes = [
 
         path: 'cardtype',
         component:CardTypeComponent
+    },
+    {
+
+        path: 'facility',
+        component:FacilityComponent
     },
     
 ];

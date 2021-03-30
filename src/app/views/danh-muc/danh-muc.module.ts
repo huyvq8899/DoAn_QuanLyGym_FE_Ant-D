@@ -11,6 +11,8 @@ import { PhuongAnNhapComponent } from './phuong-an-nhap/phuong-an-nhap.component
 import { AddEditPhuongAnNhapComponent } from './phuong-an-nhap/modal/add-edit-phuong-an-nhap/add-edit-phuong-an-nhap.component';
 import { CardTypeComponent } from './card-type/card-type.component';
 import { AddEditCardTypeComponent } from './card-type/add-edit-card-type/add-edit-card-type/add-edit-card-type.component';
+import { AddEditFacilityComponent } from './facility/add-edit-facility/add-edit-facility/add-edit-facility.component';
+import { FacilityComponent } from './facility/facility.component';
 @NgModule({
   imports: [
  
@@ -22,7 +24,8 @@ import { AddEditCardTypeComponent } from './card-type/add-edit-card-type/add-edi
   VungComponent, AddEditVungComponent,
   NganhNgheComponent, AddEditNganhNgheComponent,
   PhuongAnNhapComponent, AddEditPhuongAnNhapComponent,
-  CardTypeComponent,AddEditCardTypeComponent
+  CardTypeComponent,AddEditCardTypeComponent,
+  AddEditFacilityComponent,FacilityComponent
   
 ]
 })
