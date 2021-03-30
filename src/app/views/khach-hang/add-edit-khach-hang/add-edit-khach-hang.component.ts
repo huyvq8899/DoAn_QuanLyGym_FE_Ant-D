@@ -139,7 +139,12 @@ export class AddEditKhachHangModalComponent implements OnInit {
         id: [0],
         customerName: [null, [Validators.required]],
         customerCode: [
-          null,[Validators.required],[ValidatorsDupcateMaKhachHang(this.khachhang,""),],
+          null,[Validators.required],  [
+            ValidatorsDupcateMaKhachHang(
+              this.khachhang,
+              this.khachHangData.customerCode
+            ),
+          ],,
         ],
         address: [null, [Validators.required]],
         doB:["08/08/1999"],
