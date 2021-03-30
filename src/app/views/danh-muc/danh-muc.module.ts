@@ -13,6 +13,8 @@ import { AddEditFacilityComponent } from './facility/add-edit-facility/add-edit-
 import { FacilityComponent } from './facility/facility.component';
 import { EquipmentComponent } from './equipment/equipment.component';
 import { AddEditEquipmentComponent } from './equipment/add-edit-equipment/add-edit-equipment/add-edit-equipment/add-edit-equipment.component';
+import { AddEditDichVuComponent } from './dich-vu/add-edit-dich-vu/add-edit-dich-vu/add-edit-dich-vu.component';
+import { DichVuComponent } from './dich-vu/dich-vu.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import { AddEditEquipmentComponent } from './equipment/add-edit-equipment/add-ed
   PhuongAnNhapComponent, AddEditPhuongAnNhapComponent,
   CardTypeComponent,AddEditCardTypeComponent,
   AddEditFacilityComponent,FacilityComponent,
-  AddEditEquipmentComponent,EquipmentComponent
+  AddEditEquipmentComponent,EquipmentComponent,
+  AddEditDichVuComponent,DichVuComponent
   
 ]
 })

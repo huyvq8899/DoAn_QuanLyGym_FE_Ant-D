@@ -1,0 +1,79 @@
+<div nz-row>
+  <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+          <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+      </ng-template>
+  </div>
+  <div style="text-align: right;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+          <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+</div>
+<br />
+<div>
+  <nz-table #basicTable [nzData]="listService" nzSize="small" [nzLoading]="loading" nzBordered="true">
+      <thead>
+          <tr>
+              <th nzAlign="center" nzWidth="5%">STT</th>
+              <th nzWidth="250px" nzColumnKey="serviceName" nzCustomFilter>Tên dịch vụ
+                  <nz-filter-trigger [nzDropdownMenu]="menu">
+                      <i nz-icon nzType="search"></i>
+                  </nz-filter-trigger>
+                  <nz-dropdown-menu #menu="nzDropdownMenu">
+                      <div class="ant-table-filter-dropdown">
+                          <div class="search-box">
+                              <input type="text" nz-input placeholder="..." [(ngModel)]="displayData.KeywordCol" (change)="search('serviceName')" />
+                          </div>
+                      </div>
+                  </nz-dropdown-menu>
+              </th>
+              <th nzWidth="250px" nzColumnKey="description" nzCustomFilter>Mô tả 
+                  <nz-filter-trigger [nzDropdownMenu]="menu1">
+                      <i nz-icon nzType="search"></i>
+                  </nz-filter-trigger>
+                  <nz-dropdown-menu #menu1="nzDropdownMenu">
+                      <div class="ant-table-filter-dropdown">
+                          <div class="search-box">
+                              <input type="text" nz-input placeholder="..." [(ngModel)]="displayData.KeywordCol" (change)="search('description')" />
+                          </div>
+                      </div>
+                  </nz-dropdown-menu>
+              </th>
+              <th nzWidth="250px" nzColumnKey="money" nzCustomFilter>Giá tiền
+                <nz-filter-trigger [nzDropdownMenu]="menu1">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu1="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="displayData.KeywordCol" (change)="search('money')" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+              <th nzAlign="center" nzWidth="10%">Thao tác</th>
+
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of basicTable.data; let i = index">
+              <td nzAlign="center">{{ i + 1 }}</td>
+              <td nzAlign="center">{{ data.serviceName }}</td>
+              <td nzAlign="center">{{ data.description }}</td>
+              <td nzAlign="center">{{ data.money }}</td>
+              <td nzAlign="center">
+                  <nz-button-group nzSize="small">
+                      <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
+                          <i nz-icon nzType="edit"></i>
+                      </button> &nbsp;
+                      <button nz-button nzType="danger" (click)="removeItem(data.id)" nz-tooltip nzTooltipTitle="Xóa">
+                          <i nz-icon nzType="delete"></i>
+                      </button>
+                  </nz-button-group>
+          </tr>
+      </tbody>
+  </nz-table>
+</div>

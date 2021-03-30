@@ -8,6 +8,7 @@ import { VungComponent } from './vung/vung.component';
 import { CardTypeComponent } from './card-type/card-type.component';
 import { FacilityComponent } from './facility/facility.component';
 import { EquipmentComponent } from './equipment/equipment.component';
+import { DichVuComponent } from './dich-vu/dich-vu.component';
 
 const routes: Routes = [
     {
@@ -76,6 +77,10 @@ const routes: Routes = [
     {
         path: 'equipment',
         component:EquipmentComponent
+    },
+    {
+        path: 'dich-vu',
+        component:DichVuComponent
     },
     
 ];
