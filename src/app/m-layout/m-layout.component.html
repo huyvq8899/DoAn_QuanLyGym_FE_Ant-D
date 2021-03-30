@@ -1,0 +1,226 @@
+<div>
+    <Navbar [icon]="icon" (onLeftClick)="onOpenChange($event)">{{textHeader}} </Navbar>
+    <Drawer class="my-drawer" [ngStyle]="{ minHeight: this.height + 'px' }" [contentStyle]="{ color: '#A6A6A6', textAlign: 'center', paddingTop: '42px' }" [enableDragHandle]="true" [sidebar]="sidebar" [open]="this.state.open" (onOpenChange)="onOpenChange($event)">
+        <router-outlet></router-outlet>
+    </Drawer>
+</div>
+
+<ng-template #icon>
+    <Icon type="ellipsis"></Icon>
+</ng-template>
+
+<ng-template #sidebar>
+    <List>
+        <ul nz-menu nzMode="inline">
+
+            <!-- <li nz-submenu nzTitle="Navigation Two" nzIcon="appstore">
+              <ul>
+                <li nz-menu-item>Option 5</li>
+                <li nz-menu-item>Option 6</li>
+                <li nz-submenu nzTitle="Submenu">
+                  <ul>
+                    <li nz-menu-item>Option 7</li>
+                    <li nz-menu-item>Option 8</li>
+                    <li nz-submenu nzTitle="Submenu">
+                      <ul>
+                        <li nz-menu-item>Option 9</li>
+                        <li nz-menu-item>Option 10</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li> -->
+            <li *ngIf="CheckUser()===1" nz-submenu nzTitle="Hệ thống" nzIcon="setting">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-account/m-list']">Danh sách tài khoản
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Xin nghỉ" nzIcon="user">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-xin-nghi/m-de-xuat-xin-nghi']">Đề xuất xin nghỉ
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-xin-nghi/m-thong-ke-xin-nghi']">Thống kê xin nghỉ
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Khách hàng" nzIcon="customer-service">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-khach-hang']">Khách hàng</li>
+                    <li *ngIf="this.check===true" nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-khach-hang/m-luu-lich-su-kh']">Lịch sử thông tin KH</li>
+                </ul>
+            </li>
+            <li *ngIf="this.check===true" nz-submenu nzTitle="Danh mục" nzIcon="hdd">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-loi-nhuan']">Lợi nhuận
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-chenh-lech']">Chênh lệch
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-kho-hang']">Kho hàng
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-san-pham']">Sản phẩm
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-nha-cung-cap']">Nhà cung cấp
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-cuoc-van-chuyen']">Cước vận chuyển
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-lai-xe']">Lái xe
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-chiet-khau']">Chiết khấu
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-vung']">Vùng
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-nganh-nghe']">Ngành nghề
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-phong-ban']">Phòng ban
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-phuong-an-nhap']">Phương án nhập
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="this.roleId === 'DX'" nz-submenu nzTitle="Danh mục" nzIcon="hdd">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-cuoc-van-chuyen']">Cước vận chuyển
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-danh-muc/m-lai-xe']">Lái xe
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Bán hàng" nzIcon="shop">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-quan-ly-ban-hang/m-don-hang-cong-nghiep']">Đơn hàng công nghiệp
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-quan-ly-ban-hang/m-don-hang-thuong-mai']">Đơn hàng thương mại
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="checkxemMua === true" nz-submenu nzTitle="Mua hàng" nzIcon="shopping-cart">
+                <ul>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-quan-ly-mua-hang/m-mua-hang-cong-nghiep']">Đơn mua hàng công nghiệp
+                    </li>
+                    <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-quan-ly-mua-hang/m-mua-hang-thuong-mai']">Đơn mua hàng thương mại
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Thống kê" nzIcon="stock" *ngIf="CheckFunction('THONG_KE')">
+              <ul>
+                  <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-thong-ke/m-thong-ke-so-luong-khach-hang']">Số lượng khách hàng
+                  </li>
+              </ul>
+          </li>
+          <li  nz-submenu nzTitle="Báo cáo" nzIcon="stock" *ngIf="CheckFunction('BAO-CAO')">
+            <ul>
+                <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-bao-cao/m-bao-cao-them-khach-hang']">Báo cáo thêm KH
+                </li>
+                <li nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-bao-cao/m-bao-cao-them-khach-hang-theo-nhan-vien']">Báo cáo thêm KH theo tháng
+                </li>
+                <li *ngIf="this.check===true" nz-menu-item (click)="onCloseChange()" [routerLink]="['/m-layout/m-bao-cao/m-bao-cao-them-khach-hang-theo-nhan-vien-KD']">Báo cáo thêm KH nhân viên
+                </li>
+            </ul>
+        </li>
+            <!-- <li>
+        <ul>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+          <li nz-menu-item></li>
+        </ul>
+      </li> -->
+        </ul>
+    </List>
+</ng-template>
+
+
+<Navbar [leftContent]="''" [mode]="'light'" [rightContent]="popover" (onLeftClick)="onLeftClick()" style="top:0px !important; position: absolute; right:0px; background-color:#1890ff !important; color: #ffff !important;">
+</Navbar>
+<ng-template #popover>
+  <Icon Popover [ngStyle]="{ height: '100%', display: 'flex', 'align-items': 'center',marginRight: '36px' }" [mask]="true"  [overlay]="contentTemplate" nz-icon nzType="bell" nzTheme="outline" [placement]="'bottomRight'" (onSelect)="onSelect($event)" (onVisibleChange)="onVisibleChange($event)" (click)="onClickBell()"></Icon>
+
+    <Icon Popover [ngStyle]="{ height: '100%', display: 'flex', 'align-items': 'center' }" [mask]="true" [showArrow]="true" [overlay]="overlay" [type]="'ellipsis'" [placement]="'bottomRight'" (onSelect)="onSelect($event)" (onVisibleChange)="onVisibleChange($event)"></Icon>
+</ng-template>
+<ng-template #contentTemplate>
+  <div>
+    <app-notifications style="margin-right:230px" [isMobile]="isMobile"  ></app-notifications>
+  </div>  
+</ng-template>
+<ng-template #overlay>
+
+    <PopoverItem [icon]="icon2" [ngStyle]="{ whiteSpace: 'nowrap' }" [routerLink]="['/m-layout/m-account/m-setting']">
+        Thiết lập tài khoản</PopoverItem>
+    <PopoverItem [icon]="icon3">
+        <span [ngStyle]="{ marginRight: 5 }" [routerLink]="['/m-layout/m-account/m-account-change-password']">Đổi mật
+      khẩu</span>
+    </PopoverItem>
+    <PopoverItem [icon]="icon1" (click)="logout()">Đăng xuất tài khoản</PopoverItem>
+</ng-template>
+
+<ng-template #icon1>
+    <Icon [src]="'https://p.kindpng.com/picc/s/312-3120740_logout-hd-png-download.png'" [size]="'xs'"></Icon>
+</ng-template>
+
+<ng-template #icon2>
+    <Icon [src]="'https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/settings-512.png'" [size]="'xs'"></Icon>
+</ng-template>
+
+<ng-template #icon3>
+    <Icon [src]="'http://cdn.onlinewebfonts.com/svg/img_398183.png'" [size]="'xs'"></Icon>
+</ng-template>
+
+
+<!-- <ng-template #overlay>
+    
+    <PopoverItem [icon]="icon2" [ngStyle]="{ whiteSpace: 'nowrap' }" [routerLink]="['/m-layout/m-account/m-setting']">Thiết lập tài khoản</PopoverItem>
+    <PopoverItem [icon]="icon3">
+      <span [ngStyle]="{ marginRight: 5 }" [routerLink]="['/m-layout/m-account/m-account-change-password']">Đổi mật khẩu</span>
+    </PopoverItem>
+    <PopoverItem [icon]="icon1" (click)="logout()">Đăng xuất tài khoản</PopoverItem>
+  </ng-template>
+
+  <ng-template #icon1>
+    <Icon [src]="'https://p.kindpng.com/picc/s/312-3120740_logout-hd-png-download.png'" [size]="'xs'"></Icon>
+  </ng-template>
+
+  <ng-template #icon2>
+    <Icon [src]="'https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/settings-512.png'" [size]="'xs'"></Icon>
+  </ng-template>
+
+  <ng-template #icon3>
+    <Icon [src]="'http://cdn.onlinewebfonts.com/svg/img_398183.png'" [size]="'xs'"></Icon>
+  </ng-template>
+
+  <WingBlank>
+    <ng-template [ngTemplateOutlet]="placeHolder"></ng-template>
+  </WingBlank>
+
+  <WhiteSpace [size]="'lg'"></WhiteSpace>
+  <WingBlank [size]="'md'">
+    <ng-template [ngTemplateOutlet]="placeHolder"></ng-template>
+  </WingBlank> -->
+
+<!-- <WhiteSpace [size]="'lg'"></WhiteSpace>
+  <WingBlank [size]="'sm'">
+    <ng-template [ngTemplateOutlet]="placeHolder"></ng-template>
+  </WingBlank>
+
+  <ng-template #placeHolder>
+    <div class="placeholder">Block</div>
+  </ng-template> -->
+<!-- <WhiteSpace [size]="'lg'"></WhiteSpace>
+  <WingBlank [size]="'sm'">
+    <router-outlet></router-outlet>
+  </WingBlank> -->

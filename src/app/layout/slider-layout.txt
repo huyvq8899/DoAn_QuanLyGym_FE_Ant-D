@@ -1,0 +1,143 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo">
+      <a [routerLink]="['/']">
+        <img src="../../assets/logoCucThue.png" alt="logo" *ngIf="isCollapsed" style="left: 6px;
+        position: absolute;
+        top: 12px;
+        height: 40px;">
+        <img src="../../assets/THUE-01.png" alt="logo" *ngIf="!isCollapsed" style="height: 40px;
+        position: absolute;
+        left: 46px;
+        top: 10px;">
+        <!-- <span *ngIf="!isCollapsed" style="color: red;font-size: 12px;font-weight: 600;position: absolute;left: 55px;top: 4px;">CỤC THUẾ HẢI PHÒNG</span> -->
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" style="background: initial; float: left">
+      <li
+        *ngIf="checkFunction('TONG_QUAN') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-menu-item [nzMatchRouter]="true">
+        <a [routerLink]="['/bang-dieu-khien']">
+          <i nz-icon nzType="dashboard"></i>
+          <span>Tổng quan</span>
+        </a>
+      </li>
+      <li
+        *ngIf="checkFunction('DOANH_NGHIEP') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-menu-item [nzMatchRouter]="true">
+        <a [routerLink]="['/doanh-nghiep']">
+          <i nz-icon nzType="idcard"></i>
+          <span>Doanh nghiệp</span>
+        </a>
+      </li>
+      <li
+        *ngIf="checkFunction('HOA_DON') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-menu-item [nzMatchRouter]="true">
+        <a [routerLink]="['/quan-ly-hoa-don']">
+          <i nz-icon nzType="snippets"></i>
+          <span>Hóa đơn</span>
+        </a>
+      </li>
+      <li
+        *ngIf="checkFunction('BANG_KE_DAU_VAO') !==-1 || checkFunction('BANG_KE_DAU_RA') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-submenu nzTitle="Bảng kê" nzIcon="table">
+        <ul style="background: #272727;">
+          <li
+            *ngIf="checkFunction('BANG_KE_DAU_VAO') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+            nz-menu-item [nzMatchRouter]="true" style="background: #272727;">
+            <a [routerLink]="['/bang-ke/bang-ke-dau-vao']">Bảng kê đầu vào</a>
+          </li>
+          <li
+            *ngIf="checkFunction('BANG_KE_DAU_RA') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+            nz-menu-item [nzMatchRouter]="true" style="background: #272727;">
+            <a [routerLink]="['/bang-ke/bang-ke-dau-ra']">Bảng kê đầu ra</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        *ngIf="checkFunction('BAO_CAO') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-menu-item [nzMatchRouter]="true">
+        <a [routerLink]="['/canh-bao']">
+          <i nz-icon nzType="bar-chart"></i>
+          <span>Báo cáo</span>
+        </a>
+      </li>
+      <li
+        *ngIf="checkFunction('THIET_LAP_CANH_BAO') !==-1 || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'"
+        nz-menu-item [nzMatchRouter]="true">
+        <a [routerLink]="['/thiet-lap-canh-bao']">
+          <i nz-icon nzType="setting"></i>
+          <span>Thiết lập cảnh báo</span>
+        </a>
+      </li>
+      <li nzTitle="Phân quyền" nz-menu-item [nzMatchRouter]="true"
+        *ngIf="currentUser.roleName ==='ADMIN' || currentUser.userName === 'superadmin' || currentUser.userName === 'admin'">
+        <a [routerLink]="['/account/system']">
+          <i nz-icon nzType="apartment" nzTheme="outline"></i>
+          <span>Hệ thống</span>
+        </a>
+      </li>
+    </ul>
+    <div class="antd-pro-components-global-header-index-right">
+      <div class="inline-component" nz-popover nzPopoverTrigger="click" [nzPopoverContent]="contentTemplate"
+        nzPopoverPlacement="bottomRight" (click)="ViewNotic()">
+        <ng-template #contentTemplate>
+          <div>
+            <app-notifications></app-notifications>
+          </div>
+        </ng-template>
+        <nz-badge [nzCount]="countNotOpenNotify" style="padding: 4px;">
+          <i nz-icon nzType="bell" nzTheme="outline" style="font-size: 16px;color: #ffffff;"></i>
+        </nz-badge>
+      </div>
+      <div class="inline-component" nz-dropdown [nzDropdownMenu]="menu">
+        <nz-avatar nzIcon="user" nzSrc="{{currentUser.avatar}}">
+        </nz-avatar>
+        <span style="margin-left: 10px; color: white;">{{currentUser?.userName}}</span>
+      </div>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item [nzMatchRouter]="true">
+            <a [routerLink]="['/account/setting']">
+              <i nz-icon nzType="setting" nzTheme="outline"></i>
+              <span style="margin-left: 8px;">Thiết lập tài khoản</span>
+            </a>
+          </li>
+          <li nz-menu-item [nzMatchRouter]="true" *ngIf="this.currentUser.roleName === 'ADMIN'">
+            <a [routerLink]="['/account/list']">
+              <i nz-icon nzType="read" nzTheme="outline"></i>
+              <span style="margin-left: 8px;">Danh sách tài khoản</span>
+            </a>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="logout()" [nzMatchRouter]="true">
+            <i nz-icon nzType="logout" nzTheme="outline"></i> Đăng xuất</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+  </nz-header>
+  <nz-content>
+    <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabel]="'customBreadcrumb'"></nz-breadcrumb>
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+  <nz-footer>Website thuộc quyền sở hữu trí tuệ của Công ty Cổ phần phát triển và ứng dụng <a href="https://pmbk.vn/"
+      target="_blank">Phần Mềm Bách Khoa</a>
+  </nz-footer>
+</nz-layout>
+<ng-template let-notification let-notify="data" #notificationTemplate>
+  <div class="ant-notification-notice-content" style="cursor: pointer;" (click)="notification.close(); viewDetailNotify(notify)">
+    <div style="display: flex;">
+      <div>
+        <img src="../../assets/logoCucThue.png" alt="logo" style="height: 40px;">
+      </div>
+      <div style="flex: 1;">
+        <div class="ant-notification-notice-message">{{notify?.tieuDe}}</div>
+        <div class="ant-notification-notice-description">
+          {{notify?.noiDung}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

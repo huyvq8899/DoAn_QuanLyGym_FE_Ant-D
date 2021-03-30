@@ -1,0 +1,45 @@
+<div nz-row>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+        <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+    <div style="text-align: right;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+        <i nz-icon nzType="plus"></i>Thêm mới</button>
+    </div>
+  </div>
+  <br />
+    <div >
+      <nz-table #basicTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true">
+        <thead>
+          <tr>
+            <th nzAlign="center" nzWidth="5%">STT</th>
+            <th nzAlign="center" nzWidth="20%">Tên lợi nhuận</th>
+            <th nzAlign="center">Mức lợi nhuận</th>
+            <th nzAlign="center" nzWidth="10%">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data; let i = index">
+            <td nzAlign="center">{{ i + 1 }}</td>
+            <td>{{ data.tenLoiNhuan }}</td>
+            <td style="text-align: right !important;">{{ data.mucLoiNhuan }}</td>
+            <td nzAlign="center">
+              <nz-button-group nzSize="small">
+                <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
+                  <i nz-icon nzType="edit"></i>
+                </button>
+                &nbsp;
+                <button nz-button nzType="danger" (click)="removeItem(data.loiNhuanId)" nz-tooltip nzTooltipTitle="Xóa">
+                  <i nz-icon nzType="delete"></i>
+                </button>
+              </nz-button-group>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+  </div>

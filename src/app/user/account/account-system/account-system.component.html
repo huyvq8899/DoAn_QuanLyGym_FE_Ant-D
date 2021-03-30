@@ -1,0 +1,55 @@
+<div nz-row class="card">
+  <nz-card style="width:100%;">
+    <nz-tabset nzTabPosition="left">
+      <nz-tab nzTitle="Phân quyền">
+        <ng-template nz-tab>
+          <app-account-list></app-account-list>
+        </ng-template>
+      </nz-tab>
+      <nz-tab nzTitle="Thiết lập quyền">
+        <ng-template nz-tab>
+          <app-account-list-role></app-account-list-role>
+        </ng-template>
+      </nz-tab>
+      <nz-tab nzTitle="Sơ đồ phân quyền">
+        <ng-template nz-tab>
+          <h2>Sơ đồ phân quyền</h2>
+          <app-account-role-tree></app-account-role-tree>
+        </ng-template>
+      </nz-tab>
+      <nz-tab nzTitle="Thông tin cá nhân">
+        <ng-template nz-tab>
+          <h2>Thông tin cá nhân</h2>
+          <div nz-row [class.displayReverse]="setReverse">
+            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="10" nzXl="10">
+              <app-account-edit></app-account-edit>
+            </div>
+            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="14" nzXl="14"
+              style="text-align: center; padding-bottom: 20px;">
+              <div nz-row>
+                <!-- <span>Avatar</span> -->
+              </div>
+              <div style="padding:12px 0px">
+                <nz-avatar nzIcon="user" [nzSize]="144" [nzSrc]="currentUser?.avatar"></nz-avatar>
+              </div>
+              <div>
+                <!-- <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+                    <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
+                  </nz-upload> -->
+                <button nz-button nzType="default" (click)="fImportExcel.click()"><i nz-icon nzType="upload"></i>Change
+                  avatar</button>
+                <input id="fImportExcel" type="file" #fImportExcel (change)="importFile($event)" style="display: none;">
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </nz-tab>
+      <nz-tab nzTitle="Đổi mật khẩu">
+        <ng-template nz-tab>
+          <h2>Đổi mật khẩu</h2>
+          <app-account-change-password></app-account-change-password>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card>
+</div>

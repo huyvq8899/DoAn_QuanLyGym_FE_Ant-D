@@ -1,0 +1,128 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+  <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+    <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+
+  <div nz-col nzSpan="100" style="text-align: right; padding-left: 3px; right: 0px; position: absolute; margin-right: 5px;">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+
+<PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+    [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+    <nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+      [nzLoading]="loading" nzBordered="true" [nzScroll]="{ x: '6125px'}" nzShowTotal [nzTotal]="total"
+      [nzShowTotal]="rangeTemplate">
+      <ng-template #rangeTemplate let-range="range" let-total>
+    {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+  </ng-template>
+  <thead>
+    <tr>
+      <th nzLeft="0px" nzWidth="40px" nzAlign="center">STT</th>
+      <th nzLeft="40px" nzWidth="140px" nzAlign="center" nzColumnKey="nguoiThem" >Người tạo</th>
+      <th nzWidth="100px" nzAlign="center" nzColumnKey="createdDate" >Ngày tạo</th>
+      <th nzWidth="100px" nzAlign="center"  nzColumnKey="maKhachHang" >Mã khách hàng</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="tenKhachHang" >Tên khách hàng</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="maSoThue" >Mã số thuế</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="tenVung" >Vùng</th>
+      <th nzWidth="250px" nzAlign="center"  nzColumnKey="diaChi" >Địa chỉ đăng ký kinh doanh</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="diaChiGiaoHang" >Địa chỉ giao hàng </th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="vanPhongGiaoDich" >Văn phòng giao dịch</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="email" >Email nhận hóa đơn</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="loaiKhachHang" >Loại khách hàng</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="tenNganhNghe" >Ngành nghề</th>
+      <th nzWidth="250px" nzAlign="center"  nzColumnKey="soDienThoai" >SĐT người quyết định mua hàng</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="trangThaiKhachHang" >Trạng thái</th>
+      <th nzWidth="250px" nzAlign="center"  nzColumnKey="nguoiLienHe" >Người quyết định mua hàng</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="chucVu" >Chức vụ</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="nguoiDaiDienPhapLuat" >Người đại diện PL</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="soDienThoaiNguoiDaiDien" >SĐT người đại diện</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="keToan" >Kế toán</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="soDienThoaiKeToan" >SĐT Kế toán</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="congNo" >Công nợ</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="checkCIC" >Check CIC</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="hanMuc" >Hạn mức</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="thoiHanNo" >Thời hạn nợ</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="baoLanhThanhToan" >Bảo lãnh thanh toán</th>
+      <th nzWidth="100px" nzAlign="center"  nzColumnKey="sanLuongHangThang" >Sản lượng tháng</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="phuongAnNhapHang" >Phương án nhập</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="nhaCungCapHienTai" >Nhà CC hiện tại</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="giaTrietKhau" >Giá chiết khấu</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="mongMuonKhachHang" >Mong muốn khách hàng</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="cacVanDeCuaNhaCCCu" >Vấn đề nhà CC cũ</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="danhGiaChung" >Đánh giá chung</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="deXuatNhanVien" >Đề xuất NVKD</th>
+      <th nzWidth="150px" nzAlign="center"  nzColumnKey="luuY" >Lưu ý</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data; let i = index"  long-press (onLongPress)="showActionSheet(data)">
+      <td nzLeft="0px" nzWidth="40px" nzAlign="center">{{ i + 1 }}</td>
+      <td nzLeft="40px" nzWidth="140px" nzAlign="left">{{ data?.nguoiThem }}</td>
+      <td nzWidth="100px" nzAlign="left">{{ data?.createdDate | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="100px" nzAlign="left">{{ data.maKhachHang }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.tenKhachHang }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data.maSoThue }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data.tenVung }}</td>
+      <td nzWidth="250px" nzAlign="left">{{ data.diaChi }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.diaChiGiaoHang }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.vanPhongGiaoDich }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.email }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.loaiKhachHang }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data.tenNganhNghe }}</td>
+      <td nzWidth="250px" nzAlign="left">{{ data?.soDienThoai }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.trangThaiKhachHang }}</td>
+      <td nzWidth="250px" nzAlign="left">{{ data?.nguoiLienHe }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.chucVu }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.nguoiDaiDienPhapLuat }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.soDienThoaiNguoiDaiDien }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.keToan }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.soDienThoaiKeToan }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.congNo }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.checkCIC }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.hanMuc }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.thoiHanNo }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.baoLanhThanhToan }}</td>
+      <td nzWidth="100px" nzAlign="left">{{ data?.sanLuongHangThang }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.phuongAnNhapHang }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.nhaCungCapHienTai }} </td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.giaTrietKhau }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.mongMuonKhachHang }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data?.cacVanDeCuaNhaCCCu }} </td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.danhGiaChung }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.deXuatNhanVien }}</td>
+      <td nzWidth="150px" nzAlign="left">{{ data?.luuY }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+</PullToRefresh>

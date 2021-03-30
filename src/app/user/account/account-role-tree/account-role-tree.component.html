@@ -1,0 +1,33 @@
+<ng-container *ngIf="nodes.length > 0">
+  <nz-tree nzBlockNode [nzData]="nodes" [nzTreeTemplate]="nzTreeTemplate"></nz-tree>
+  <ng-template #nzTreeTemplate let-node let-origin="origin">
+    <span class="custom-node">
+      <span *ngIf="!node.isLeaf" (contextmenu)="contextMenu($event, menu)">
+        <i nz-icon [nzType]="node.isExpanded ? 'user' : 'team'" (click)="openFolder(node)"></i>
+        <span class="folder-name">{{ node.title }} ({{node._children.length}})</span>
+        <span *ngIf="node.origin.roleName != 'ADMIN'" class="folder-desc" (click)="clickOpenDetail(node)">Chi tiết</span>
+        &nbsp;
+        &nbsp;
+        <button nzSize="small" nz-button nzType="primary"  (click)="clickSua(node.origin)">
+          <i nz-icon nzType="edit" nzTheme="outline" ></i>
+        </button>
+      </span>
+      <span *ngIf="node.isLeaf" (contextmenu)="contextMenu($event, menu)">
+        <i nz-icon nzType="user"></i>
+        <span class="file-name">{{ node.title }}</span>
+        <span class="file-desc" (click)="clickOpenDetail(node)">Chi tiết</span>
+        &nbsp;
+        &nbsp;
+        <button nzSize="small" nz-button nzType="primary"  (click)="clickSua(node.origin)">
+          <i nz-icon nzType="edit" nzTheme="outline" ></i>
+        </button>
+      </span>
+    </span>
+  </ng-template>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item (click)="selectDropdown()">Action 1</li>
+      <li nz-menu-item (click)="selectDropdown()">Action 2</li>
+    </ul>
+  </nz-dropdown-menu>
+</ng-container>

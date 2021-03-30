@@ -1,0 +1,174 @@
+<!-- 
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8" nzXl="8">
+    <nz-card class="card11" [nzBordered]="false">
+      <h6>Tổng số doanh nghiệp</h6>
+      <h1>{{totalDoanhNghiep}}</h1>
+      <i class="iconThongKe" nz-icon nzType="idcard" nzTheme="outline"></i>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8" nzXl="8">
+    <nz-card class="card12" [nzBordered]="false">
+      <h6>Tổng hóa đơn lập trong ngày</h6>
+      <h1>{{totalHoaDon}}</h1>
+      <i class="iconThongKe" nz-icon nzType="snippets" nzTheme="fill"></i>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8" nzXl="8">
+    <nz-card class="card13" [nzBordered]="false">
+      <h6>Số hóa đơn cảnh báo</h6>
+      <h1>{{totalHoaDonNotic}}</h1>
+      <i class="iconThongKe" nz-icon nzType="notification" nzTheme="outline"></i>
+    </nz-card>
+  </div>
+</div>
+
+<nz-card>
+  <div style="width:100%">
+    <a [routerLink]="['/']">
+      <div nz-col nzXs="24" nzSm="8" nzMd="8" nzLg="6" nzXl="6" class="card1" nz-card-grid [ngStyle]="gridStyle">
+        <i nz-icon nzType="setting" nzTheme="fill" style="color: yellowgreen;"></i>
+        <h5>Thiết lập cảnh báo</h5>
+      </div>
+    </a>
+    <a [routerLink]="['/']">
+      <div nz-col nzXs="24" nzSm="8" nzMd="8" nzLg="6" nzXl="6" class="card1" nz-card-grid [ngStyle]="gridStyle">
+        <i nz-icon nzType="idcard" style="color:chocolate"></i>
+        <h5>Doanh nghiệp</h5>
+      </div>
+    </a> 
+    <a [routerLink]="['/']">
+      <div nz-col nzXs="24" nzSm="8" nzMd="8" nzLg="6" nzXl="6" class="card1" nz-card-grid [ngStyle]="gridStyle">
+        <i nz-icon nzType="snippets" nzTheme="outline" style="color: #b57c78;"></i>
+        <h5>Hóa đơn</h5>
+      </div>
+    </a>
+    <a [routerLink]="['/']">
+      <div nz-col nzXs="24" nzSm="8" nzMd="8" nzLg="6" nzXl="6" class="card1" nz-card-grid [ngStyle]="gridStyle">
+        <i nz-icon nzType="area-chart" style="color:#009688"></i>
+        <h5>Báo cáo</h5>
+      </div>
+    </a>
+  </div>
+</nz-card> -->
+
+<!-- <nz-collapse>
+  <nz-collapse-panel style="background-color: #FFC107;" *ngFor="let panel of panels" [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+   <div *ngFor="let item of panel?.content" nz-row style="width: 100%;">
+      {{item}}
+   </div>
+  </nz-collapse-panel>
+</nz-collapse> -->
+<!-- <div nz-row style="width: 100%;">
+  <div nz-col nzSpan="12">
+    <nz-card nzSize="small">
+      <nz-descriptions nzBordered="true" nzSize="small">
+        <nz-descriptions-item [nzSpan]="4" nzTitle="Tất cả doanh nghiệp">
+          <nz-statistic [nzValue]="(1949101 | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="DN lớn">
+          <nz-statistic [nzValue]="(2019 | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="DN vừa và nhỏ">
+          <nz-statistic [nzValue]="(5400 | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="DN siêu nhỏ">
+          <nz-statistic [nzValue]="(8799 | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Đang hoạt động">
+          <nz-statistic [nzValue]="(13800 | number)!" [nzPrefix]="prefixTplLike">
+            <ng-template #prefixTplLike><i nz-icon nzType="like" style="font-size: 16px;"></i></ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Tạm dừng">
+          <nz-statistic [nzValue]="(577 | number)!" [nzPrefix]="prefixTplPause">
+            <ng-template #prefixTplPause><i nz-icon nzType="pause-circle" style="font-size: 16px;color: orange;"></i>
+            </ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Bỏ địa chỉ">
+          <nz-statistic [nzValue]="(125 | number)!" [nzPrefix]="prefixTplDisLike">
+            <ng-template #prefixTplDisLike><i nz-icon nzType="dislike" style="font-size: 16px;color: red;"></i>
+            </ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </nz-card>
+    <nz-card nzSize="small">
+      <nz-descriptions nzBordered="true" nzSize="small">
+        <nz-descriptions-item [nzSpan]="4" nzTitle="Cảnh báo hóa đơn">
+          <nz-statistic [nzValue]="(totalCanhBaoHoaDon | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Doanh thu lớn, thuế phát sinh nhỏ">
+          <nz-statistic [nzValue]="(doanhThuLonThueIt | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Đột biến về doanh thu">
+          <nz-statistic [nzValue]="(dotBienDoanhThu | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Hóa đơn nhiều mặt hàng">
+          <nz-statistic [nzValue]="(nhieuMatHang | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Hóa đơn hủy và cưỡng chế">
+          <nz-statistic [nzValue]="(daHuy | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Doanh thu hóa đơn bán ra">
+          <nz-statistic [nzValue]="(doanhThuHDBanra | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="Xuất DN rủi ro">
+          <nz-statistic [nzValue]="(xuatDNRuiRo | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item [nzSpan]="2" nzTitle="DN rủi ro xuất">
+          <nz-statistic [nzValue]="(DNRuiRoXuat | number)!">
+          </nz-statistic>
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="12">
+    <nz-card nzSize="small">
+      <nz-descriptions nzBordered="true" nzSize="small">
+        <nz-descriptions-item [nzSpan]="3" nzTitle="Tổng số hóa đơn">
+          <nz-statistic [nzValue]="(totalHoaDon | number)!"></nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Ngày">
+          <nz-statistic [nzValue]="(totalHoaDonNgay | number)!" [nzValueStyle]="{ color: '#3F8600' }"
+            [nzPrefix]="prefixTplOne">
+            <ng-template #prefixTplOne><i nz-icon nzType="arrow-up" style="font-size: 16px;color: '#3F8600'"></i>
+            </ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Tháng">
+          <nz-statistic [nzValue]="(totalHoaDonThang | number)!" [nzValueStyle]="{ color: '#CF1322' }"
+            [nzPrefix]="prefixTplTwo">
+            <ng-template #prefixTplTwo><i nz-icon nzType="arrow-down" style="font-size: 16px;color: '#CF1322'"></i>
+            </ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Năm">
+          <nz-statistic [nzValue]="(totalHoaDonNam | number)!" [nzValueStyle]="{ color: '#3F8600' }"
+            [nzPrefix]="prefixTplThree">
+            <ng-template #prefixTplThree><i nz-icon nzType="arrow-up" style="font-size: 16px;color: '#3F8600'"></i>
+            </ng-template>
+          </nz-statistic>
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </nz-card>
+    <nz-card nzSize="small">
+      <ejs-accumulationchart id="chart-container2" #pie [legendSettings]="legendSettings" [tooltip]="tooltip2"
+        (load)='loadOfferStatus($event)' [enableAnimation]='enableAnimation' [center]='center'>
+        <e-accumulation-series-collection>
+          <e-accumulation-series name='Hóa đơn' [dataSource]='data' xName='x' yName='y' [startAngle]="startAngle"
+            [endAngle]="endAngle" innerRadius="0%" radius="50%" [dataLabel]="dataLabel" [explode]='explode'
+            explodeOffset='10%' [palettes]='palette'>
+          </e-accumulation-series>
+        </e-accumulation-series-collection>
+      </ejs-accumulationchart>
+    </nz-card>
+  </div>
+</div> -->

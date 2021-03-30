@@ -1,0 +1,40 @@
+<div nz-row style="margin-top: 5px; margin-bottom: 5px;">
+  <div nz-col nzSpan="8" style="text-align: left;">
+    <nz-button-group nzSize="small">
+      <button nz-button nzType="primary" [nzLoading]="loadingExportExcel" (click)="exportExcel()"><i nz-icon
+          nzType="download" nzTheme="outline"></i>Xuất excel</button>
+    </nz-button-group>
+  </div>
+  <div nz-col nzSpan="8" nzOffset="8">
+    <div style="float:right">
+      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.fromDate"
+      placeholder="Từ" />
+      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.toDate"
+      placeholder="Đến" />
+      <button nz-button nzSize="small" nzType="primary" style="margin-left: 2px;" (click)="filterTable()">
+        <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+    </div>
+  </div>
+</div>
+<div nz-col nzSpan="8" style="margin-top: 5px; margin-bottom: 10px;">
+  <strong>Tổng số khách hàng đã thêm trong thời gian: {{total | formatPrice}}</strong>
+</div>
+<div>
+  <nz-table #basicTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true"
+  [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th nzAlign="center" nzWidth="7%">STT</th>
+        <th nzAlign="center">Nhân viên</th>
+        <th nzAlign="center" nzWidth="20%">Lượng khách hàng đã thêm</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; let i = index">
+        <td nzAlign="center">{{ i + 1 }}</td>
+        <td nzColumnKey="fullName">{{ data.fullName }}</td>
+        <td nzColumnKey="soLuongKhachHang" nzAlign="center">{{ data.soLuongKhachHang }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

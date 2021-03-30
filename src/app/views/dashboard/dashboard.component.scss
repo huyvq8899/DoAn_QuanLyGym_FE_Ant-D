@@ -1,0 +1,215 @@
+[nz-icon] {
+  font-size: 35px;
+  // position: absolute;
+  // right: 20px;
+  // top: 30px;
+  color: #1890ff;
+}
+.iconThongKe {
+  font-size: 60px;
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  color: rgba(255, 255, 255, 0.288);
+}
+h6 {
+  font-size: 16px;
+  color: white;
+}
+
+h1 {
+  font-size: 20px;
+  color: #1890ff;
+}
+
+.card1 {
+  // margin-top: 30px;
+  cursor: pointer;
+  // background-color: orange;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 5px 7px rgba(183, 183, 183, 0.25), 0 2px 20px rgba(138, 138, 138, 0.22);
+  }
+  &:active,
+  &:visited {
+    // background-color: orange;
+  }
+}
+
+.card2 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: green;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.card3 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: darkolivegreen;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+.card4 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: rgb(109, 197, 255);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  &:active,
+  &:visited {
+    background-color: rgb(250, 109, 255);
+  }
+}
+
+.card5 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: rgb(255, 61, 87);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.card6 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: darkcyan;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+.card7 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: darkkhaki;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  &:active,
+  &:visited {
+    background-color: olivedrab;
+  }
+}
+
+.card8 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: cadetblue;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.card9 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: burlywood;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+.card10 {
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: rgb(255, 87, 213);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 0px;
+}
+
+.card11 {
+  height: 120px;
+  cursor: pointer;
+  background-color: #2ecc71;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card12 {
+  height: 120px;
+  cursor: pointer;
+  background-color: #23b7e5;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card13 {
+  height: 120px;
+  cursor: pointer;
+  background-color: #f39c12;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+nz-card {
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  h6 {
+    font-size: 16px;
+    color: white;
+    padding: 0;
+    margin: 10px;
+  }
+
+  h1 {
+    font-size: 25px;
+    color: white;
+    padding: 0;
+    font-weight: bold;
+    margin: 10px;
+  }
+  margin: 5px;
+}
+// :host ::ng-deep #chart-container2_border {
+//   fill: transparent !important;
+// }
+// :host ::ng-deep .ant-descriptions-bordered .ant-descriptions-item-label {
+//   background-color: #272727;
+//   color: #a5a5a5;
+// }
+// :host ::ng-deep .ant-descriptions-item-content {
+//   background-color: #272727;
+//   color: white;
+// }
+// :host ::ng-deep .ant-statistic-content {
+//   color: white;
+// }
+// :host ::ng-deep .ant-descriptions-bordered .ant-descriptions-item-label,
+// .ant-descriptions-bordered .ant-descriptions-item-content {
+//   border-right: 1px solid #525252 !important;
+// }
+// :host ::ng-deep .ant-descriptions-bordered .ant-descriptions-row {
+//   border-bottom: 1px solid #525252;
+// }
+// :host ::ng-deep .ant-descriptions-bordered .ant-descriptions-item-content {
+//   border-right: 1px solid #525252 !important;
+// }
+// ::ng-deep #chart-container2_chart_legend_text_0 {
+//   fill: white !important;
+// }
+// ::ng-deep #chart-container2_chart_legend_text_1 {
+//   fill: white !important;
+// }

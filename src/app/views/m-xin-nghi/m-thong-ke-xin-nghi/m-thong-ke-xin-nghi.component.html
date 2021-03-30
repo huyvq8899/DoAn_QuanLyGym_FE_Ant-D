@@ -1,0 +1,37 @@
+<nz-spin [nzSpinning]="spinning">
+    <!-- <nz-card nzTitle="Thống kê số lần đi muộn , xin nghỉ" [nzExtra]="dropdownExtraTemplate"> -->
+      <nz-card nzTitle="" [nzExtra]="dropdownExtraTemplate">
+      <ejs-chart width="100%" [palettes]='palette' [tooltip]='tooltip' id="chart-container" [primaryXAxis]='primaryXAxis'
+      [primaryYAxis]='primaryYAxis' [title]='title' (load)='load($event)'[zoomSettings]='zoomSettings'> 
+        <e-series-collection>
+          <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='tongLanDiMuon' name='Tổng lần đi muộn' [marker]='marker'></e-series>
+            <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='soNgayNghiPhep' name='Tổng số ngày nghỉ phép' [marker]='marker'></e-series>
+            <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='soLanNghiPhep' name='Tổng số lần nghỉ phép' [marker]='marker'></e-series>
+        </e-series-collection>
+      </ejs-chart>
+    </nz-card>
+  
+    <ng-template #dropdownExtraTemplate>
+      <nz-select nzSize="small" style="width: 175px;" nzShowSearch nzAllowClear nzPlaceHolder="Nhân viên cần lọc" nzServerSearch
+        (nzOnSearch)="SearchNhanVien($event)" (ngModelChange)="changeNhanVien($event)" [(ngModel)]="selectedNhanVien"
+        [nzDropdownStyle]="searchCustomerOverlayStyle" (ngModelChange)="changeData()">
+  
+        <nz-option nzCustomContent *ngFor="let option of listNhanVien" [nzLabel]="option.fullName"
+          [nzValue]="option.userId">
+          <nz-avatar nzIcon="user" [nzSrc]="option.avatar"></nz-avatar> {{option.userName}} -
+          {{option.fullName}}
+        </nz-option>
+      </nz-select>
+      <nz-select nzSize="small" nzShowSearch nzAllowClear  nzPlaceHolder="Năm"  style="margin-left: 5px;width: 90px;" [(ngModel)]="selectedYears"
+      (ngModelChange)="changeData()" >
+        <nz-option *ngFor="let item of years" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+      </nz-select>
+      <!-- <button nzSize="small" style="margin-left: 10px;" nz-button nzType="primary" type="button" (click)="getData()">Lấy dữ
+        liệu</button> -->
+    </ng-template>
+  
+  </nz-spin>
+  

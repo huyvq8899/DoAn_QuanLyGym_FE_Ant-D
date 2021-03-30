@@ -1,0 +1,58 @@
+<div nz-row style="margin-top: 10px; margin-bottom: 5px;">
+  <div nz-col nzSpan="16">
+    <div nz-row>
+      <div nz-col nzSpan="16">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input (change)="changeSearch($event)" type="text" nz-input placeholder="Tìm kiếm ..." />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="8" style="text-align: right;">
+    <nz-button-group>
+      <button nz-button nzType="primary" (click)="clickReset()"><i nz-icon nzType="redo"
+          nzTheme="outline"></i>Reset</button>
+      <button nz-button nzType="primary" (click)="clickThem()"><i nz-icon nzType="plus"
+          nzTheme="outline"></i>Thêm</button>
+    </nz-button-group>
+  </div>
+</div>
+<div style="background: #fff;">
+  <nz-table #fixedTable nzSize="small" nzBordered nzShowSizeChanger [nzFrontPagination]="false" [nzData]="listData"
+    nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize" nzShowTotal [nzPageSizeOptions]="pageSizeOptions"
+    [(nzPageIndex)]="displayData.PageNumber" nzBordered [nzLoading]="loading" [nzTotal]="total"
+    (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate" nzSize="small">
+    <ng-template #rangeTemplate let-range="range" let-total>
+      {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+    </ng-template>
+    <thead>
+      <tr>
+        <th>Nhóm quyền</th>
+        <th>Quản lý bơi</th>
+        <th nzWidth="120px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of fixedTable.data;let i = index" (dblclick)="clickSua(data)">
+        <td>{{ data.roleName }}</td>
+        <td>{{ data?.parentRoleViewModel?.roleName}}</td>
+        <td>
+          <nz-button-group>
+            <button nz-button nzType="default" nz-tooltip nzTooltipTitle="Phân quyền" (click)="clickPhanQuyen(data)">
+              <i nz-icon nzType="audit" nzTheme="outline"></i>
+            </button>
+            <button *ngIf="data.roleName!=='ADMIN'" nz-button nzType="default" nz-tooltip nzTooltipTitle="Sửa" (click)="clickSua(data)">
+              <i nz-icon nzType="edit" nzTheme="outline"></i>
+            </button>
+            <button *ngIf="data.roleName!=='ADMIN'" nz-button nzType="danger" nz-tooltip nzTooltipTitle="Xóa" (click)="clickXoa(data)">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+          </nz-button-group>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

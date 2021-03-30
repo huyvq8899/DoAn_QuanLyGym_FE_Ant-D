@@ -1,0 +1,35 @@
+<nz-spin [nzSpinning]="spinning">
+    <nz-card width="100%" nzTitle="Thống kê số lần đi muộn , xin nghỉ" [nzExtra]="dropdownExtraTemplate">
+      <ejs-chart  [palettes]='palette' [tooltip]='tooltip' id="chart-container" [primaryXAxis]='primaryXAxis'
+        [primaryYAxis]='primaryYAxis' [title]='title' (load)='load($event)'[zoomSettings]='zoomSettings'> 
+        <e-series-collection>
+          <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='tongLanDiMuon' name='Tổng lần đi muộn' [marker]='marker'></e-series>
+            <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='soNgayNghiPhep' name='Tổng số ngày nghỉ phép' [marker]='marker'></e-series>
+            <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='ten'
+            yName='soLanNghiPhep' name='Tổng số lần nghỉ phép' [marker]='marker'></e-series>
+        </e-series-collection>
+      </ejs-chart>
+    </nz-card>
+  
+    <ng-template #dropdownExtraTemplate>
+      <nz-select nzSize="small" style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch
+        (nzOnSearch)="SearchNhanVien($event)" (ngModelChange)="changeNhanVien($event)" [(ngModel)]="selectedNhanVien"
+        [nzDropdownStyle]="searchCustomerOverlayStyle" >
+  
+        <nz-option nzCustomContent *ngFor="let option of listNhanVien" [nzLabel]="option.fullName"
+          [nzValue]="option.userId">
+          <nz-avatar nzIcon="user" [nzSrc]="option.avatar"></nz-avatar> {{option.userName}} -
+          {{option.fullName}} - {{option.title}}
+        </nz-option>
+      </nz-select>
+      <nz-select nzSize="small" nzShowSearch nzAllowClear  nzPlaceHolder="Chọn năm"  style="margin-left: 10px;width: 100px;" [(ngModel)]="selectedYears" >
+        <nz-option *ngFor="let item of years" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+      </nz-select>
+      <button nzSize="small" style="margin-left: 10px;" nz-button nzType="primary" type="button" (click)="getData()">Lấy dữ
+        liệu</button>
+    </ng-template>
+  
+  </nz-spin>
+  

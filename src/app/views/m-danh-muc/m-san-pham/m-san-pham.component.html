@@ -1,0 +1,42 @@
+<div nz-row>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+            <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+    </div>
+    <div style="text-align: right;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+            <i nz-icon nzType="plus"></i>Thêm mới</button>
+    </div>
+</div>
+<br />
+<div>
+    <PullToRefresh 
+    [ngStyle]="dtPullToRefreshStyle"
+    [direction]="state.direction"    
+    [endReachedRefresh]="state.endReachedRefresh"
+    (onRefresh)="pullToRefresh($event)"
+  >
+    <nz-table #basicTable [nzData]="listProduct" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small" [nzLoading]="loading" nzBordered="true">
+        <thead>
+            <tr>
+                <th nzAlign="center" nzWidth="5%">STT</th>
+                <th nzAlign="center" nzWidth="20%">Mã SP</th>
+                <th nzAlign="center" nzWidth="40%"> Tên SP</th>
+                <th nzAlign="center">Giá bán lẻ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr tabindex="1" #indexScroll *ngFor="let data of basicTable.data; let i = index" long-press (onLongPress)="showActionSheet(data,i)">
+                <td nzAlign="center">{{ i + 1 }}</td>
+                <td nzAlign="center">{{ data.productCode }}</td>
+                <td nzAlign="center">{{ data.productName }}</td>
+                <td nzAlign="center">{{ data.retailPrice }}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+    </PullToRefresh>
+</div>

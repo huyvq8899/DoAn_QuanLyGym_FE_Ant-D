@@ -1,0 +1,30 @@
+<nz-spin [nzSpinning]="spinning" >
+  <nz-card  [nzExtra]="dropdownExtraTemplate" >
+    <ejs-chart width="100%" [palettes]='palette' [tooltip]='tooltip' id="chart-container" [primaryXAxis]='primaryXAxis'
+      [primaryYAxis]='primaryYAxis' [title]='title' (load)='load($event)'[zoomSettings]='zoomSettings'> 
+      <e-series-collection>
+        <e-series [dataSource]='chartData' [animation]='animation'  type='Column' xName='sThang'
+          yName='tongSoKhachHang' name='Tổng số khách hàng' [marker]='marker'></e-series>
+      </e-series-collection>
+    </ejs-chart>
+  </nz-card>
+  
+    <ng-template #dropdownExtraTemplate>
+      <nz-select nzSize="small" style="width: 175px;" nzShowSearch nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch
+        (nzOnSearch)="SearchNhanVien($event)" (ngModelChange)="changeNhanVien($event)" [(ngModel)]="selectedNhanVien"
+        [nzDropdownStyle]="searchCustomerOverlayStyle" >
+  
+        <nz-option nzCustomContent *ngFor="let option of listNhanVien" [nzLabel]="option.fullName"
+          [nzValue]="option.userId">
+          <nz-avatar nzIcon="user" [nzSrc]="option.avatar"></nz-avatar> {{option.userName}} -
+          {{option.fullName}}
+        </nz-option>
+      </nz-select>
+      <nz-select nzSize="small" nzShowSearch nzPlaceHolder="Chọn năm"  style="margin-left: 5px;width: 90px;" [(ngModel)]="selectedYears"
+      (ngModelChange)="changeNam()" >
+        <nz-option *ngFor="let item of years" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+      </nz-select>
+    </ng-template>
+  
+  </nz-spin>
+  

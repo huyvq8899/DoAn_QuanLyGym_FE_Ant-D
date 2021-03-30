@@ -1,0 +1,41 @@
+<div nz-row class="card">
+  <nz-card style="width:100%;">
+    <nz-tabset nzTabPosition="left">
+      <nz-tab [nzTitle]="titleTemplate">
+        <ng-template #titleTemplate> 
+          <!-- <i nz-icon nzType="idcard" nzTheme="outline"></i> -->
+          Thông tin</ng-template>
+        <h2>Thông tin</h2>
+        <div nz-row [class.displayReverse]="setReverse">
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="10" nzXl="10">
+            <app-account-edit></app-account-edit>
+          </div>
+          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="14" nzXl="14" style="text-align: center; padding-bottom: 20px;">
+            <div nz-row>
+              <!-- <span>Avatar</span> -->
+            </div>
+            <div style="padding:12px 0px">
+              <nz-avatar nzIcon="user" [nzSize]="144" [nzSrc]="currentUser?.avatar"></nz-avatar>
+            </div>
+            <div>
+                <!-- <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+                  <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
+                </nz-upload> -->
+              <button nz-button nzType="default" (click)="fImportExcel.click()"><i nz-icon nzType="upload"></i>Thay đổi hình đại diện</button>
+              <input id="fImportExcel" type="file" #fImportExcel (change)="importFile($event)" style="display: none;">
+            </div>
+          </div>
+        </div>
+
+      </nz-tab>
+      <nz-tab [nzTitle]="titleTemplate1">
+        <ng-template #titleTemplate1> 
+          <!-- <i nz-icon nzType="safety-certificate" nzTheme="outline"></i> -->
+          Bảo mật
+        </ng-template>
+        <h2>Bảo mật</h2>
+        <app-account-change-password></app-account-change-password>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card>
+</div>

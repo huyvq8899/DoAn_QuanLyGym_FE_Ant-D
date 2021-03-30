@@ -1,0 +1,163 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <List [className]="'date-picker-list'">
+      <ListItem
+        DatePicker
+        [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')"
+        [arrow]="'horizontal'"
+        [mode]="'date'"
+        [(ngModel)]="valueBegin"
+        (onOk)="onOkBegin($event)"
+      >
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker  [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')"
+      [arrow]="'horizontal'"  [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+  <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="themMoi()">
+    <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+
+  <div nz-col nzSpan="100" style="text-align: right; padding-left: 3px; right: 0px; position: absolute; margin-right: 5px;">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+<PullToRefresh 
+[ngStyle]="dtPullToRefreshStyle"
+[direction]="state.direction"    
+[endReachedRefresh]="state.endReachedRefresh"
+(onRefresh)="pullToRefresh($event)"
+>
+  <nz-table [nzShowPagination]="false"  #fixedTable nzSize="small" nzBordered nzShowSizeChanger
+    [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize"
+    nzShowTotal [nzPageSizeOptions]="pageSizeOptions" [(nzPageIndex)]="displayData.PageNumber" nzBordered
+    [nzLoading]="loading" [nzTotal]="total" (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate"
+    nzSize="small">
+    <ng-template #rangeTemplate let-range="range" let-total>
+      {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+    </ng-template>
+    <thead>
+      <tr>
+        <th nzWidth="50px" nzAlign="center">STT</th>   
+  
+        <th nzWidth="100px" nzAlign="center"   nzColumnKey="createdDate"  >
+          Ngày tạo
+          <nz-filter-trigger [nzDropdownMenu]="menu36">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu36="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('createdDate',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+  
+        <th nzWidth="150px" nzAlign="center"   nzColumnKey="maDonHang"  >Mã đơn hàng
+          <nz-filter-trigger [nzDropdownMenu]="menu1">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu1="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('maDonHang',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+        <th nzWidth="200px"  nzAlign="center">Trạng thái</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr long-press (onLongPress)="showActionSheet(data)" *ngFor="let data of fixedTable.data; let i = index">
+        <td nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+        <td nzWidth="150px" nzAlign="center">{{ data?.createdDate | date:'dd/MM/yyyy' }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.maDonHang }}</td>
+        <td nzWidth="200px">
+          <div *ngIf="data.trangThai === 0" >
+             <nz-alert nzType="info" nzMessage="Tạo đơn hàng "></nz-alert>
+            </div>
+          <div *ngIf="data.trangThai === 1" >
+            <nz-alert nzType="warning" nzMessage="Sửa lại đơn hàng "></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 2" >
+            <nz-alert nzType="success" nzMessage="Xác nhận cước thực tế"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 3" >
+            <nz-alert nzType="error" nzMessage="Hủy xác nhận cước (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 4" >
+            <nz-alert nzType="success" nzMessage="PPKD duyệt"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 5" >
+            <nz-alert nzType="error" nzMessage="PPKD hủy duyệt (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 6" >
+            <nz-alert nzType="success" nzMessage="BLĐ duyệt"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 7" >
+            <nz-alert nzType="error" nzMessage="BLĐ hủy duyệt (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 8" >
+            <nz-alert nzType="success" nzMessage="Đã chốt xe"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 9" >
+            <nz-alert nzType="error" nzMessage="Hủy chốt xe (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 10" >
+            <nz-alert nzType="success" nzMessage="Lấy xong hàng"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 11" >
+            <nz-alert nzType="error" nzMessage="Hủy lấy hàng (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 12" >
+            <nz-alert nzType="success" nzMessage="Đang giao"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 13" >
+            <nz-alert nzType="error" nzMessage="Hủy đang giao (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 14" >
+            <nz-alert nzType="success" nzMessage="Đã giao"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 15" >
+            <nz-alert nzType="error" nzMessage="Hủy đã giao (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 16" >
+            <nz-alert nzType="success" nzMessage="Đã thanh toán"></nz-alert>
+          </div>
+          <div *ngIf="data.trangThai === 17" >
+            <nz-alert nzType="error" nzMessage="Hủy đã thanh toán (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+          </div>
+        </td>
+  
+  
+      </tr>
+    </tbody>
+  </nz-table>
+  </PullToRefresh>

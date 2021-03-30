@@ -1,0 +1,94 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;" *ngIf="checkcreate()">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="themMoi()">
+      <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+
+  <div nz-col nzSpan="100"
+    style="text-align: right; padding-left: 3px; right: 0px; position: absolute; margin-right: 5px">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;" *ngIf="!checkcreate()">
+  <div nz-col nzSpan="12" nzOffset="12" style="text-align: right; padding-left: 3px;margin-right: 5px">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch" >
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+<PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+  [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)" style="margin-top: 1em;">
+  <nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+    [nzLoading]="loading" nzBordered="true" [nzScroll]="{ x: '2075px'}">
+    <thead>
+      <tr>
+        <th nzLeft="0px" nzWidth="30px" nzAlign="center">STT</th>
+        <th nzLeft="50px" nzWidth="80px" nzAlign="center" nzColumnKey="createdDate">Ngày tạo</th>
+        <th nzWidth="150px" nzAlign="center" nzColumnKey="tenNguoiNghi"> Người xin nghỉ</th>
+        <th nzWidth="100px" nzAlign="center" nzColumnKey="tenDeXuat">Đề Xuất</th>
+        <th nzWidth="200px" nzAlign="center" nzColumnKey="lyDo">Lý do</th>
+        <th nzWidth="150px" nzAlign="center" nzColumnKey="thoiGianDiMuon">Thời gian đi muộn</th>
+        <th nzWidth="100px" nzAlign="center" nzColumnKey="ngayNghi">Ngày nghỉ</th>
+        <th nzWidth="100px" nzAlign="center" nzColumnKey="ngayDiLam">Ngày đi làm</th>
+        <th nzWidth="100px" nzAlign="center" nzColumnKey="soNgayNghiPhep">Số ngày nghỉ</th>
+        <th nzWidth="200px" nzAlign="center" nzColumnKey="lyDoTuChoi">Lý do từ chối</th>
+        <th nzRight nzWidth="90px" nzAlign="center" nzColumnKey="trangThaiDuyet">Trạng thái duyệt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr long-press (onLongPress)="showActionSheet(data)" *ngFor="let data of basicTable.data; let i = index">
+        <td nzLeft="0px" nzWidth="30px" nzAlign="center">{{ i + 1 }}</td>
+        <td nzLeft="50px" nzWidth="80px" nzAlign="center">{{ data?.createdDate | date:'dd/MM/yyyy' }}</td>
+        <td nzWidth="150px" nzAlign="center">{{ data?.tenNguoiNghi }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.tenDeXuat }}</td>
+        <td nzWidth="200px" nzAlign="center">{{ data?.lyDo }}</td>
+        <td nzWidth="150px" nzAlign="center">{{ data?.thoiGianDiMuon }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.ngayNghi| date:'dd/MM/yyyy' }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.ngayDiLam | date:'dd/MM/yyyy' }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.soNgayNghiPhep }}</td>
+        <td nzWidth="200px" nzAlign="center">{{ data?.lyDoTuChoi }}</td>
+        <td nzRight nzWidth="90px" nzAlign="center">
+          <div *ngIf="data.isDuyet === '1'">
+            <nz-alert nzType="success" nzMessage="Đã duyệt"></nz-alert>
+          </div>
+          <div *ngIf="data.isDuyet === '2'">
+            <nz-alert nzType="error" nzMessage="Không duyệt"></nz-alert>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</PullToRefresh>

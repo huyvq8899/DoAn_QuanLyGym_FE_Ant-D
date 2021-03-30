@@ -1,0 +1,73 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+    <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+      <List [className]="'date-picker-list'">
+        <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+          [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+          <Brief>{{ name }}</Brief>
+        </ListItem>
+      </List>
+    </div>
+    <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+      <List [className]="'date-picker-list'">
+        <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+          [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+          <Brief>{{ name }}</Brief>
+        </ListItem>
+      </List>
+    </div>
+    <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+      <button nz-button nzSize="small" nzType="primary"
+        style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+        <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+    </div>
+  </div>
+  <div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+    <div nz-col nzSpan="12" nzOffset="12" style="text-align: right; padding-left: 3px;margin-right: 5px">
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch" >
+        <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+          placeholder="Tìm kiếm" />
+        <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </nz-input-group>
+    </div>
+  </div>
+  
+  <PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+    [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+    <nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+      [nzLoading]="loading" nzBordered="true" [nzScroll]="{ x: '1000px'}" nzShowTotal [nzTotal]="total"
+      [nzShowTotal]="rangeTemplate">
+      <ng-template #rangeTemplate let-range="range" let-total>
+        {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+      </ng-template>
+      <thead>
+        <tr>
+          <th nzLeft="0px" nzWidth="50px" nzAlign="center">STT</th>
+          <th nzLeft="50px" nzWidth="150px" nzAlign="center" nzColumnKey="createdBy">Người tạo</th>
+          <th nzWidth="150px" nzAlign="center" nzColumnKey="createdDate">Ngày tạo</th>
+          <th nzWidth="150px" nzAlign="center" nzColumnKey="maKhachHang">Mã khách hàng</th>
+          <th nzWidth="200px" nzAlign="center" nzColumnKey="tenKhachHang">Tên khách hàng</th>
+          <th nzWidth="150px" nzAlign="center" nzColumnKey="maSoThue">Mã số thuế</th>
+          <th nzWidth="250px" nzAlign="center" nzColumnKey="tenTruongThayDoi">Tên trường thay đổi</th>
+          <th nzWidth="250px" nzAlign="center" nzColumnKey="dienGiai">Diễn giải</th>
+          <th nzWidth="200px" nzAlign="center" nzColumnKey="duLieuCu"> Dữ liệu cũ</th>
+          <th nzWidth="200px" nzAlign="center" nzColumnKey="duLieuMoi">Dữ liệu mới</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data; let i = index" long-press (onLongPress)="showActionSheet(data)">
+          <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+          <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data?.createdBy }}</td>
+          <td nzWidth="150px" nzAlign="center">{{ data.createdDate | date:'HH:mm  dd/MM/YYYY'}}</td>
+          <td nzWidth="150px" nzAlign="center">{{ data.maKhachHang}}</td>
+          <td nzWidth="150px" nzAlign="center">{{ data.tenKhachHang }}</td>
+          <td nzWidth="200px" nzAlign="center">{{ data.maSoThue }}</td>
+          <td nzWidth="150px" nzAlign="center">{{ data.tenTruongThayDoi }}</td>
+          <td nzWidth="250px" nzAlign="center">{{ data.dienGiai }}</td>
+          <td nzWidth="250px" nzAlign="center">{{ data.duLieuCu }}</td>
+          <td nzWidth="200px" nzAlign="center">{{ data.duLieuMoi }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </PullToRefresh>

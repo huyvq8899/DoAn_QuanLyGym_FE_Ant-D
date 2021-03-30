@@ -1,0 +1,29 @@
+<nz-spin [nzSpinning]="spinning">
+    <nz-card nzTitle="" [nzExtra]="dropdownExtraTemplate">
+        <ejs-chart id="bar-chart" width="100%" [palettes]='palette' [tooltip]='tooltip' id="chart-container" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title'
+        (load)='load($event)'[zoomSettings]='zoomSettings'>
+            <e-series-collection>
+                <e-series [dataSource]='chartData' [animation]='animation' type='Column' xName='fullName' yName='tongSoKhachHang' name='Tổng số khách hàng' [marker]='marker'></e-series>
+            </e-series-collection>
+        </ejs-chart>
+    </nz-card>
+    <ng-template #dropdownExtraTemplate>
+        <!-- <label for="selectedMonths">Tháng:</label>
+        <nz-select nzSize="small" nzShowSearch nzAllowClear nzPlaceHolder="Chọn tháng làm việc trong năm" style="margin-left: 1px;width: 50px;" [(ngModel)]="selectedMonths">
+            <nz-option *ngFor="let item of months" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+        </nz-select>
+        <label id="f-label-year" style="margin-left: 5px;" for="selectedYears">Năm:</label>
+        <nz-select nzSize="small" nzShowSearch nzAllowClear nzPlaceHolder="Chọn năm" style="margin-left: 1px;width: 65px;" [(ngModel)]="selectedYears">
+            <nz-option *ngFor="let item of years" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+        </nz-select>
+        <button nzSize="small" style="margin-left: 5px;" nz-button nzType="primary" type="button" (click)="getData()">Lấy dữ liệu</button> -->
+        <label for="selectedMonths">Tháng:</label>
+        <nz-select nzSize="small" nzShowSearch nzPlaceHolder="Chọn tháng" style="width: 70px;margin-left: 7px" [(ngModel)]="selectedMonths"(ngModelChange)="changeData()">
+            <nz-option *ngFor="let item of months" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+        </nz-select>
+        <label id="f-label-year" style="margin-left: 15px;" for="selectedYears">Năm:</label>
+        <nz-select nzSize="small" nzShowSearch nzPlaceHolder="Chọn năm" style="margin-left: 7px;width: 100px;" [(ngModel)]="selectedYears" (ngModelChange)="changeData()">
+            <nz-option *ngFor="let item of years" [nzLabel]="item" [nzValue]="item">{{item}}</nz-option>
+        </nz-select>
+    </ng-template>
+</nz-spin>

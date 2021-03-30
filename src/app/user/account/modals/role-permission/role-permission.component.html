@@ -1,0 +1,29 @@
+<nz-tabset [nzTabPosition]="'left'" [nzType]="'line'">
+  <nz-tab *ngFor="let tab of listFunctionRole; let i=index" [nzTitle]="tab?.roleName">
+    <nz-table nzSize="small" #basicTable [nzData]="tab?.listFunction" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Chức năng</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data; let j=index">
+          <td>{{data?.title}}</td>
+          <td>
+            <nz-switch [nzDisabled]="tab?.roleName === 'ADMIN'" nzSize="small" [ngModel]="data?.active"
+            (ngModelChange)="changeActive(i,j,$event)"></nz-switch>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()" [disabled]="spinning">
+    <i nz-icon nzType="close" nzTheme="outline"></i>Hủy
+  </button>
+  <button nz-button nzType="primary" (click)="saveChanges()" [nzLoading]="spinning">
+    <i nz-icon nzType="save" nzTheme="outline"></i>Lưu
+  </button>
+</div>

@@ -1,0 +1,27 @@
+<div style="width: 100%; text-align: center; margin-top: 30px;">
+  <img src="../../../assets/logo-full.png" style="width: 180px;">
+</div>
+<div class="am-demo-page" style="padding:20px 50px 50px 50px;">
+  <form nz-form  (ngSubmit)="submitForm()" [formGroup]="loginForm">
+  <!-- <div style="font-size: 16px; color:#000">ĐĂNG NHẬP</div> -->
+  <div class="am-list" style="margin:0;">
+    <div class="am-list-body">
+      <InputItem [placeholder]="'Tài khoản'" [content]="content" formControlName="userName">
+        <ng-template #content>
+          <!-- <div
+            style="background-image:url(http://www.mhsdevelopers.com.br/_include/support/img/icon-user.png); background-size:cover;height:18px; width: 18px "
+          ></div> -->
+        </ng-template>
+      </InputItem>
+      <InputItem [placeholder]="'Mật khẩu'" [content]="content"  [type]="'password'" formControlName="password">
+        <ng-template #content>
+          <div
+            style="background-image:url(http://www.mhsdevelopers.com.br/_include/support/img/lock.png); background-size:cover;height:18px; width: 18px; width: 30px; "
+          ></div>
+        </ng-template>
+      </InputItem>
+    </div>
+    <div Button [type]="'primary'" style="margin-top: 30px;" (onClick)="submitForm()">Đăng nhập</div>
+  </div>
+</form>
+</div>

@@ -1,0 +1,9 @@
+:host ::ng-deep .ant-form-item-label {
+    text-align: left;
+}
+
+:host ::ng-deep .ant-form-item-required{
+  bottom: -5px;
+  margin-top: -15px !important;
+  height: 5px;
+}

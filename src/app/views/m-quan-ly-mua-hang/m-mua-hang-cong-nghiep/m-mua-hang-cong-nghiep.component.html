@@ -1,0 +1,175 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="width: 32%;max-width: 120px; text-align: left; padding-left: 3px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="width: 32%;max-width: 120px; text-align: left; padding-left: 3px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="width: 25%; text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 14px; margin-top: 6px;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+ 
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+  <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+    <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+
+  <div nz-col nzSpan="100" style="text-align: right; padding-left: 3px; right: 0px; position: absolute; margin-right: 5px;">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+<PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction" 
+    [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+<nz-table [nzScroll]="{ x: '3175px'}" #fixedTable nzSize="small" nzBordered nzShowSizeChanger
+  [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize"
+  nzShowTotal [nzPageSizeOptions]="pageSizeOptions" [(nzPageIndex)]="displayData.PageNumber" nzBordered
+  [nzLoading]="loading" (nzQueryParams)="onQueryParamsChange($event)">
+
+  <thead>
+    <tr>
+      <th nzLeft="0px" nzWidth="50px" nzAlign="center">STT</th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="ngayMuaName">
+        Ngày mua
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="ngayThanhToanName">
+        Ngày thanh toán
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="maDonMua">
+        Mã đơn hàng
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="maNhaCungCap">
+        Mã nhà cung cấp
+      </th>
+
+      <th nzWidth="250px" nzAlign="center" nzCustomFilter nzColumnKey="maSoThueNhaCungCap">
+        Mã số thuế
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="tenNhaCungCap">
+        Tên nhà cung cấp
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="emailNhaCungCap">
+        Email
+      </th>
+
+      <th nzWidth="250px" nzAlign="center" nzCustomFilter nzColumnKey="diaChiDKKD">
+        Địa chỉ đăng ký kinh doanh
+      </th>
+
+      <th nzWidth="250px" nzAlign="center" nzCustomFilter nzColumnKey="diaChiPhongGiaoDich">
+        Văn phòng giao dịch
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="soDienThoaiKeToan">
+        SĐT kế toán
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="soDienThoaiNGuoiDaiDienPhapLuat">
+        SĐT người đại diện
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="productCode">
+        Sản phẩm
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="productName">
+        Tên sản phẩm
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="retailPrice">
+        Giá bán lẻ
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="maKho">
+        Mã kho
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="tongLuongMua">
+        Tổng lượng mua
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="chietKhauMua">
+        Chiết khấu mua
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="thueXuatName">
+        Thuế Xuất
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="donGiaTruocThue">
+        Đơn giá trước thuế
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="thanhToan">
+        Thanh toán
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="loaiNoiNhan">
+        Loại nơi nhận
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="noiNhanChiTiet">
+      Nơi nhận chi tiết
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="hinhThucThanhToan">
+        Hình thức thanh toán
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="ghiChu">
+        ghi chú
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr long-press (onLongPress)="showActionSheet(data)" *ngFor="let data of fixedTable.data; let i = index">
+      <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.ngayMua | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.ngayThanhToan | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.maDonMua }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.maNhaCungCap }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.maSoThueNhaCungCap }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.tenNhaCungCap }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.emailNhaCungCap }}</td>
+      <td nzWidth="250px" nzAlign="center">{{ data?.diaChiDKKD }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.diaChiPhongGiaoDich }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.soDienThoaiKeToan }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.soDienThoaiNGuoiDaiDienPhapLuat }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.productCode }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.productName }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.retailPrice }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.maKho }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.tongLuongMua }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.chietKhauMua }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.thueXuatName }}</td>  
+    
+      <td nzWidth="200px" nzAlign="center">{{ data?.donGiaTruocThue | formatPrice }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.thanhToan | formatPrice }}</td>
+      <td >
+        <nz-tag selected *ngIf="data.loaiNoiNhan=='Tại kho'">Tại kho</nz-tag>
+        <nz-tag selected *ngIf="data.loaiNoiNhan=='Giao hộ'">Giao hộ</nz-tag>
+      </td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.noiNhanChiTiet }}</td>
+      <td>
+        <nz-tag selected *ngIf="data.hinhThucThanhToan=='Trước'">Trước</nz-tag>
+        <nz-tag selected *ngIf="data.hinhThucThanhToan=='Sau'">Sau</nz-tag>
+      </td>
+      
+      <td nzWidth="200px" nzAlign="center">{{ data?.ghiChu }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+</PullToRefresh>

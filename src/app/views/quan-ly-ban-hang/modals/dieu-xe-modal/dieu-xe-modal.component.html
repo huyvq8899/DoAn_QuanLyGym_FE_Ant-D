@@ -1,0 +1,46 @@
+<form nz-form [formGroup]="dieuXeForm" class="login-form">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">Tên gọi</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Vui lòng chọn tên gọi">
+      <nz-select nzSize="small" nzShowSearch formControlName="id" (ngModelChange)="changeLaiXe($event)">
+        <nz-option *ngFor="let item of listLaiXe" [nzLabel]="item?.tenGoi" [nzValue]="item?.id">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="bienKiemSoat">Biển kiểm sát</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="text" nzSize="small" formControlName="bienKiemSoat" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tongDungTich">Tổng dung tích</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="text" nzSize="small" currencyMask formControlName="tongDungTich" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tenLaiXe">Tên lái xe</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="text" nzSize="small" formControlName="tenLaiXe" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="cmt">CMT</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="text" nzSize="small" formControlName="cmt" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="soDienThoai">SĐT</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="text" nzSize="small" formControlName="soDienThoai" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+  <button nz-button nzType="primary" (click)="saveChanges()" *ngIf="!isView">Lưu</button>
+</div>

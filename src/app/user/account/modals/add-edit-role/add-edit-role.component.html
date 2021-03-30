@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="roleForm" (ngSubmit)="saveChanges()" style="padding: 10px;">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="roleName">Tên nhóm</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24" [nzErrorTip]="errorRoleName">
+      <input nz-input type="roleName" formControlName="roleName" id="roleName">
+      <ng-template #errorRoleName let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Vui lòng nhập tên nhóm !
+        </ng-container>
+        <ng-container *ngIf="control.hasError('checkRoleName')">
+          Tên nhóm đã tồn tại vui lòng chọn tên nhóm khác!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="8" [nzXs]="24" nzFor="parentRoleId">Dưới quyền</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Vui lòng chọn!"
+      nzExtra="Thuộc quyền quản lý của nhóm nào">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn quyền" formControlName="parentRoleId"
+        id="parentRoleId">
+        <nz-option *ngFor="let item of roles" [nzValue]="item.roleId" [nzLabel]="item.roleName">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">
+    <i nz-icon nzType="close" nzTheme="outline"></i>Đóng
+  </button>
+  <button nz-button nzType="primary" (click)="saveChanges()" [nzLoading]="isLoading">
+    <i nz-icon nzType="save" nzTheme="outline"></i>Lưu
+  </button>
+</div>

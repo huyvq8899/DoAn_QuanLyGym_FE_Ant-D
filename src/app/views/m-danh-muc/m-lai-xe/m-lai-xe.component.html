@@ -1,0 +1,57 @@
+<div nz-row>
+  <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <div style="text-align: right;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+</div>
+<br />
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+    [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+    <nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+      [nzLoading]="loading" nzBordered="true">
+      <thead>
+        <tr>
+          <th nzAlign="center">STT</th>
+          <th nzAlign="center">Tên gọi</th>
+          <th nzAlign="center">Biển kiểm soát</th>
+          <th nzAlign="center">Tổng dung tích (Lít)</th>
+          <th nzAlign="center">Tên lái xe</th>
+          <th nzAlign="center">Chi tiết khoang/hầm (Lít)</th>
+          <th nzAlign="center">Lái xe ngoài</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr tabindex="1" #indexScroll *ngFor="let data of basicTable.data; let i = index" long-press (onLongPress)="showActionSheet(data, i)">
+          <td nzAlign="center">{{ i + 1 }}</td>
+          <td>{{ data?.tenGoi }}</td>
+          <td>{{ data?.bienKiemSoat }}</td>
+          <td >{{ data?.tongDungTich | formatPrice}}</td>
+          <td>
+            <strong>{{ data?.tenLaiXe }}</strong><br>
+            CMT: {{ data?.cmt }}<br>
+            SĐT: {{ data?.soDienThoai }}
+          </td>
+          <td>
+            <ng-container *ngFor="let item of data?.dungtichct; let i = index">
+              <span>KL{{i + 1}}: {{ item?.dungTich | formatPrice}}</span><br>     
+                   </ng-container>
+          </td>
+          <td nzAlign="center">
+            <label nz-checkbox [ngModel]="data.laiXeNgoai === true" nzDisabled></label>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </PullToRefresh>
+  </div>
+</div>

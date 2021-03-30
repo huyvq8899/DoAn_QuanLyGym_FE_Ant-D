@@ -1,0 +1,21 @@
+<form nz-form [formGroup]="myFormGroup" class="login-form">
+    <div >
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="maNganhNghe">Mã ngành nghề</nz-form-label>
+            <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <input nz-input nzSize="small" formControlName="maNganhNghe" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="tenNganhNghe">Tên ngành nghề</nz-form-label>
+            <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <input nz-input nzSize="small"  formControlName="tenNganhNghe" />
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+</form>
+
+<div *nzModalFooter>
+<button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+<button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

@@ -1,0 +1,248 @@
+<form nz-form [formGroup]="myFormGroup">
+  <div nz-row>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="ngayMua">Ngày mua</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="date" formControlName="ngayMua" id="ngayMua" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="ngayThanhToan">Ngày thanh toán</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="date" formControlName="ngayThanhToan" id="ngayThanhToan" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="maDonMua">Mã đơn hàng</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" [nzErrorTip]="errorMaDonHang">
+          <input nz-input nzSize="small" type="text" formControlName="maDonMua" id="maDonMua"
+            (blur)="blurMaDonMua()" />
+          <ng-template #errorMaDonHang let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Vui lòng nhập mã đơn hàng
+            </ng-container>
+            <ng-container *ngIf="control.hasError('exists')">
+              Mã đơn hàng này đã tồn tại
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="nhaCungCapId">Mã nhà cung cấp</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <nz-select nzSize="small" nzShowSearch formControlName="nhaCungCapId"
+            (ngModelChange)="changeNhaCungCap($event)">
+            <nz-option *ngFor="let option of nhaCungCaps" [nzLabel]="option.maNhaCungCap" [nzValue]="option.nhaCungCapId">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="maSoThueNhaCungCap">Mã số thuế</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="maSoThueNhaCungCap" id="maSoThueNhaCungCap" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="tenNhaCungCap">Tên nhà cung cấp</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="tenNhaCungCap" id="tenNhaCungCap" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="diaChiDKKD">Địa chỉ đăng ký kinh doanh</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="diaChiDKKD" id="diaChiDKKD" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="diaChiPhongGiaoDich">Địa chỉ phòng giao dịch</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="diaChiPhongGiaoDich" id="diaChiPhongGiaoDich" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="emailNhaCungCap">Email nhận hóa đơn</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="emailNhaCungCap" id="emailNhaCungCap" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="soDienThoaiNGuoiDaiDienPhapLuat">SĐT người đại diện pháp luật</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="soDienThoaiNGuoiDaiDienPhapLuat" id="soDienThoaiNGuoiDaiDienPhapLuat" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="soDienThoaiKeToan">SĐT kế toán</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24">
+          <input nz-input nzSize="small" type="text" formControlName="soDienThoaiKeToan" id="soDienThoaiKeToan" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="productId">Mã sản phẩm</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải chọn!">
+          <nz-select nzSize="small" nzShowSearch formControlName="productId" (ngModelChange)="changeSanPham($event)">
+            <nz-option nzCustomContent *ngFor="let option of sanPhams" [nzLabel]="option.productCode" [nzValue]="option.productId">
+              {{option.productCode}} - {{option.productName}}
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="productName">Tên sản phẩm</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" type="text" formControlName="productName" id="productName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="retailPrice">Giá bán lẻ</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" type="text" currencyMask formControlName="retailPrice" id="retailPrice" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="tongLuongMua">Số lượng mua</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input (blur)="blurTongLuongMua()" nzSize="small" type="text" currencyMask formControlName="tongLuongMua" id="tongLuongMua" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="chietKhauMua">Chiết khấu mua</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" type="text" currencyMask formControlName="chietKhauMua" id="chietKhauMua" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" class="flabelGHL">File hóa đơn</nz-form-label>
+        <nz-form-control class="fcontrolGHL">
+          <button type="button" nzSize="small" nz-button nzType="default" (click)="fDK.click()">
+            <i nz-icon nzType="upload" nzTheme="outline"></i>Tải lên
+            <input id="fileURL" type="file" #fDK style="display: none;"
+              nzSize="small" accept="image/*,.pdf" multiple="multiple" (change)="importFile($event)">
+          </button>
+          &nbsp;
+          <label *ngIf="FileURLs && FileURLs !== null" for="file">
+            <div *ngFor="let FileURL of FileURLs ;let i =index  " style="display: inline-block;padding: 5px;">
+              <a (click)="openImage(FileURL)">{{FileName[i]}}</a>
+              <i *ngIf="isFixAble2" nz-icon nzType="delete" nzTheme="outline" style="cursor:pointer;margin-left:2px; "
+                nz-popconfirm nzPopconfirmTitle="Bạn có chắc chắn muốn xóa file này không?"
+                nzPopconfirmPlacement="bottom" (nzOnConfirm)="removeFile(i)"></i>
+            </div>
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <nz-form-item>
+        <nz-form-control [nzSm]="24" [nzXs]="24">
+          <nz-table nzSize="small" [nzNoResult]="null" style="padding: 15px;" nzSize="small" nzBordered
+            #chiTietKhoangHamTable nzShowPagination="false" [nzData]="this.myFormGroup.get('listLayHangChiTiet').value"
+            [nzScroll]="{x: '100%', y: '200px'}">
+            <thead>
+              <tr>
+                <th *ngIf="!(this.isDuyetDonMuaHang || this.isView)" nzWidth="50px" nzLeft="0px" nzAlign="center">
+                  <button nz-button nzType="default" type="button" nzSize="small" (click)="addItemLayHangChiTiets()"><i
+                      nz-icon nzType="plus"></i></button>
+                </th>
+                <th nzAlign="center">Ngày lấy hàng</th>
+                <th nzAlign="center">Diễn giải</th>
+                <th nzAlign="center">Số lượng</th>
+                <th nzAlign="center">Biển số xe</th>
+                <th nzAlign="center">Lái xe</th>
+                <th nzAlign="center">Kho lấy hàng</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="listLayHangChiTiet">
+              <tr class="list-item-detail"
+                *ngFor="let data of myFormGroup.get('listLayHangChiTiet')['controls']; let i = index" [formGroupName]="i">
+                <td *ngIf="!(this.isDuyetDonMuaHang || this.isView)" nzWidth="50px" nzLeft="0px" nzAlign="center">
+                  <button *ngIf="myFormGroup.get('listLayHangChiTiet')['controls'].length > 0" nzSize="small" type="button"
+                    nz-button nzType="default" (click)="removeItemLayHangChiTiets(i)"><i nz-icon nzType="minus"
+                      nzTheme="outline"></i></button>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <input nzSize="small" type="date" nz-input formControlName="ngayLay" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <!-- <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <input nzSize="small" (blur)="blurSoLuongLay()" currencyMask type="text" nz-input
+                        formControlName="soLuongLay" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td> -->
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <input nzSize="small" type="text" nz-input formControlName="dienGiai" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <input nzSize="small" currencyMask type="text" nz-input
+                        formControlName="soLuongLay" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <nz-select nzSize="small" nzShowSearch formControlName="bienKiemSoat"
+                      (ngModelChange)="changexeId($event, i)">
+                        <nz-option *ngFor="let option of laiXes" [nzLabel]="option.bienKiemSoat" [nzValue]="option.xeId">
+                        </nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <input nzSize="small" type="text" nz-input formControlName="tenLaiXe" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+                <td>
+                  <nz-form-item>
+                    <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Phải nhập!">
+                      <nz-select nzSize="small" nzShowSearch formControlName="tenKho"
+                      (ngModelChange)="changeKhoHang($event)">
+                        <nz-option *ngFor="let option of khoHangs" [nzLabel]="option.tenKho" [nzValue]="option.tenKho">
+                        </nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+
+<div *nzModalFooter>
+  <div nz-row>
+    <div style="margin-left: 85%">
+      <button nz-button nzType="default" (click)="closeModal()">
+        <i nz-icon nzType="close" nzTheme="outline"></i>Đóng
+      </button>
+      <button nz-button nzType="primary" (click)="submitForm()">
+        <i nz-icon nzType="save" nzTheme="outline"></i>Lưu
+      </button>
+    </div>
+  </div>
+</div>

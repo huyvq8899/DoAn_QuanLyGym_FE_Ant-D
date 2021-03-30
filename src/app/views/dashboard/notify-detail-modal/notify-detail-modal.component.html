@@ -1,0 +1,62 @@
+<div style="margin: 10px;">
+  <nz-alert nzType="warning" [nzMessage]="data.noiDung" nzShowIcon></nz-alert>
+  <div nz-row [nzGutter]="8" style="margin-top: 10px;">
+    <div nz-col class="gutter-row" [nzSpan]="12">
+      <nz-card style="width: 100%;" nzTitle="Thông tin hóa đơn" nzSize="small">
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 25%;">Số hóa đơn</td>
+            <td style="width: 25%;">
+              <strong>{{data.hoaDon.soHoaDon}}</strong>
+            </td>
+            <td style="width: 25%;">Ngày hóa đơn</td>
+            <td style="width: 25%;">{{data.hoaDon.ngayHoaDon | date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td style="width: 25%;">Mẫu số</td>
+            <td style="width: 25%;">{{data.hoaDon.mauSo}}</td>
+            <td style="width: 25%;">Ký hiệu</td>
+            <td style="width: 25%;">{{data.hoaDon.kyHieu}}</td>
+          </tr>
+          <tr>
+            <td>Tổng tiền</td>
+            <td colspan="3">
+              <strong style="color: #e03232;">{{data.hoaDon.tongCongTienThanhToan | formatPrice}}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <button nz-button [nzSize]="'small'" nzType="primary" (click)="viewHoaDon(data)">Xem hóa đơn</button>
+            </td>
+          </tr>
+        </table>
+      </nz-card>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="12">
+      <nz-card style="width: 100%;" nzTitle="Thông tin doanh nghiệp rủi ro" nzSize="small">
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 30%;">Mã số thuế</td>
+            <td style="width: 70%;">
+              <strong>{{data.doanhNghiep.maSoThue}}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 30%;">Tên doanh nghiệp</td>
+            <td style="width: 70%;">{{data.doanhNghiep.hoVaTen}}</td>
+          </tr>
+          <tr>
+            <td style="width: 30%;">Địa chỉ</td>
+            <td style="width: 70%;">{{data.doanhNghiep.diaChi}}</td>
+          </tr>
+          <tr>
+            <td style="width: 30%;">Trạng thái</td>
+            <td style="width: 70%;">
+              <strong style="color: #e03232;">{{data.doanhNghiep.tenTrangThai}}</strong>
+            </td>
+          </tr>
+        </table>
+      </nz-card>
+    </div>
+  </div>
+</div>

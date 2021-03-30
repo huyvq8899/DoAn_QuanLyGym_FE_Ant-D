@@ -1,0 +1,17 @@
+<div nz-row style="text-align: right;padding-bottom: 2px;">
+  <button nz-button nzSize="small" nzType="default" (click)="toggleTree()">
+    <i nz-icon nzType="minus" *ngIf="expandedTree"></i>
+    <i nz-icon nzType="plus" *ngIf="!expandedTree"></i>
+    {{expandedTree? 'Đóng tất cả' : 'Mở tất cả'}}
+  </button>
+</div>
+<nz-collapse [nzBordered]="false">
+  <nz-collapse-panel *ngFor="let panel of nodes" [nzHeader]="panel.title" [nzActive]="expandedTree">
+    <p style="padding-left: 35px;margin-bottom: 10px;" *ngFor="let item of panel.children">
+      <i nz-icon nzType="file" nzTheme="outline"></i>
+      <a [routerLink]="item.link" [queryParams]="{ detail: item.key}">
+        {{item.title}}
+      </a>
+    </p>
+  </nz-collapse-panel>
+</nz-collapse>

@@ -1,0 +1,25 @@
+:host ::ng-deep .am-list-content{
+  display: none;
+}
+
+//   :host ::ng-deep .am-list-extra{
+//     width: 100px !important;
+//   }
+
+
+:host ::ng-deep .am-pull-to-refresh-indicator{
+display: none;
+}
+
+:host ::ng-deep .date-picker-list .am-list-item .am-list-line .am-list-extra {
+  flex-basis: initial;
+}
+
+//   :host ::ng-deep .am-list-item .am-list-line .am-list-extra {
+//     flex-basis: 150%;
+//     font-size: 16px;
+//     text-align: right;
+//     padding-top: 7px;
+//     padding-bottom: 7px;
+//     width: 200px !important;
+// }

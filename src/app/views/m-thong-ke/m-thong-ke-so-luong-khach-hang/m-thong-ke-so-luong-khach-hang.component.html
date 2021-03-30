@@ -1,0 +1,48 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+</div>
+<div nz-col nzSpan="24" style="margin-top: 5px; margin-bottom: 10px;" >
+  <strong>Tổng số khách hàng đã thêm trong thời gian: {{total | formatPrice}}</strong>
+</div>
+<div>
+  <PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+      [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+      <nz-table #sortTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+        [nzLoading]="loading" nzBordered="true">
+        <thead>
+      <tr>
+        <th nzAlign="center" nzWidth="7%">STT</th>
+        <th nzAlign="center">Nhân viên</th>
+        <th nzAlign="center" nzWidth="25%">Số lượng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data; let i = index">
+        <td nzAlign="center">{{ i + 1 }}</td>
+        <td nzColumnKey="fullName">{{ data.fullName }}</td>
+        <td nzColumnKey="soLuongKhachHang" nzAlign="center">{{ data.soLuongKhachHang }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</PullToRefresh>
+</div>

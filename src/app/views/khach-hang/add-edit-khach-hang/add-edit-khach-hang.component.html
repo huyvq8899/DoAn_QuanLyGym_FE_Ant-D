@@ -1,0 +1,95 @@
+<form nz-form [formGroup]="myFormGroup" class="login-form">
+  <div nz-row>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="customerCode">Mã khách hàng</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" [nzErrorTip]="errorMa">
+          <input nz-input nzSize="small" formControlName="customerCode" id="customerCode"
+            autocomplete="new-customerCode" />
+          <ng-template #errorMa let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Vui lòng nhập mã khách hàng !
+            </ng-container>
+            <ng-container *ngIf="control.hasError('checkMa')">
+              Mã khách hàng đã tồn tại vui lòng kiểm tra lại!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>    
+        <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="customerName">Tên khách hàng</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="customerName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="address">Địa chỉ</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <textarea nzSize="small" nz-input formControlName="address"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="doB">Ngày sinh </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <textarea nzSize="small" nz-input formControlName="doB"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="job">Nghề nghiệp </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="job" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="numberPhone">Số điện thoại</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="numberPhone" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="note">Chú ý
+        </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="note" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="height">Chiều cao</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="height" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="weight">Cân nặng</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="weight" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24" nzFor="healthStatus">Tình trạng sức khỏe</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="healthStatus" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24" nzFor="email">Email
+        </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+
+    </div>
+  </div>
+</form>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+  <button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

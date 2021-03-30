@@ -1,0 +1,614 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px;">
+  <div nz-col nzSpan="4" style="text-align: left; padding-left: 3px;">
+    <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="themMoi()" *ngIf="isNVKD">
+      <i nz-icon nzType="plus"></i>Thêm</button>
+    <button style="float:left; margin-left: 2px;" nz-button nzSize="small" nz-button nzType="primary" type="button"
+      [nzLoading]="loadingExportExcel" (click)="exportExcel()">
+      <i nz-icon nzType="download" nzTheme="outline"></i>Xuất excel </button>
+  </div>
+
+  <div nz-col nzSpan="8" style="text-align: left;">
+    <div style="float:right">
+      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.fromDate"
+      placeholder="Từ"/>
+      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.toDate"
+      placeholder="Đến" />
+      <button nz-button nzSize="small" nzType="primary" style="margin-left: 2px;" (click)="filterTable()">
+        <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+    </div>
+  </div>
+  <div nz-col nzSpan="8" style="text-align: left;">
+    <div style="float:right" >
+      <nz-select *ngIf="!isNVKD" nzSize="small" style="width: 200px;" nzShowSearch nzAllowClear
+        nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch (nzOnSearch)="searchUser($event)"
+        (ngModelChange)="changeUser($event)" [(ngModel)]="selectedUser" [nzDropdownStyle]="searchCustomerOverlayStyle">
+
+        <nz-option nzSize="small" nzCustomContent *ngFor="let option of listUser"
+          nzLabel="{{option.userName}} - {{option.fullName}}" [nzValue]="option.userId">
+          {{option.userName}} -
+          {{option.fullName}} - {{option.title}}
+        </nz-option>
+      </nz-select>
+      <nz-select *ngIf="isNVKD" nzSize="small" style="width: 200px;" nzShowSearch nzAllowClear
+      nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch (nzOnSearch)="searchUser($event)"
+      (ngModelChange)="changeUser($event)" [(ngModel)]="selectedUser" [nzDropdownStyle]="searchCustomerOverlayStyle">
+
+      <nz-option nzSize="small" nzCustomContent *ngFor="let option of listUser"
+        nzLabel="{{option.userName}} - {{option.fullName}}" [nzValue]="option.userId">
+        {{option.userName}} -
+        {{option.fullName}} - {{option.title}}
+      </nz-option>
+    </nz-select>
+
+      <button nz-button nzSize="small" nz-button nzType="primary" type="button" (click)="LoadData()"
+        style="margin-left: 2px;">
+        <i nz-icon nzType="filter" nzTheme="outline"></i>Lọc nhân viên </button>
+    </div>
+  </div>
+
+  <!-- <div nz-col nzSpan="8" style="text-align: left;">
+    <div style="padding-left: 5px;float:right">
+      <nz-select *ngIf="isBLD" nzSize="small" style="width: 200px;" nzShowSearch nzAllowClear
+        nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch (nzOnSearch)="searchUser($event)"
+        (ngModelChange)="changeUser($event)" [(ngModel)]="selectedUser" [nzDropdownStyle]="searchCustomerOverlayStyle">
+
+        <nz-option nzSize="small" nzCustomContent *ngFor="let option of listUser"
+          nzLabel="{{option.userName}} - {{option.fullName}}" [nzValue]="option.userId">
+          {{option.userName}} -
+          {{option.fullName}} - {{option.title}}
+        </nz-option>
+      </nz-select>
+
+      <button *ngIf="isBLD" nz-button nzSize="small" nz-button nzType="primary" type="button" (click)="LoadData()"
+        style="margin-left: 2px;">
+        <i nz-icon nzType="filter" nzTheme="outline"></i>Lọc nhân viên </button>
+    </div>
+  </div> -->
+
+  <div nz-col nzSpan="4" style="text-align: right;">
+    <div style="float:right;padding-left: 5px">
+      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+        <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+          placeholder="Tìm kiếm" />
+        <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </nz-input-group>
+    </div>
+  </div>
+</div>
+
+<nz-table [nzScroll]="{ x: '5100px'}" #fixedTable nzSize="small" nzBordered nzShowSizeChanger
+  [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize"
+  nzShowTotal [nzPageSizeOptions]="pageSizeOptions" [(nzPageIndex)]="displayData.PageNumber" nzBordered
+  [nzLoading]="loading" [nzTotal]="total" (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate"
+  nzSize="small">
+  <ng-template #rangeTemplate let-range="range" let-total>
+    {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+  </ng-template>
+  <thead>
+    <tr>
+      <th nzLeft="0px" nzWidth="50px" nzAlign="center">STT</th>   
+
+      <th nzLeft="50px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="createdDate" [nzSortFn]="true">
+        Ngày tạo
+        <nz-filter-trigger [nzDropdownMenu]="menu36">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu36="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('createdDate',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzLeft="200px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="maDonHang" [nzSortFn]="true">Mã đơn hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu1">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu1="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('maDonHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzLeft="350px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="maKhachHang" [nzSortFn]="true">Mã
+        khách hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu1">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu1="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('maKhachHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <!-- <th nzLeft="500px" nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="tenKhachHang" [nzSortFn]="true">
+        Tên khách hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu2">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu2="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('tenKhachHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th> -->
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="tenKhachHang" [nzSortFn]="true">Tên khách hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu02">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu02="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('tenKhachHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="maSoThue" [nzSortFn]="true">Mã số thuế
+        <nz-filter-trigger [nzDropdownMenu]="menu20">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu20="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('maSoThue',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="email" [nzSortFn]="true">Email
+        <nz-filter-trigger [nzDropdownMenu]="menu0">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu0="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('email',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="250px" nzAlign="center" nzCustomFilter nzColumnKey="diaChi" [nzSortFn]="true">Địa chỉ đăng ký
+        kinh doanh
+        <nz-filter-trigger [nzDropdownMenu]="menu3">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu3="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('diaChi',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="vanPhongGiaoDich" [nzSortFn]="true">Văn phòng giao dịch
+        <nz-filter-trigger [nzDropdownMenu]="menu30">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu30="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('vanPhongGiaoDich',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="soDienThoaiKeToan" [nzSortFn]="true">SĐT kế toán
+        <nz-filter-trigger [nzDropdownMenu]="menu31">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu31="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('soDienThoaiKeToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="soDienThoaiNguoiDaiDien" [nzSortFn]="true">SĐT người đại diện
+        <nz-filter-trigger [nzDropdownMenu]="menu32">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu32="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('soDienThoaiNguoiDaiDien',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="ngayGiaoHang" [nzSortFn]="true">Ngày giao hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu5">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu5="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('ngayGiaoHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="thanhToan" [nzSortFn]="true">Thanh toán
+        <nz-filter-trigger [nzDropdownMenu]="menu5">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu5="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('thanhToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="sanPham" [nzSortFn]="true">Sản phẩm
+        <nz-filter-trigger [nzDropdownMenu]="menu6">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu6="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('sanPham',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="tenSanPham" [nzSortFn]="true">Tên sản phẩm
+        <nz-filter-trigger [nzDropdownMenu]="menu7">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu7="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('tenSanPham',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="giaSanPham" [nzSortFn]="true">Giá sản phẩm
+        <nz-filter-trigger [nzDropdownMenu]="menu000">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu000="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('giaSanPham',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="kho" [nzSortFn]="true">Kho
+        <nz-filter-trigger [nzDropdownMenu]="menu8">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu8="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('kho',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="tongLuongGiao" [nzSortFn]="true">Tổng lượng giao
+        <nz-filter-trigger [nzDropdownMenu]="menu4">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu4="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('tongLuongGiao',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="chietKhauCongTy" [nzSortFn]="true">Chiết khấu công ty
+        <nz-filter-trigger [nzDropdownMenu]="menu9">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu9="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('chietKhauCongTy',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="chietKhauKhachHang" [nzSortFn]="true">
+        Chiết khấu khách hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu21">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu21="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('chietKhauKhachHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="luongConLai" [nzSortFn]="true">
+        Lượng còn lại 
+        <nz-filter-trigger [nzDropdownMenu]="menu22">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu22="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('luongConLai',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="xeLayHang" [nzSortFn]="true">Xe lấy hàng
+        <nz-filter-trigger [nzDropdownMenu]="menu27">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu27="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('xeLayHang',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="laiXe" [nzSortFn]="true">Lái xe
+        <nz-filter-trigger [nzDropdownMenu]="menu40">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu40="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('laiXe',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="bienSoXe" [nzSortFn]="true">Biển số xe
+        <nz-filter-trigger [nzDropdownMenu]="menu23">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu23="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('soDienThoaiKeToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="hinhThucThanhToan" [nzSortFn]="true">Hình thức thanh toán
+        <nz-filter-trigger [nzDropdownMenu]="menu24">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu24="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('hinhThucThanhToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="tinhTrangThanhToan" [nzSortFn]="true">Tình trạng thanh toán
+        <nz-filter-trigger [nzDropdownMenu]="menu25">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu25="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('tinhTrangThanhToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="ngaySeThanhToan" [nzSortFn]="true">Ngày sẽ thanh toán
+        <nz-filter-trigger [nzDropdownMenu]="menu100">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu100="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('ngaySeThanhToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="ngaySeThanhToan" [nzSortFn]="true">Ngày đã thanh toán
+        <nz-filter-trigger [nzDropdownMenu]="menu101">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu101="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('ngayDaThanhToan',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="ghiChu" [nzSortFn]="true">Ghi chú
+        <nz-filter-trigger [nzDropdownMenu]="menu33">
+          <i nz-icon nzType="search"></i>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #menu33="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                (ngModelChange)="onChangeSearch('ghiChu',$event)" />
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th nzWidth="200px" nzRight="75px" nzAlign="center">Trạng thái</th>
+      <th nzWidth="75px" nzRight="0px" nzAlign="center">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of fixedTable.data; let i = index">
+      <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+      <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data?.createdDate | date:'dd/MM/yyyy' }}</td>
+      <td nzLeft="200px" nzWidth="150px" nzAlign="center">{{ data?.maDonHang }}</td>
+      <td nzLeft="350px" nzWidth="150px" nzAlign="center">{{ data?.maKhachHang }}</td>
+      <!-- <td nzLeft="500px" nzWidth="200px" nzAlign="center">{{ data?.tenKhachHang }}</td> -->
+      <td nzWidth="200px" nzAlign="center">{{ data?.tenKhachHang }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.maSoThue }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.email }}</td>
+      <td nzWidth="250px" nzAlign="center">{{ data?.diaChi }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.vanPhongGiaoDich }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.soDienThoaiKeToan }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.soDienThoaiNguoiDaiDien }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.ngayGiaoHang | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.thanhToanGiaoHang }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.sanPham }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.tenSanPham }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.giaSanPham | formatPrice }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.kho }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.tongLuongGiao | formatPrice}}</td>
+      <!-- <td nzWidth="150px" nzAlign="center">{{ data?.giamDoc }}</td> -->
+      <td nzWidth="200px" nzAlign="center">{{ data?.chietKhauCongTy| formatPrice }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.chietKhauKhachHang| formatPrice }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.luongConLai | formatPrice}}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.xeLayHang }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.laiXe }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.bienSoXe }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.hinhThucThanhToan }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.tinhTrangTT }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.ngaySeThanhToan | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.ngayDaThanhToan | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data?.ghiChu }}</td>
+      <td nzRight nzWidth="200px">
+        <div *ngIf="data.trangThai === 0" >
+           <nz-alert nzType="info" nzMessage="Tạo đơn hàng "></nz-alert>
+          </div>
+        <div *ngIf="data.trangThai === 1" >
+          <nz-alert nzType="warning" nzMessage="Sửa lại đơn hàng "></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 2" >
+          <nz-alert nzType="success" nzMessage="Xác nhận cước thực tế"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 3" >
+          <nz-alert nzType="error" nzMessage="Hủy xác nhận cước (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 4" >
+          <nz-alert nzType="success" nzMessage="PPKD duyệt"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 5" >
+          <nz-alert nzType="error" nzMessage="PPKD hủy duyệt (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 6" >
+          <nz-alert nzType="success" nzMessage="BLĐ duyệt"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 7" >
+          <nz-alert nzType="error" nzMessage="BLĐ hủy duyệt (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 8" >
+          <nz-alert nzType="success" nzMessage="Đã chốt xe"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 9" >
+          <nz-alert nzType="error" nzMessage="Hủy chốt xe (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 10" >
+          <nz-alert nzType="success" nzMessage="Lấy xong hàng"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 11" >
+          <nz-alert nzType="error" nzMessage="Hủy lấy hàng (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 12" >
+          <nz-alert nzType="success" nzMessage="Đang giao"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 13" >
+          <nz-alert nzType="error" nzMessage="Hủy đang giao (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 14" >
+          <nz-alert nzType="success" nzMessage="Đã giao"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 15" >
+          <nz-alert nzType="error" nzMessage="Hủy đã giao (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 16" >
+          <nz-alert nzType="success" nzMessage="Đã thanh toán"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 17" >
+          <nz-alert nzType="error" nzMessage="Hủy đã thanh toán (Lý do:{{data.lyDoHuyDuyet}})"></nz-alert>
+        </div>
+        <div *ngIf="data.trangThai === 18" >
+          <nz-alert nzType="success" nzMessage="Đã hoàn thành"></nz-alert>
+        </div>
+      </td>
+
+
+      <td nzWidth="75px" nzRight nzAlign="center">
+        <button  nzSize="small" nz-button nzType="primary"
+          (click)="editItem(data)" nz-tooltip nzTooltipTitle="Sửa" >
+          <i nz-icon nzType="edit"></i>
+        </button>
+        &nbsp;
+        <!-- <button nz-button nzType="danger" (click)="removeItem(data.id)" nz-tooltip nzTooltipTitle="Xóa">
+                <i nz-icon nzType="delete"></i>
+              </button>
+              &nbsp;-->
+        <!-- <button nz-button nzType="default" (click)="updateTN(data.id)" nz-tooltip nzTooltipTitle="Khách hàng">
+                <i nz-icon nzType="form"></i>
+              </button> -->
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

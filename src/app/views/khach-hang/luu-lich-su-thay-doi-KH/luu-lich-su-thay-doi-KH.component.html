@@ -1,0 +1,186 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px;">
+    <div nz-col nzSpan="4" style="text-align: left; padding-left: 3px;">
+        <button style="float:left; margin-left: 2px;" nz-button nzSize="small" nz-button nzType="primary" type="button" [nzLoading]="loadingExportExcel" (click)="exportExcel()">
+        <i nz-icon nzType="download" nzTheme="outline"></i>Xuất excel </button>
+    </div>
+
+    <div nz-col nzSpan="8" style="text-align: left;">
+        <div style="float:left">
+            <!-- <nz-range-picker style="width: 190px;margin-left: 2px;" [nzFormat]="'dd/MM/yyyy'" [(ngModel)]="getDateTime"
+          (ngModelChange)="changeDate($event)" (nzOnCalendarChange)="changeDate($event)">
+        </nz-range-picker> -->
+
+            <input nzSize="small" style="width: 150px;margin-left: 2px;" type="date" nz-input [(ngModel)]="displayData.fromDate" placeholder="Từ" />
+            <input nzSize="small" style="width: 150px;margin-left: 2px;" type="date" nz-input [(ngModel)]="displayData.toDate" placeholder="Đến" />
+            <button nz-button nzSize="small" nzType="primary" style="margin-left: 2px;" (click)="filterTable()">
+          <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+        </div>
+    </div>
+
+    <div nz-col nzSpan="8" style="text-align: left;">
+        <div style="padding-left: 5px;float:right" *ngIf="this.check===true">
+            <nz-select nzSize="small" style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Chọn nhân viên cần lọc" nzServerSearch (nzOnSearch)="searchUser($event)" (ngModelChange)="changeUser($event)" [(ngModel)]="selectedUser" [nzDropdownStyle]="searchCustomerOverlayStyle">
+
+                <nz-option nzSize="small" nzCustomContent *ngFor="let option of listUser" nzLabel="{{option.userName}} - {{option.fullName}}" [nzValue]="option.userId">
+                    {{option.userName}} - {{option.fullName}} - {{option.title}}
+                </nz-option>
+            </nz-select>
+
+            <button nz-button nzSize="small" nz-button nzType="primary" type="button" (click)="LoadDL()" style="margin-left: 2px;">
+          <i nz-icon nzType="filter" nzTheme="outline"></i>Lọc nhân viên </button>
+        </div>
+    </div>
+
+    <div nz-col nzSpan="4" style="text-align: right;">
+        <div style="float:right;padding-left: 5px">
+            <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+                <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+                <ng-template #suffixIconSearch>
+                    <i nz-icon nzType="search"></i>
+                </ng-template>
+            </nz-input-group>
+        </div>
+    </div>
+</div>
+
+<nz-table [nzScroll]="{ x: '3000px'}" #fixedTable nzSize="small" nzBordered nzShowSizeChanger [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize" nzShowTotal [nzPageSizeOptions]="pageSizeOptions"
+    [(nzPageIndex)]="displayData.PageNumber" nzBordered [nzLoading]="loading" [nzTotal]="total" (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate" nzSize="small">
+    <ng-template #rangeTemplate let-range="range" let-total>
+        {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+    </ng-template>
+    <thead>
+        <tr>
+            <th nzWidth="10px" nzAlign="center">STT</th>
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="createdBy" [nzSortFn]="true">Người tạo
+                <nz-filter-trigger [nzDropdownMenu]="menu18">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu18="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('createdBy',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="createdDate" [nzSortFn]="true">
+                Ngày tạo
+                <nz-filter-trigger [nzDropdownMenu]="menu36">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu36="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('createdDate',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="maKhachHang" [nzSortFn]="true">Mã khách hàng
+                <nz-filter-trigger [nzDropdownMenu]="menu1">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu1="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('maKhachHang',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="tenKhachHang" [nzSortFn]="true">
+                Tên khách hàng
+                <nz-filter-trigger [nzDropdownMenu]="menu2">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu2="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('tenKhachHang',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="maSoThue" [nzSortFn]="true">Mã số thuế
+                <nz-filter-trigger [nzDropdownMenu]="menu20">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu20="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('maSoThue',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="tenTruongThayDoi" [nzSortFn]="true">Tên trường thay đổi
+                <nz-filter-trigger [nzDropdownMenu]="menu0">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu0="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('tenTruongThayDoi',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="dienGiai " [nzSortFn]="true">Diễn giải
+                <nz-filter-trigger [nzDropdownMenu]="menu3">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu3="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('dienGiai',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="duLieuCu" [nzSortFn]="true">Dữ liệu cũ
+                <nz-filter-trigger [nzDropdownMenu]="menu30">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu30="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('duLieuCu',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="duLieuMoi" [nzSortFn]="true">Dữ liệu mới
+                <nz-filter-trigger [nzDropdownMenu]="menu31">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+                <nz-dropdown-menu #menu31="nzDropdownMenu">
+                    <div class="ant-table-filter-dropdown">
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('duLieuMoi',$event)" />
+                        </div>
+                    </div>
+                </nz-dropdown-menu>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of fixedTable.data; let i = index">
+            <td nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+            <td nzAlign="center">{{ data?.createdBy }}</td>
+            <td nzAlign="center">{{ data?.createdDate | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td nzAlign="center">{{ data.maKhachHang }}</td>
+            <td nzAlign="center">{{ data.tenKhachHang }}</td>
+            <td nzAlign="center">{{ data.maSoThue }}</td>
+            <td nzAlign="center">{{ data.tenTruongThayDoi }}</td>
+            <td nzAlign="center">{{ data.dienGiai }}</td>
+            <td nzAlign="center">{{ data.duLieuCu }}</td>
+            <td nzAlign="center">{{ data.duLieuMoi }}</td>
+
+        </tr>
+    </tbody>
+</nz-table>

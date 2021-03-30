@@ -1,0 +1,70 @@
+<nz-button-group>
+  <button style="margin-left: 5px;" nz-button nzType="primary" (click)="BackPages()"><i nz-icon nzType="left"></i>
+      Trang chủ</button>
+</nz-button-group>
+<form *ngIf="!isAddNew" nz-form [formGroup]="userForm" autocomplete="off" (ngSubmit)="saveChanges()" style="margin-left: 5px;margin-right: 5px;">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="fullName" nzRequired>Họ tên</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Vui lòng nhập họ tên !">
+      <input nz-input type="text" formControlName="fullName" id="fullName">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">Tài khoản</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="errorTpl">
+      <input nz-input formControlName="userName" id="userName" autocomplete="new-userName">
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Vui lòng nhập tài khoản !
+        </ng-container>
+        <ng-container *ngIf="control.hasError('checkUserName')">
+          Tên tài khoản đã tồn tại !
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="errorMail">
+      <input nz-input formControlName="email" id="email">
+      <ng-template #errorMail let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Vui lòng nhập email !
+        </ng-container>
+        <ng-container *ngIf="control.hasError('email')">
+          Email không hợp lệ !
+        </ng-container>
+        <ng-container *ngIf="control.hasError('checkMail')">
+          Email đã tồn tại vui lòng chọn email khác!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title">Chức danh</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzExtra="Chức danh , chức vụ hoặc vị trí trong công ty">
+      <input nz-input type="title" formControlName="title" id="title">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Ngày sinh</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input type="date" nz-input formControlName="dateOfBirth" id="dateOfBirth">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">Điện thoại</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <input nz-input type="phone" formControlName="phone" id="phone">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address">Địa chỉ</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <textarea nz-input formControlName="address" id="address"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div style="margin: 10px 5px 10px 0px; text-align: right; padding-bottom:20px;">
+  <button nz-button nzType="primary" type="submit" [nzLoading]="isLoading" (click)="saveChanges()" style=" margin-left: 2%;width:40%; max-width: 150px;">Cập nhật thông tin</button>
+</div>

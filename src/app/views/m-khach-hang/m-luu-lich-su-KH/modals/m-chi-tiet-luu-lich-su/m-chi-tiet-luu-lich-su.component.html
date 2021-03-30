@@ -1,0 +1,87 @@
+<nz-button-group style="padding-bottom: 10px;">
+  <button style="margin-left: 5px" nz-button nzType="primary" (click)="BackPage()"><i nz-icon nzType="left"></i>
+    Quay lại</button>
+</nz-button-group>
+
+<form nz-form [formGroup]="myFormGroup">
+  <ng-container>
+    <fieldset class="fdonhang">
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="createdBy">Người tạo:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="createdBy" id="createdBy" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="createdDate">Ngày tạo:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <nz-date-picker style="width:100%" [nzFormat]="'dd/MM/yyyy'"
+                  formControlName="createdDate" nzPlaceHolder="Chọn ngày"></nz-date-picker>
+          </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="maKhachHang">Mã khách hàng: </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="maKhachHang" id="maKhachHang" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="tenKhachHang">Tên khách hàng: </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="tenKhachHang" id="tenKhachHang" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="maSoThue">Mã số thuế:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="maSoThue" id="maSoThue" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="tenTruongThayDoi">Tên trường thay đổi: </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="tenTruongThayDoi" id="tenTruongThayDoi" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="dienGiai">Diễn giải:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="dienGiai" id="dienGiai" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="duLieuCu">Dữ liệu cũ:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="duLieuCu" id="duLieuCu" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="duLieuMoi">Dữ liệu mới:</nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24">
+              <input nz-input nzSize="small" type="text" formControlName="duLieuMoi" id="duLieuMoi" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+    </fieldset>
+  </ng-container>
+</form>

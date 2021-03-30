@@ -1,0 +1,40 @@
+<form class="f-form" nz-form [formGroup]="myFormGroup" class="login-form">
+    <div>
+        <nz-form-item>
+            <nz-form-label  [nzSm]="8" [nzXs]="24"nzRequired nzFor="productCode">Mã sản phẩm   </nz-form-label>
+            <nz-form-control  [nzSm]="15" [nzXs]="24" [nzErrorTip]="errorMa">
+              <input nz-input nzSize="small" formControlName="productCode" id="productCode"
+                autocomplete="new-productCode" />
+              <ng-template #errorMa let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Vui lòng nhập mã sản phẩm!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('checkMa')">
+                  Mã sản phẩm đã tồn tại vui lòng kiểm tra lại!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+    <div>
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24"  nzRequired nzFor="productName">Tên sản phẩm</nz-form-label>
+            <nz-form-control  [nzSm]="15" [nzXs]="24" class="fcontrol" nzErrorTip="Không được bỏ trống!">
+              <input nz-input nzSize="small" formControlName="productName" id="productName"/>
+            </nz-form-control>
+            </nz-form-item>
+    </div>
+    <div>
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24"  nzRequired nzFor="retailPrice">Giá bán lẻ</nz-form-label>
+            <nz-form-control  [nzSm]="15" [nzXs]="24" class="fcontrol" nzErrorTip="Không được bỏ trống!">
+              <input nz-input nzSize="small" formControlName="retailPrice" id="retailPrice"/>
+            </nz-form-control>
+            </nz-form-item>
+    </div>
+</form>
+
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+    <button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

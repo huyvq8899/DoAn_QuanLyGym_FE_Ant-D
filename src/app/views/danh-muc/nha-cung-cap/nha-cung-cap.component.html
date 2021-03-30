@@ -1,0 +1,59 @@
+<div nz-row>
+  <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <div style="text-align: right;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+</div>
+<br />
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table #basicTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true">
+      <thead>
+        <tr>
+          <th nzAlign="center"nzWidth="5%">STT</th>
+          <th nzAlign="center">Mã nhà cung cấp</th>
+          <th nzAlign="center">Mã số thuế</th>
+          <th nzAlign="center">Tên nhà cung cấp</th>
+          <th nzAlign="center">Địa chỉ đăng ký kinh doanh</th>
+          <th nzAlign="center">Địa chỉ phòng giao dịch</th>
+          <th nzAlign="center">Email</th>
+          <th nzAlign="center">SĐT người đại diện pháp luật</th>
+          <th nzAlign="center">SĐT kế toán</th>
+          <th nzAlign="center"nzWidth="10%">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data; let i = index">
+          <td nzAlign="center">{{ i + 1 }}</td>
+          <td>{{ data.maNhaCungCap }}</td>
+          <td>{{ data.maSoThueNhaCungCap }}</td>
+          <td>{{ data.tenNhaCungCap }}</td>
+          <td>{{ data.diaChiDKKD }}</td>
+          <td>{{ data.diaChiPhongGiaoDich }}</td>
+          <td>{{ data.emailNhaCungCap }}</td>
+          <td>{{ data.soDienThoaiNGuoiDaiDienPhapLuat }}</td>
+          <td>{{ data.soDienThoaiKeToan }}</td>
+          <td>
+            <nz-button-group nzSize="small">
+              <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
+                <i nz-icon nzType="edit"></i>
+              </button>
+              &nbsp;
+              <button nz-button nzType="danger" (click)="removeItem(data.nhaCungCapId)" nz-tooltip nzTooltipTitle="Xóa">
+                <i nz-icon nzType="delete"></i>
+              </button>
+            </nz-button-group>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.card {
+  padding: 12px 12px;
+  /* background: #fff; */
+}
+:host ::ng-deep .ant-tabs .ant-tabs-left-bar .ant-tabs-tab {
+  text-align: left;
+}
+:host ::ng-deep .ant-card-body {
+  padding: 24px 0px;
+}
+.displayReverse {
+  display: flex;
+  flex-direction:column-reverse ;
+}

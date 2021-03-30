@@ -1,0 +1,31 @@
+:host ::ng-deep .am-list-content{
+    display: none;
+  }
+
+//   :host ::ng-deep .am-list-extra{
+//     width: 100px !important;
+//   }
+
+
+:host ::ng-deep .date-picker-list .am-list-item .am-list-line .am-list-extra {
+    flex-basis: initial;
+  }
+
+  :host ::ng-deep .am-pull-to-refresh-indicator {
+    font-size: 0 !important;
+}
+nz-affix-td{
+  position: absolute;
+}
+.scrollable-container {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.background {
+  padding-top: 60px;
+  height: 100%;
+}
+
+
+

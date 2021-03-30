@@ -1,0 +1,79 @@
+<form nz-form [formGroup]="myFormGroup" >
+    <div >
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="createdDate">Ngày tạo </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-date-picker style="width: 100%" nzDisabled [nzFormat]="'dd/MM/yyyy'" formControlName="createdDate"  ></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="tenNguoiNghi">Người nghỉ </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <input  nz-input nzSize="small"  formControlName="tenNguoiNghi" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="deXuat">Đề xuất </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-select nzPlaceHolder="Chọn đề xuất"  formControlName="deXuat" nzSize="small" (ngModelChange)="changeDeXuat($event)">
+                    <nz-option  *ngFor="let item of deXuats" [nzLabel]="item.loai" [nzValue]="item.ma"></nz-option>
+                  </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="lyDo">Lý do </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <textarea nzSize="small" nz-input formControlName="lyDo"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="ngayDiMuon">Ngày đi muộn </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-date-picker style="width: 100%"  [nzFormat]="'dd/MM/yyyy'" formControlName="ngayDiMuon"  ></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="thoiGianDiMuon">Thời gian đi muộn </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <input  nz-input nzSize="small"  formControlName="thoiGianDiMuon" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="ngayNghi">Ngày nghỉ </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-date-picker style="width: 100%"  [nzFormat]="'dd/MM/yyyy'" formControlName="ngayNghi"  ></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="ngayDiLam">Ngày đi làm </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-date-picker style="width: 100%"  [nzFormat]="'dd/MM/yyyy'" formControlName="ngayDiLam"  ></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="soNgayNghi">Số ngày nghỉ </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <input  nz-input nzSize="small"  formControlName="soNgayNghiPhep" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="isDuyet">Duyệt </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <nz-select  formControlName="isDuyet" nzSize="small" (ngModelChange)="changeDuyet($event)">
+                    <nz-option  *ngFor="let item of Duyets" [nzLabel]="item.loai" [nzValue]="item.ma"></nz-option>
+                  </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="7" [nzXs]="24"  nzFor="lyDoTuChoi">Lý do từ chối </nz-form-label>
+            <nz-form-control [nzSm]="12" [nzXs]="24" nzErrorTip="Không được bỏ trống!">
+                <textarea nzSize="small" nz-input formControlName="lyDoTuChoi"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+</form>
+
+<div *nzModalFooter>
+<button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+<button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

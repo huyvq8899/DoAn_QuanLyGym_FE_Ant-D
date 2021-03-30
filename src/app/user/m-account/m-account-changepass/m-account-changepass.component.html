@@ -1,0 +1,31 @@
+<form nz-form [formGroup]="changePasswordForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="password">Mật khẩu mới</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Vui lòng nhập mật khẩu mới !">
+      <input nz-input type="password" formControlName="password" id="password">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="confirmPassword">Nhập lại mật khẩu mới</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24" [nzErrorTip]="errorPass">
+      <input nz-input type="password" formControlName="confirmPassword" id="confirmPassword">
+      <ng-template #errorPass let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Vui lòng xác nhận mật khẩu mới !
+        </ng-container>
+        <ng-container *ngIf="control.hasError('notSame') && !control.hasError('required')">
+          Mật khẩu mới không khớp, vùi lòng xác nhận lại!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div style="margin: 10px 0px 10px 0px; text-align: right; padding-bottom:20px;">
+  <!-- <button nz-button nzType="default" (click)="closeModal()" [disabled]="spinning">
+    <i nz-icon nzType="close" nzTheme="outline"></i>Hủy
+  </button> -->
+  <button nz-button nzType="default" (click)="BackPages()">Hủy bỏ</button>
+  <button nz-button nzType="primary" (click)="saveChanges()" style="width: 30%; margin-left: 10px;">Lưu</button>
+</div>
+

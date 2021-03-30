@@ -1,0 +1,180 @@
+fieldset {
+    border: 1px ;
+    border-style: ridge;
+    border-color:#D8D8D8;
+    border-bottom: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: -16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 14px;
+}
+fieldset legend
+{
+    margin-left: 0%;
+    color: black;
+    width: auto;
+    border: none;
+    margin-bottom: 0%;
+    padding: 0px 10px ;
+    font-size: 32px;
+}
+.fcontrol
+{
+    margin-right: 15px;
+}
+.flabel1{
+    width: 146px;
+    text-align: left;
+    margin-left: 15px;
+}
+.flabel2{
+    width: 155px;
+    text-align: left;
+}
+.flabel{
+    width: 146px;
+    text-align: left;
+    margin-left: 15px;
+}
+.fcontrol1{
+    margin-right: 15px;
+}
+.flabelxegiaohang{
+    width: 146px;
+    text-align: left;
+    margin-left: 15px;
+}
+.fcontrolxegiaohang{
+    margin-right: 25px;
+}
+.floinhuan{
+    margin-top: 1%; 
+    border: 1px ;
+    border-style: ridge;
+    border-color:#D8D8D8;
+    border-top: none;
+    margin-bottom: 10px;
+}
+.flabelloinhuan
+{
+    font-weight: 600;
+    color:red;
+    font-size:20px!important;
+    margin-left: 5%;
+}
+/*
+.floinhuan{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    margin-top: 0px;
+}
+*/.flabelthanhtoan{
+    text-align: left;
+    width: 142px;
+    margin-left: 4.5em;
+}
+
+.fdonhang{
+    margin-top: 0px;
+    margin-bottom: -20px;
+}
+.fcontrol2{
+    margin-right: 15px;
+    margin-left: 12px;
+}
+.GHLX
+{
+    border: 1px ;
+    border-style: ridge;
+    border-color:#a3a2a2;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 2%;
+}
+.flabelGHL
+{
+    margin-left: 5%;
+    text-align: left;
+    width: 28%;
+}.fcontrolGHL
+{
+    margin-right: 5%;
+}
+#conten
+{
+    position: relative;
+    margin-right: 0px;
+    margin-bottom: 15px;
+}
+.fxegiaohang
+{
+    width: 50%;
+    height: 275px;
+    border: 1px ;
+    border-style: ridge;
+    border-color:#D8D8D8;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+.fthanhtoan
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 50%;
+    border: 1px ;
+    border-style: ridge;
+    border-color:#D8D8D8;
+    border-left: none; 
+}
+.fthanhtoan legend
+{
+    margin-left: 20px;
+    color: black;
+    width: auto;
+    border: none;
+    margin-bottom: 0%;
+    padding: 0px 10px ;
+    font-size: 32px;
+}
+.flabelc1
+{
+    width: 146px;
+    text-align: left;
+    margin-left: 15px;
+}
+.flabelc2
+{
+    width: 33%;
+    text-align: left;
+    margin-left: -10px;
+}
+.flabelxc1
+{
+    text-align: left;
+    width: 153px;
+    margin-left: 55px;
+}
+.flabelc3
+{
+    width: 155px;
+    text-align: left;
+    margin-left: 0px;
+}
+.ckcdungtich
+{
+    margin-left: 162px;
+    font-style:italic
+}
+nz-alert {
+    font-weight: 600;
+    float: left;
+    margin-left: 0px;
+  }
+  

@@ -1,0 +1,317 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="230px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+        [nzTrigger]="null">
+        <div class="sidebar-logo">
+            <a href="https://petrotimesgroup.com" target="_blank">
+                <img src="../../assets/logo-full.png" alt="logo">
+                <!-- <h1>Ant Design Of Angular</h1> -->
+            </a>
+        </div>
+        <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <li *ngIf="CheckUser()===1" nz-submenu nzTitle="Hệ thống" nzIcon="setting">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/account/list">Danh sách tài khoản</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li nz-submenu nzTitle="Xin nghỉ" nzIcon="user">
+                <ul>
+
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/xin-nghi/de-xuat-xin-nghi">Đề xuất xin nghỉ</a>
+                    </li>
+                    <li  nz-menu-item nzMatchRouter>
+                        <a routerLink="/xin-nghi/thong-ke-xin-nghi">Thống kê xin nghỉ</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li nz-submenu nzTitle="Khách hàng" nzIcon="customer-service">
+                <ul>
+
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/khach-hang/khach-hang">Khách hàng </a>
+                    </li>
+                    <li *ngIf="this.check===true" nz-menu-item nzMatchRouter>
+                        <a routerLink="/khach-hang/luu-lich-su-kh">Lịch sử thông tin KH</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="this.check===true" nz-submenu nzTitle="Danh mục" nzIcon="hdd">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/cardtype">Loại thẻ</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/chenh-lech">Chênh lệch</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/kho-hang">Kho hàng</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/product">Sản phẩm</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/nha-cung-cap">Nhà cung cấp</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/cuoc-van-chuyen">Cước vận chuyển</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/lai-xe">Lái xe</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/chiet-khau">Chiết khấu</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/vung">Vùng</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/nganh-nghe">Ngành nghề</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/phong-ban">Phòng ban</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/phuong-an-nhap">Phương án nhập</a>
+                    </li>
+
+
+                    <!-- <li nz-menu-item nzMatchRouter>
+            <a routerLink="/danh-muc/bao-gia">Báo giá</a>
+          </li> -->
+                </ul>
+            </li>
+            <li *ngIf="this.roleId === 'DX'"nz-submenu nzTitle="Danh mục" nzIcon="hdd">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/cuoc-van-chuyen">Cước vận chuyển</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/danh-muc/lai-xe">Lái xe</a>
+                    </li>
+                    <!-- <li nz-menu-item nzMatchRouter>
+            <a routerLink="/danh-muc/bao-gia">Báo giá</a>
+          </li> -->
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Bán hàng" nzIcon="shop">
+                <ul>
+                    <!--<li nz-menu-item nzMatchRouter>Theo quy trình
+             <a routerLink="/quan-ly-ban-hang/quan-ly-ban-hang-theo-quy-trinh">Theo quy trình</a>
+          </li>  -->
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/quan-ly-ban-hang/don-hang-thong-thuong">Đơn hàng công nghiệp</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/quan-ly-ban-hang/don-hang-thuong-mai">Đơn hàng thương mại</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="checkxemMua === true" nz-submenu nzTitle="Mua hàng" nzIcon="shopping-cart">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/quan-ly-mua-hang/don-mua-hang">Đơn mua hàng công nghiệp</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/quan-ly-mua-hang/mua-hang-gui-kho">Đơn mua hàng thương mại</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--<li nz-submenu nzTitle="QL tài chính - kế toán" nzIcon="dollar">
+        <ul>
+          <li nz-menu-item nzMatchRouter>Danh mục
+             <a routerLink="/quan-ly-tai-chinh-ke-toan/danh-muc-tai-chinh-ke-toan">Danh mục</a> 
+          </li>
+        </ul>
+      </li>-->
+            <!--<li nz-submenu nzTitle="Tính DS - BH" nzIcon="calculator">
+        <ul>
+          <li nz-menu-item nzMatchRouter>Tính lương lái xe
+             <a routerLink="/tinh-doanh-so-ban-hang/tinh-luong-lai-xe">Tính lương lái xe</a> 
+          </li>
+        </ul>
+      </li>-->
+            <!--<li nz-submenu nzTitle="Quản lý công việc" nzIcon="file-done">
+        <ul>
+          <li nz-menu-item nzMatchRouter>Quản lý tồn kho
+             <a routerLink="/quan-ly-cong-viec/quan-ly-ton-kho">Quản lý tồn kho</a> 
+          </li>
+        </ul>
+      </li>-->
+            <!-- <li nz-submenu nzOpen nzTitle="Danh mục" nzIcon="hdd">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/danh-muc/khach-hang-than-thien">Khách hàng thân thiện</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/danh-muc/bao-gia">Bao giá</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li> -->
+            <li nz-submenu nzTitle="Thống kê" nzIcon="stock" *ngIf="CheckFunction('THONG_KE')">
+                <ul>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/thong-ke/thong-ke-so-luong-khach-hang']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Số lượng khách hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Báo cáo" nzIcon="stock" *ngIf="CheckFunction('BAO-CAO')">
+                <ul>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/bao-cao/bao-cao-them-khach-hang']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Báo cáo thêm khách hàng</span>
+                        </a>
+                    </li>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/bao-cao/bao-cao-them-khach-hang-theo-nhan-vien']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Báo cáo thêm KH theo tháng</span>
+                        </a>
+                    </li>
+                    <li *ngIf="this.check===true" nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/bao-cao/bao-cao-them-khach-hang-theo-nhan-vien-KD']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Báo cáo thêm KH nhân viên</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="toggleCollapsed()"></i>
+            <div class="antd-pro-components-global-header-index-right">      
+              <div class="inline-component" nz-popover nzPopoverTrigger="click" [nzPopoverContent]="contentTemplate"
+                nzPopoverPlacement="bottomRight" (click)="ViewNotic()">
+                <nz-badge [nzCount]="totalNoticNotView" style="padding: 4px;">
+                  <i nz-icon nzType="bell" nzTheme="outline" style="font-size: 20px;"></i>
+                  <ng-template #contentTemplate>
+                    <div>
+                      <app-notifications></app-notifications>
+                    </div>
+                  </ng-template>
+                </nz-badge>
+              </div>
+              <div class="inline-component" nz-dropdown [nzDropdownMenu]="accountMenu">
+                <nz-avatar nzIcon="user" nzSrc="{{currentUser.avatar}}">
+                </nz-avatar>
+                <span style="margin-left: 10px;">{{currentUser?.userName}}</span>
+              </div>
+              <nz-dropdown-menu #accountMenu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item nzMatchRouter [routerLink]="['/account/setting']">
+                        <i nz-icon nzType="setting" nzTheme="outline"></i>
+                        <span>Thiết lập tài khoản</span>
+                    </li>
+
+                    <li nz-menu-divider></li>
+                    <li nz-menu-item (click)="logout()">
+                        <i nz-icon nzType="logout" nzTheme="outline"></i>
+                        <span>Đăng xuất</span>
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+            </div>
+          </nz-header>
+        <!-- <nz-header>
+            <div class="app-header">
+                <div nz-row>
+                    <div nz-col nzXs="2" nzSm="2" nzMd="2" nzLg="2" nzXl="2">
+                        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+                            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+                        </span>
+                    </div>
+                    <div nz-col nzXs="22" nzSm="22" nzMd="22" nzLg="22" nzXl="22" style="text-align: right;">
+                        
+                        <ul class="list-inline">
+                            <app-notifications></app-notifications>
+                            <li class="list-inline-item" nz-dropdown [nzDropdownMenu]="accountMenu">
+                                <a>
+                                    <nz-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+                                    <span style="margin-left: 10px;">{{currentUser?.userName}}</span>
+                                </a>
+                                <nz-dropdown-menu #accountMenu="nzDropdownMenu">
+                                    <ul nz-menu>
+                                        <li nz-menu-item nzMatchRouter [routerLink]="['/account/setting']">
+                                            <i nz-icon nzType="setting" nzTheme="outline"></i>
+                                            <span>Thiết lập tài khoản</span>
+                                        </li>
+
+                                        <li nz-menu-divider></li>
+                                        <li nz-menu-item (click)="logout()">
+                                            <i nz-icon nzType="logout" nzTheme="outline"></i>
+                                            <span>Đăng xuất</span>
+                                        </li>
+                                    </ul>
+                                </nz-dropdown-menu>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nz-header> -->
+        <nz-content>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
+<ng-template #template>
+    <div *ngIf="noticBasic!= null">
+      <!-- hợp đồng -->
+      <div class="rowNotification" nz-row *ngIf="noticBasic.type === 1" (click)="clickHopDong(noticBasic)">
+        <div nz-col nzXs="6" nzSm="6" nzMd="6" nzLg="4" nzXl="4">
+          <nz-avatar class="avauser" [nzSize]="36" nzIcon="user" [nzSrc]="noticBasic?.createdByUser?.avatar">
+          </nz-avatar>
+        </div>
+        <div nz-col nzXs="18" nzSm="18" nzMd="18" nzLg="20" nzXl="20">
+          <div nz-row>
+            <span style="font-weight: 700;">{{noticBasic?.createdByUser?.userName}}&nbsp;</span> {{noticBasic?.content}}
+            <span style="font-weight: 700;">&nbsp;[{{noticBasic?.hopDongViewModel?.soHopDong}}] </span>
+          </div>
+          <div nz-row>
+            <span style="font-style: italic;font-size: 12px;">
+              {{noticBasic?.createdDate | date: 'hh:mm a dd/MM/yyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- phản hồi -->
+      <div class="rowNotification" nz-row *ngIf="noticBasic.type === 3" (click)="clickPhanHoi(noticBasic)">
+        <div nz-col nzXs="6" nzSm="6" nzMd="6" nzLg="4" nzXl="4">
+          <nz-avatar class="avauser" [nzSize]="36" nzIcon="user" [nzSrc]="noticBasic?.createdByUser?.avatar">
+          </nz-avatar>
+        </div>
+        <div nz-col nzXs="18" nzSm="18" nzMd="18" nzLg="20" nzXl="20">
+          <div nz-row>
+            <span style="font-weight: 700;">{{noticBasic?.createdByUser?.userName}}&nbsp;</span> {{noticBasic?.content}}
+          </div>
+          <div nz-row>
+            <span style="font-style: italic;font-size: 12px;">
+              {{noticBasic?.createdDate | date: 'hh:mm a dd/MM/yyy'}}</span>
+            <!-- <img src='../../assets/christmas_flat-08-512.png'> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  

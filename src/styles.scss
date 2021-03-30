@@ -1,0 +1,250 @@
+
+* {
+  font-family: Helvetica, Arial, sans-serif;
+  color: black;
+  font-size: 12px !important;
+}
+
+.ant-layout-header {
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+/* TABLE */
+tbody {
+  border-color: black !important;
+}
+
+tr > th {
+  color: black !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  background-color: #eeeeee !important;
+  border-top: 1px solid #e0e0e0 !important;
+  border-right: 1px solid #e0e0e0 !important;
+  border-bottom: 2px solid #e0e0e0 !important;
+}
+
+tr > td {
+  color: black !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  border-right: 1px solid #dddee3 !important;
+  border-bottom: 1px solid #dddee3 !important;
+  text-align: left !important;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeef6 !important;  
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  background-color: #EEEEE0  !important;
+}
+
+tbody tr:hover td {
+  background-color: #EEEEE0  !important; 
+  border-top: 1px dotted black !important;
+  border-bottom: 1px dotted black !important;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 50px;
+  color: black !important;
+}
+
+/* SELECT */
+.ant-select-item {
+  border: 1px solid transparent;
+}
+
+.ant-select-item {
+  color: black !important;
+  border-bottom: 1px dotted #eeeef6 !important;
+  padding: 1px 8px 1px 8px !important;
+}
+
+.ant-select-item:hover {
+  background: #eeeef6 !important;
+  border-top: 1px dotted black !important;
+  border-bottom: 1px dotted black !important;
+}
+
+.ant-select-item-option-active {
+  background: #eeeef6 !important;
+  border-top: 1px dotted black !important;
+  border-bottom: 1px dotted black !important;
+}
+
+/* Form item */
+nz-form-item {
+  margin-bottom: 1px !important;
+}
+
+.ant-input-sm {
+  padding: 3px 7px !important;
+}
+
+// .ant-table-fixed tbody tr td {
+//   border-top: 1px dotted #fff;
+//   border-bottom: 1px dotted #fff;
+//   }
+
+/* Button */
+/* .ant-btn {
+  border: 1px solid #b7b7b7;  
+}
+
+.ant-btn:hover {
+  background: #EEEEE0;
+  border: 1px solid #fb974c;
+}
+
+.ant-btn-group > .ant-btn:hover {
+  background: #EEEEE0;
+} */
+
+// /* INPUT DATETIME */
+// input[type="date"]:before {
+//   content: attr(placeholder) !important;
+//   color: black !important;
+//   margin-right: 0.3em;
+// }
+
+// input[type="date"]:focus:before,
+// input[type="date"]:valid:before {
+//   content: "";
+// }
+
+// /* ant picker */
+// .ant-picker {
+//   padding: 3px 11px 3px !important;
+// }
+// .ant-input-affix-wrapper {
+//   padding: 3px 11px !important;
+// }
+
+/* .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector {
+  height: 27px !important;
+} */
+
+.ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+  color: white !important;
+}
+
+.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+  font-weight: bold !important;
+  padding-left: 10px !important;
+}
+
+.ant-menu-item {
+  height: 32px !important;
+  line-height: 32px !important;
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+  padding-left: 30px !important;
+}
+
+.ant-select-selector  {
+  height: 26px !important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #9595b4 !important;
+  border-top: 1px dotted black !important;
+  border-bottom: 1px dotted black !important;
+  color: white;
+  font-weight: bold;
+}
+
+.ant-menu-item-selected::after {
+  background-color: #9595b4 !important;
+}
+
+/* MODAL */
+.ant-modal-header {
+  padding: 6px 24px;
+  background: #eeeef6 !important;
+}
+
+.ant-modal-title {
+  font-size: 25px !important;
+  font-weight: bold;
+  color: white !important;
+}
+
+.ant-modal-close-x {
+  width: 45px;
+  height: 34px;
+  line-height: 40px;
+  background-color: #b8b5b5;
+}
+
+.ant-layout-header {
+  height: 38px !important;
+  line-height: 38px !important;
+  background: #dcdcdc !important;
+}
+
+/*--------------------------------------------------------------*/
+
+// input[type="text"]:disabled,
+// input[type="date"]:disabled,
+// input[type="file"]:disabled,
+// input[type="number"]:disabled {
+//   color: #00000091;
+// }
+
+// .ant-select-disabled nz-select-item {
+//   color: #00000091;
+// }
+
+// nz-form-item {
+//   margin-bottom: 1px !important;
+// }
+
+// nz-select {
+//   width: 100%;
+// }
+
+// .alert-small .ant-alert {
+//   padding: 2px 15px !important;
+// }
+
+// .text-bold {
+//   font-weight: bold;
+// }
+
+// .left {
+//   text-align: left;
+// }
+
+// .right {
+//   text-align: right;
+// }
+
+// .ng-trigger-helpMotion {
+//   color: red !important;
+// }
+
+/* INPUT DATETIME */
+input[type="date"] {
+  padding: 0.14em 7px !important;
+}
+
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: black !important;
+  margin-right: 0.3em;
+}
+
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
+}

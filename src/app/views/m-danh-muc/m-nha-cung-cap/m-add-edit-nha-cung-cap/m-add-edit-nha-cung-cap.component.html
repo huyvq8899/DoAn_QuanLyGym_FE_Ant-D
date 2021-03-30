@@ -1,0 +1,68 @@
+<nz-button-group>
+  <button style="margin-left: 5px;" nz-button nzType="primary" (click)="Back()"><i nz-icon nzType="left"></i>
+      Quay lại</button>
+</nz-button-group>
+<form nz-form [formGroup]="myFormGroup" class="login-form">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="maNhaCungCap">Mã nhà cung cấp</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="passwordErrorTpl">
+      <input nz-input nzSize="small" formControlName="maNhaCungCap" />
+      <ng-template #passwordErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Phải nhập!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('duplicate')">
+          Mã nhà cung cấp đã tồn tại!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="maSoThueNhaCungCap">Mã số thuế</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="maSoThueNhaCungCap" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="tenNhaCungCap">Tên nhà cung cấp</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="tenNhaCungCap" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="diaChiDKKD">Địa chỉ đăng ký kinh doanh</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="diaChiDKKD" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="diaChiPhongGiaoDich">Địa chỉ phòng giao dịch</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="diaChiPhongGiaoDich" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="emailNhaCungCap">Email người nhận hóa đơn</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="emailNhaCungCap" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="soDienThoaiNGuoiDaiDienPhapLuat">SĐT người đại diện pháp
+      luật</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="soDienThoaiNGuoiDaiDienPhapLuat" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="soDienThoaiKeToan">SĐT kế toán</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Phải nhập!">
+      <input nz-input nzSize="small" formControlName="soDienThoaiKeToan" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div style="margin: 10px 5px 10px 0px; text-align: right; padding-bottom:20px;">
+  <button *ngIf="!isAddNew" nz-button nzType="primary" nzDanger (click)="removeItem()" style="width:20%">Xóa</button>
+  <button nz-button nzType="primary" (click)="saveChanges()" style=" margin-left: 2%;width:20%;max-width: 100px; ">Lưu</button>
+</div>

@@ -1,0 +1,97 @@
+<div nz-row>
+  <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" (input)="changeSearch($event.target.value)" nz-input placeholder="Tìm kiếm" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+</div>
+<div nz-row style="margin-top: 5px;">
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table #basicTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true"
+      [nzWidthConfig]="widthConfig" [nzScroll]="scrollConfig" [nzPageIndex]="1" [nzPageSize]="listOfData.length"
+      [nzFrontPagination]="false">
+      <thead>
+        <tr>
+          <th nzAlign="center">Mã đơn hàng</th>
+          <th nzAlign="center">Ngày đơn hàng</th>
+          <th nzAlign="center">Tên khách hàng</th>
+          <th nzAlign="center">Sản phẩm</th>
+          <th nzAlign="center">Vùng 1</th>
+          <th nzAlign="center">Vùng 2</th>
+          <th nzAlign="center">Kho hàng</th>
+          <th nzAlign="center">SL giao dự kiến</th>
+          <th nzAlign="center">SL giao dịch thực thể</th>
+          <th nzAlign="center">Tình trạng xe</th>
+          <th nzAlign="center">Ngày giao hàng</th>
+          <th nzAlign="center">Địa điểm giao hàng</th>
+          <th nzAlign="center" nzRight>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data; let i = index">
+          <td>{{ data.maDonMuaHang }}</td>
+          <td>{{ data.ngayDonMuaHang | date:'dd/MM/yyyy' }}</td>
+          <td>{{ data.tenKhachHang }}</td>
+          <td>{{ data.tenSanPham }}</td>
+          <td nzAlign="right">{{ data?.vung1 | formatPrice }}</td>
+          <td nzAlign="right">{{ data?.vung2 | formatPrice }}</td>
+          <td>{{ data?.tenKhoHang }}</td>
+          <td>{{ data?.soLuongGiaoDuKien }}</td>
+          <td>{{ data?.soLuongGiaoDichThucTe }}</td>
+          <td>{{ data?.tinhTrangXe === 1 ? 'Đầy xe' : 'Ghép xe' }}</td>
+          <td>{{ data?.ngayGiaoHang | date:'dd/MM/yyyy' }}</td>
+          <td>{{ data?.diaDiemGiaoHang }}</td>
+          <td nzRight nzAlign="center">
+            <nz-button-group nzSize="small">
+              <button *ngIf="trangThai === 0 && roleId === 'LD'" nz-button nzType="primary" (click)="duyetDonHang(data)"
+                nz-tooltip nzTooltipTitle="Duyệt">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <button *ngIf="trangThai === 1 && roleId === 'DH'" nz-button nzType="primary"
+                (click)="dieuXe(data)" nz-tooltip nzTooltipTitle="Điều xe">
+                <i nz-icon nzType="car" nzTheme="outline"></i>
+              </button>
+              <button *ngIf="trangThai === 3 && roleId === 'GNLX'" nz-button nzType="primary"
+                (click)="layXongHang(data)" nz-tooltip nzTooltipTitle="Lấy hàng">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <button *ngIf="trangThai === 3" nz-button nzType="default"
+                (click)="dieuXe(data, true)" nz-tooltip nzTooltipTitle="Điều xe">
+                <i nz-icon nzType="car" nzTheme="outline"></i>
+              </button>
+              <button *ngIf="trangThai === 4 && roleId === 'GNLX'" nz-button nzType="primary" (click)="dangGiao(data)"
+                nz-tooltip nzTooltipTitle="Đang giao">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <button *ngIf="trangThai === 5 && !data.daGiao && roleId === 'GNLX'" nz-button nzType="primary" (click)="daGiao(data)"
+                nz-tooltip nzTooltipTitle="Đã giao">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <ng-container
+                *ngIf="((trangThai === 0 && roleId === 'KD') || (trangThai === 1 && roleId === 'DH') || ((trangThai === 7 || trangThai === 8) && roleId === 'KT')); else viewTemplate">
+                <button nz-button nzType="default" (click)="editItem(data)" nz-tooltip nzTooltipTitle="Sửa">
+                  <i nz-icon nzType="edit"></i>
+                </button>
+              </ng-container>
+              <ng-template #viewTemplate>
+                <button nz-button nzType="default" (click)="editItem(data, true)" nz-tooltip nzTooltipTitle="Xem">
+                  <i nz-icon nzType="eye" nzTheme="outline"></i>
+                </button>
+              </ng-template>
+              <button *ngIf="" nz-button nzType="primary" (click)="editItem(data)" nz-tooltip nzTooltipTitle="Sửa">
+                <i nz-icon nzType="edit"></i>
+              </button>
+              <button *ngIf="trangThai === 0 && roleId === 'KD'" nz-button nzType="primary" nzDanger
+                (click)="removeItem(data)" nz-tooltip nzTooltipTitle="Xóa">
+                <i nz-icon nzType="delete"></i>
+              </button>
+            </nz-button-group>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
