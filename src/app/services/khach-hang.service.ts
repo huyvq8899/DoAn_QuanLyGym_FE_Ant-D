@@ -104,7 +104,6 @@ export class KhachHangService {
       + `&selectedId=` + selectedId
       + `&fromDate=` + data.fromDate
       + `&toDate=` + data.toDate
-
     return this.http.get(str, this.getHeader());
   }
 }
