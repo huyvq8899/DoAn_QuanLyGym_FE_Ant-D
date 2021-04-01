@@ -1,0 +1,159 @@
+<form nz-form [formGroup]="myFormGroup" class="login-form">
+  <div nz-row>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cardTypeId">Loại thẻ</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
+            <nz-select style="width:100%" (ngModelChange)="onCardTypeChange($event)" nzShowSearch nzAllowClear
+              id="id" nzServerSearch (nzOnSearch)="searchCardType($event)" formControlName="id"
+              nzPlaceHolder="Chọn loại thẻ">
+              <nz-option *ngFor="let item of listCardType" [nzLabel]="item.nameType" [nzValue]="item.id">
+                {{item.nameType}}
+              </nz-option>
+            </nz-select>
+          </nz-input-group>
+          <ng-template #beforeIconSubTaskAssign2>
+            <a (click)="addCardtype()">
+              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+            </a>
+          </ng-template>
+        </nz-form-control>
+
+
+      </nz-form-item>
+    <!-- Seclect Loại thẻ -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cardCode">Mã thẻ</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" [nzErrorTip]="errorMa">
+          <input nz-input nzSize="small" formControlName="cardCode" id="cardCode"
+            autocomplete="new-cardCode" />
+          <ng-template #errorMa let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Vui lòng nhập mã khách hàng !
+            </ng-container>
+            <ng-container *ngIf="control.hasError('checkMa')">
+              Mã khách hàng đã tồn tại vui lòng kiểm tra lại!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+ <!-- select Khách hàng -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="customerId">Chọn khách hàng</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
+            <nz-select style="width:100%" (ngModelChange)="onCustomerChange($event)" nzShowSearch nzAllowClear
+              id="id" nzServerSearch (nzOnSearch)="searchCustomer($event)" formControlName="id"
+              nzPlaceHolder="Chọn khách hàng">
+              <nz-option *ngFor="let item of listCustomer" [nzLabel]="item.customerName" [nzValue]="item.id">
+                {{item.customerName}}
+              </nz-option>
+            </nz-select>
+          </nz-input-group>
+          <ng-template #beforeIconSubTaskAssign2>
+            <a (click)="addCustomer()">
+              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+            </a>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- Select Cơ sở -->
+        <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="facilityId">Nhập cơ sở</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
+            <nz-select style="width:100%" (ngModelChange)="onFacilityChange($event)" nzShowSearch nzAllowClear
+              id="id" nzServerSearch (nzOnSearch)="searchFacility($event)" formControlName="id"
+              nzPlaceHolder="Chọn cơ sở ">
+              <nz-option *ngFor="let item of listFacility" [nzLabel]="item.facilityName" [nzValue]="item.id">
+                {{item.facilityName}}
+              </nz-option>
+            </nz-select>
+          </nz-input-group>
+          <ng-template #beforeIconSubTaskAssign2>
+            <a (click)="addFacility()">
+              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+            </a>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+            <!-- Select dịch vụ -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="serviceId">Dịch vụ</nz-form-label>
+              <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+                <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
+                  <nz-select style="width:100%" (ngModelChange)="onServiceChange($event)" nzShowSearch nzAllowClear
+                    id="id" nzServerSearch (nzOnSearch)="searchService($event)" formControlName="id"
+                    nzPlaceHolder="Chọn dịch vụ ">
+                    <nz-option *ngFor="let item of listDichVu" [nzLabel]="item.serviceName" [nzValue]="item.id">
+                      {{item.serviceName}}
+                    </nz-option>
+                  </nz-select>
+                </nz-input-group>
+                <ng-template #beforeIconSubTaskAssign2>
+                  <a (click)="addNganh()">
+                    <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+                  </a>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+      
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="note">Chú ý
+        </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="note" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="fromDate"> Từ ngày
+        </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="fromDate" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="toDate">Đến ngày
+        </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <input nz-input nzSize="small" formControlName="toDate" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <!-- <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cardTypeId">Loại thẻ </nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign3">
+
+            <nz-select style="width:100%" (ngModelChange)="onCardTypeChange($event)" nzShowSearch nzServerSearch
+              (nzOnSearch)="searchCardType($event)" nzAllowClear id="cardTypeId" formControlName="cardTypeId"
+              nzPlaceHolder="Chọn phương án nhập ">
+              <nz-option *ngFor="let item of listCardType" [nzLabel]="item.cardCode"
+                [nzValue]="item.cardTypeId">
+                {{item.cardTypeName}}
+              </nz-option>
+            </nz-select>
+          </nz-input-group>
+
+          <ng-template #beforeIconSubTaskAssign3>
+             <a (click)="addPhuongAnNhap()">
+              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+            </a> 
+          </ng-template>
+
+        </nz-form-control>
+      </nz-form-item> -->
+    </div>
+  </div>
+</form>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
+  <button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+</div>

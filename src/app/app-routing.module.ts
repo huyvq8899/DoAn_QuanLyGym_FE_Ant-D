@@ -7,6 +7,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { DesktopGuard, MobileGuard } from './device-guard';
 import { MLayoutComponent } from './m-layout/m-layout.component';
 import { XinNghiComponent } from './views/xin-nghi/xin-nghi.component';
+import { CardComponent } from './views/card/card.component';
 
 // {
 //     path: '',
@@ -153,6 +154,10 @@ const routes: Routes = [
             {
                 path: 'xin-nghi/thong-ke-xin-nghi',
                 component:BaoCaoXinNghiComponent
+            },
+            {
+                path: 'card',
+                component:CardComponent
             },
         ]
     },

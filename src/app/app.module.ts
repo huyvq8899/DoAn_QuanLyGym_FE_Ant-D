@@ -35,6 +35,8 @@ import {
   DataLabelService, SplineSeriesService, StripLineService,
   SelectionService, ScatterSeriesService, AccumulationLegendService, ZoomService,
 } from '@syncfusion/ej2-angular-charts';
+import { AddEditCardComponent } from './views/card/add-edit-card/add-edit-card/add-edit-card.component';
+import { CardComponent } from './views/card/card.component';
 
 registerLocaleData(en);
 export function tokenGetter() {
@@ -52,6 +54,9 @@ export function tokenGetter() {
       XinNghiComponent,
       AddEditXinNghiComponent,
       BaoCaoXinNghiComponent,
+      CardComponent,
+      AddEditCardComponent,
+      
    ],
    imports: [
       BrowserModule,
