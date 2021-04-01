@@ -6,7 +6,7 @@
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
           <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
             <nz-select style="width:100%" (ngModelChange)="onCardTypeChange($event)" nzShowSearch nzAllowClear
-              id="id" nzServerSearch (nzOnSearch)="searchCardType($event)" formControlName="id"
+              id="id" nzServerSearch (nzOnSearch)="searchCardType($event)" formControlName="cardTypeId"
               nzPlaceHolder="Chọn loại thẻ">
               <nz-option *ngFor="let item of listCardType" [nzLabel]="item.nameType" [nzValue]="item.id">
                 {{item.nameType}}
@@ -44,7 +44,7 @@
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
           <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
             <nz-select style="width:100%" (ngModelChange)="onCustomerChange($event)" nzShowSearch nzAllowClear
-              id="id" nzServerSearch (nzOnSearch)="searchCustomer($event)" formControlName="id"
+              id="customerId" nzServerSearch (nzOnSearch)="searchCustomer($event)" formControlName="customerId"
               nzPlaceHolder="Chọn khách hàng">
               <nz-option *ngFor="let item of listCustomer" [nzLabel]="item.customerName" [nzValue]="item.id">
                 {{item.customerName}}
@@ -64,7 +64,7 @@
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
           <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
             <nz-select style="width:100%" (ngModelChange)="onFacilityChange($event)" nzShowSearch nzAllowClear
-              id="id" nzServerSearch (nzOnSearch)="searchFacility($event)" formControlName="id"
+              id="facilityId" nzServerSearch (nzOnSearch)="searchFacility($event)" formControlName="facilityId"
               nzPlaceHolder="Chọn cơ sở ">
               <nz-option *ngFor="let item of listFacility" [nzLabel]="item.facilityName" [nzValue]="item.id">
                 {{item.facilityName}}
@@ -84,7 +84,7 @@
               <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
                 <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
                   <nz-select style="width:100%" (ngModelChange)="onServiceChange($event)" nzShowSearch nzAllowClear
-                    id="id" nzServerSearch (nzOnSearch)="searchService($event)" formControlName="id"
+                    id="serviceId" nzServerSearch (nzOnSearch)="searchService($event)" formControlName="serviceId"
                     nzPlaceHolder="Chọn dịch vụ ">
                     <nz-option *ngFor="let item of listDichVu" [nzLabel]="item.serviceName" [nzValue]="item.id">
                       {{item.serviceName}}

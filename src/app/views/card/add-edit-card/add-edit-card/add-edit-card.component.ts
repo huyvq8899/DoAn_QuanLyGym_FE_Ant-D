@@ -103,15 +103,11 @@ export class AddEditCardComponent implements OnInit {
       const cardType = this.listCardType.find(x => x.id === event);
   //console.log(khachHang);
     if (this.myFormGroup.dirty) {
-     
-      if (cardType) {
-  
-        this.myFormGroup.patchValue({
-          cardTypeId:cardType.id,
-        });
-      }
+      this.myFormGroup.patchValue({
+        nameType:cardType.nameType
+      });
     }
-    }
+  }
     onFacilityChange(event){
   const facility = this.listFacility.find(x => x.id === event);
   // console.log(facility);
@@ -121,7 +117,7 @@ export class AddEditCardComponent implements OnInit {
       if (facility) {
   
         this.myFormGroup.patchValue({
-          facilityId:facility.id
+          facilityName:facility.facilityName
         });
         console.log(facility.id)
       }
@@ -134,7 +130,7 @@ export class AddEditCardComponent implements OnInit {
           if (customer) {
       
             this.myFormGroup.patchValue({
-              customerId:customer.id
+              customerName:customer.customerName
             });
             console.log(customer.id)
           }
@@ -149,7 +145,7 @@ export class AddEditCardComponent implements OnInit {
           if (service) {
       
             this.myFormGroup.patchValue({
-              serviceId:service.id
+              serviceName:service.serviceName
             });
             console.log(service.id)
           }
@@ -175,10 +171,10 @@ export class AddEditCardComponent implements OnInit {
       this.myFormGroup.get(`id`).setValue(this.idNew);
     } else {
       this.myFormGroup.patchValue({
-        tenNganhNghe:this.khachHangData.tenNganhNghe,
-        tencardType:this.khachHangData.tencardType,
         ...this.khachHangData
       });
+      console.log(this.khachHangData);
+      console.log(this.myFormGroup);
     }
     this.FacilityService.getAllFacility().subscribe((rs:any)=>{
       this.listFacility=rs;
