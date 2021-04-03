@@ -15,6 +15,8 @@ import { AddEditPhuongAnNhapComponent } from 'src/app/views/danh-muc/phuong-an-n
 import { AddEditNganhNgheComponent } from 'src/app/views/danh-muc/nganh-nghe/modal/add-edit-nganh-nghe/add-edit-nganh-nghe.component'
 import { PagingParams } from 'src/app/models/PagingParams';
 import { UserService } from 'src/app/services/user.service';
+import { JobService } from 'src/app/services/job.service';
+import { AddEditJobComponent } from '../../danh-muc/job/add-edit-job/add-edit-job/add-edit-job.component';
 @Component({
   selector: 'app-add-edit-khach-hang',
   templateUrl: './add-edit-khach-hang.component.html',
@@ -25,8 +27,8 @@ export class AddEditKhachHangModalComponent implements OnInit {
   @Input() isAddNew: boolean;
   @Input() khachHangData: any;
   stt:any;
-  listPhuongAnNhap:any[]=[];
-  listPhuongAnNhapTmp:any[]=[];
+  listJob:any[]=[];
+  listJobTmp:any[]=[];
   listVung:any[]=[];
   listVungTmp:any[]=[];
   listNganh:any[]=[];
@@ -53,11 +55,29 @@ export class AddEditKhachHangModalComponent implements OnInit {
     private router: Router,
     private modal: NzModalRef,
     private modalz :NzModalService,
-    private userService:UserService
+    private jobService:JobService,
+    
   ) { }
+  onJobChange(event){
+    const job = this.listJob.find(x => x.id === event);
+//console.log(khachHang);
+  if (this.myFormGroup.dirty) {
+    this.myFormGroup.patchValue({
+      placeWork:job.placeWork
+    });
+  }
+}
   ngOnInit() {
       this.selectedId=localStorage.getItem('userId');;
     this.createForm();
+    this.jobService.getAllJob().subscribe((rs:any)=>{
+      this.listJob=rs;
+      this.listJobTmp=rs;
+      // if(this.isAddNew && rs.length > 0) { 
+      //   this.myFormGroup.get('cardTypeId').setValue(rs[0].cardTypeId);
+      //   this.myFormGroup.get('maKhachHang').setValue(rs[0].macardType);
+      // }
+    })
     if(this.isAddNew) {
       this.myFormGroup.get(`id`).setValue(this.idNew);
     } else {
@@ -114,7 +134,31 @@ export class AddEditKhachHangModalComponent implements OnInit {
     //const myFormGroupData = this.myFormGroup.getRawValue();
     //this.modelRef.destroy(myFormGroupData);
   }
-
+  addJob() {
+    const modal = this.modalz.create({
+      nzTitle: 'Thêm mới',
+      nzContent: AddEditJobComponent,
+      nzClosable: false,
+      nzFooter: 'null',
+      nzWidth: '30%',
+      nzStyle: {
+        top: '10px'
+      },
+      nzComponentParams: {
+        idNew: this.listJob.length + 1,
+        isAddNew: true
+      },
+    });
+    modal.afterClose.subscribe((rs: any) => {
+      if (rs) {
+        this.ngOnInit();
+      }
+    });
+  }
+  searchJob(event){
+    const arrCondition = ["placeWork"];
+    this.listJob = SearchEngine(this.listJobTmp, arrCondition, event);
+  }
   createForm() {
     if(this.isAddNew){
     this.myFormGroup = this.fb.group({
@@ -125,7 +169,7 @@ export class AddEditKhachHangModalComponent implements OnInit {
       ],
       address: [null, [Validators.required]],
       doB:["08/08/1999"],
-      job:[null],
+      jobId:[null],
       numberPhone: [null],
       note:[null],
       height:[null],
@@ -148,7 +192,7 @@ export class AddEditKhachHangModalComponent implements OnInit {
         ],
         address: [null, [Validators.required]],
         doB:["08/08/1999"],
-        job:[null],
+        jobId:[null],
         numberPhone: [null],
         note:[null],
         height:[null],

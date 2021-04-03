@@ -37,10 +37,25 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="job">Nghề nghiệp </nz-form-label>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="jobId">Công việc</nz-form-label>
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
-          <input nz-input nzSize="small" formControlName="job" />
+          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
+            <nz-select style="width:100%" (ngModelChange)="onJobChange($event)" nzShowSearch nzAllowClear
+              id="id" nzServerSearch (nzOnSearch)="searchJob($event)" formControlName="jobId"
+              nzPlaceHolder="Chọn loại thẻ">
+              <nz-option *ngFor="let item of listJob" [nzLabel]="item.placeWork" [nzValue]="item.id">
+                {{item.jobName}}- {{item.placeWork}}
+              </nz-option>
+            </nz-select>
+          </nz-input-group>
+          <ng-template #beforeIconSubTaskAssign2>
+            <a (click)="addJob()">
+              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
+            </a>
+          </ng-template>
         </nz-form-control>
+
+
       </nz-form-item>
 
       <nz-form-item>

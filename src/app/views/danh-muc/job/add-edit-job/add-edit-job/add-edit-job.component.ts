@@ -16,6 +16,7 @@ export class AddEditJobComponent implements OnInit {
   @Input() isAddNew: boolean;
   @Input() JobData: any;
   myFormGroup: FormGroup;
+  
   constructor(
     private modelRef: NzModalRef,
     private fb: FormBuilder,

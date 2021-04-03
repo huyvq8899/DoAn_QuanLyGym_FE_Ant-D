@@ -152,7 +152,7 @@
         </nz-dropdown-menu>
       </th>
 
-      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="job" [nzSortFn]="true">Nghề nghiệp
+      <th nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="placeWork" [nzSortFn]="true">Nghề nghiệp
         <nz-filter-trigger [nzDropdownMenu]="menu30">
           <i nz-icon nzType="search"></i>
         </nz-filter-trigger>
@@ -160,7 +160,7 @@
           <div class="ant-table-filter-dropdown">
             <div class="search-box">
               <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('job',$event)" />
+                (ngModelChange)="onChangeSearch('placeWork',$event)" />
             </div>
           </div>
         </nz-dropdown-menu>
@@ -259,7 +259,7 @@
       <td nzLeft="500px" nzWidth="200px" nzAlign="center">{{ data.customerName }}</td>
       <td nzWidth="150px" nzAlign="center">{{ data.address }}</td>
       <td nzWidth="250px" nzAlign="center">{{ data.doB }}</td>
-      <td nzWidth="200px" nzAlign="center">{{ data.job }}</td>
+      <td nzWidth="200px" nzAlign="center">{{ data.placeWork }}</td>
       <td nzWidth="200px" nzAlign="center">{{ data.numberPhone }}</td>
       <td nzWidth="200px" nzAlign="center">{{ data.note }}</td>
       <td nzWidth="200px" nzAlign="center">{{ data.height }}</td>
