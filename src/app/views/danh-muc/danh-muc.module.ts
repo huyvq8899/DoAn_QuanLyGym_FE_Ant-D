@@ -15,6 +15,8 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { AddEditEquipmentComponent } from './equipment/add-edit-equipment/add-edit-equipment/add-edit-equipment/add-edit-equipment.component';
 import { AddEditDichVuComponent } from './dich-vu/add-edit-dich-vu/add-edit-dich-vu/add-edit-dich-vu.component';
 import { DichVuComponent } from './dich-vu/dich-vu.component';
+import { JobComponent } from './job/job.component';
+import { AddEditJobComponent } from './job/add-edit-job/add-edit-job/add-edit-job.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ import { DichVuComponent } from './dich-vu/dich-vu.component';
   CardTypeComponent,AddEditCardTypeComponent,
   AddEditFacilityComponent,FacilityComponent,
   AddEditEquipmentComponent,EquipmentComponent,
-  AddEditDichVuComponent,DichVuComponent
+  AddEditDichVuComponent,DichVuComponent,
+  JobComponent,AddEditJobComponent
   
 ]
 })

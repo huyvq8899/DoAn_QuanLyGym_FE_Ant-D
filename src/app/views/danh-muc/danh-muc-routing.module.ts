@@ -9,6 +9,7 @@ import { CardTypeComponent } from './card-type/card-type.component';
 import { FacilityComponent } from './facility/facility.component';
 import { EquipmentComponent } from './equipment/equipment.component';
 import { DichVuComponent } from './dich-vu/dich-vu.component';
+import { JobComponent } from './job/job.component';
 
 const routes: Routes = [
     {
@@ -81,6 +82,10 @@ const routes: Routes = [
     {
         path: 'dich-vu',
         component:DichVuComponent
+    },
+    {
+        path: 'job',
+        component:JobComponent
     },
     
 ];
