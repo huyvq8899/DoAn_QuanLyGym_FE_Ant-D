@@ -228,7 +228,7 @@ export class CardComponent implements OnInit {
 
   changeSearch(event: any) {
     
-    const arrCondition = ['tenKhachHang', 'diaChi', 'nganhNghe', 'soDienThoai','tenNganhNghe','maKhachHang','tenVung','loaiKhachHang','trangThaiKhachHang','nguoiLienHe','maSoThue','cacVanDeCuaNhaCCCu','nhaCungCapHienTai','nguoiThem','nguoiDaiDienPhapLuat','soDienThoaiNguoiDaiDien','keToan','soDienThoaiKeToan','congNo','checkCIC','hanMuc','createdDate','thoiHanNo','diaChiGiaoHang','vanPhongGiaoDich','email','deXuatNhanVien','phuongAnNhapHang'];
+    const arrCondition = ['nguoiThem', 'createDateName', 'cardCode', 'customerCode','customerName','address','numberPhone','nameType','facilityName','serviceName','price','fromDateName','toDateName'];
     //console.log(arrCondition);
     this.displayData.Keyword = event;
     //console.log(this.displayData.Keyword);
@@ -248,7 +248,7 @@ export class CardComponent implements OnInit {
 
   addNewItem() {
     const modal = this.modal.create({
-      nzTitle: 'Thêm > Khách hàng',
+      nzTitle: 'Thêm > Thẻ tập',
       nzContent: AddEditCardComponent,
       nzClosable: true,
       nzFooter: 'null',

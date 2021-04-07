@@ -252,7 +252,7 @@
     <tr *ngFor="let data of fixedTable.data; let i = index">
       <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
       <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data?.nguoiThem }}</td>
-      <td nzLeft="200px" nzWidth="150px" nzAlign="center">{{ data?.createDateName | date:'dd/MM/yyyy' }}</td>
+      <td nzLeft="200px" nzWidth="150px" nzAlign="center">{{ data?.createDateName }}</td>
       <td nzLeft="350px" nzWidth="150px" nzAlign="center">{{ data.cardCode }}</td>
       <td nzWidth="150px" nzAlign="center">{{ data.customerCode }}</td>
       <td nzWidth="150px" nzAlign="center">{{ data.customerName }}</td>
@@ -262,8 +262,8 @@
       <td nzWidth="200px" nzAlign="center">{{ data.facilityName }}</td>
       <td nzWidth="200px" nzAlign="center">{{ data.serviceName }}</td>
       <td nzWidth="150px" nzAlign="center">{{ data.price }}</td>
-      <td nzWidth="250px" nzAlign="center">{{ data?.fromDateName | date:'dd/MM/yyyy' }}</td>
-      <td nzWidth="150px" nzAlign="center">{{ data?.toDateName | date:'dd/MM/yyyy' }}</td>
+      <td nzWidth="250px" nzAlign="center">{{ data?.fromDateName  }}</td>
+      <td nzWidth="150px" nzAlign="center">{{ data?.toDateName  }}</td>
       <td nzWidth="75px" nzRight nzAlign="center">
         <button *ngIf="checkCreate(data?.createdBy)" nzSize="small" nz-button nzType="primary"
           (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">

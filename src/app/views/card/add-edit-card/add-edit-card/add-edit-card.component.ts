@@ -18,6 +18,9 @@ import { CardService } from 'src/app/services/card.service';
 import { DichVuService } from 'src/app/services/dich-vu.service';
 import { AddEditDichVuComponent } from 'src/app/views/danh-muc/dich-vu/add-edit-dich-vu/add-edit-dich-vu/add-edit-dich-vu.component';
 import { AddEditKhachHangModalComponent } from 'src/app/views/khach-hang/add-edit-khach-hang/add-edit-khach-hang.component';
+import { ConvertDateTime } from 'src/app/shared/get-selected-array';
+import { DateTime } from '@syncfusion/ej2-charts';
+import { formatDate } from 'src/app/shared/moment';
 
 @Component({
   selector: 'app-add-edit-card',
@@ -29,6 +32,7 @@ export class AddEditCardComponent implements OnInit {
   @Input() isAddNew: boolean;
   @Input() khachHangData: any;
   stt:any;
+  price: number
   listFacility:any[]=[];
   listFacilityTmp:any[]=[];
   listCustomer:any[]=[];
@@ -98,6 +102,7 @@ export class AddEditCardComponent implements OnInit {
         loai:'Công nghiệp'
       }
     ]
+
     //link loại thẻ
     onCardTypeChange(event){
       const cardType = this.listCardType.find(x => x.id === event);
@@ -106,6 +111,7 @@ export class AddEditCardComponent implements OnInit {
       this.myFormGroup.patchValue({
         nameType:cardType.nameType
       });
+      this.tinhTien();
     }
   }
     onFacilityChange(event){
@@ -117,7 +123,8 @@ export class AddEditCardComponent implements OnInit {
       if (facility) {
   
         this.myFormGroup.patchValue({
-          facilityName:facility.facilityName
+          facilityName:facility.facilityName,
+          address:facility.address
         });
         console.log(facility.id)
       }
@@ -130,7 +137,8 @@ export class AddEditCardComponent implements OnInit {
           if (customer) {
       
             this.myFormGroup.patchValue({
-              customerName:customer.customerName
+              customerName:customer.customerName,
+              customerCode:customer.customerCode,
             });
             console.log(customer.id)
           }
@@ -145,9 +153,12 @@ export class AddEditCardComponent implements OnInit {
           if (service) {
       
             this.myFormGroup.patchValue({
-              serviceName:service.serviceName
+              serviceName:service.serviceName,
+              money:service.money
             });
             console.log(service.id)
+            this.tinhTien();
+         //   this.tinhNgayHetHan();
           }
         }
         }
@@ -160,7 +171,7 @@ export class AddEditCardComponent implements OnInit {
           tenNganhNghe:nganh.tenNganhNghe,
           maNganhNghe:nganh.maNganhNghe
         });
- 
+
       }
     }
     }
@@ -215,6 +226,7 @@ export class AddEditCardComponent implements OnInit {
       //   this.myFormGroup.get('nganhNgheId').setValue(rs[0].nganhNgheId);
       // }
     })
+    this.tinhTien();
   }
   addFacility() {
     const modal = this.modalz.create({
@@ -255,6 +267,7 @@ export class AddEditCardComponent implements OnInit {
     modal.afterClose.subscribe((rs: any) => {
       if (rs) {
         this.ngOnInit();
+       
       }
     });
   }
@@ -325,12 +338,13 @@ export class AddEditCardComponent implements OnInit {
   saveChanges() {
     if(this.myFormGroup.invalid) {      
       for (const i in this.myFormGroup.controls) {
-
         this.myFormGroup.controls[i].markAsDirty();
         this.myFormGroup.controls[i].updateValueAndValidity();
       }
       return;
+     
     }
+    console.log(this.myFormGroup);
     // console.log('submitted');
     if (this.isAddNew === true) {
       console.log('api insert');
@@ -390,17 +404,22 @@ export class AddEditCardComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       createdDate:[null],
-      cardCode: [null, [Validators.required]],
+      cardCode: ["MTT00", [Validators.required]],
       customerId: [
         null,[Validators.required],
       ],
+      price:0,
       cardTypeId: [null, [Validators.required]],
       facilityId:[null],
       serviceId:[null],
       note: [null],
-      toDate:["5/4/2020"],
-      fromDate:["5/4/2020"],
+      // toDate:[null],
+      fromDate:[null],
       createdBy:localStorage.getItem('userId'),
+      money:0,
+      address:[null],
+      customerCode:[null],
+      nameType:[null],
     });
   }else{
     this.myFormGroup = this.fb.group({
@@ -410,13 +429,18 @@ export class AddEditCardComponent implements OnInit {
       customerId: [
         null,[Validators.required],
       ],
+      price:0,
       cardTypeId: [null, [Validators.required]],
       facilityId:[null],
       serviceId:[null],
       note: [null],
-      toDate:["5/4/2020"],
-      fromDate:["5/4/2020"],
+      // toDate:[null],
+      fromDate:[null],
       ModifiedBy:localStorage.getItem('userId'),
+      money:0,
+      address:[null],
+      customerCode:[null],
+      nameType:[null],
     });
   }
   }
@@ -424,4 +448,101 @@ export class AddEditCardComponent implements OnInit {
   closeModal() {
     this.modelRef.destroy(null);
   }
+  blurTien() {
+    if (!this.myFormGroup.get('money').value) {
+      this.myFormGroup.get('money').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('soLuongDuKien').value) {
+      this.myFormGroup.get('soLuongDuKien').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('soLuongThucTe').value) {
+      this.myFormGroup.get('soLuongThucTe').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('chietKhauCongTy').value) {
+      this.myFormGroup.get('chietKhauCongTy').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('chietKhauKhachHang').value) {
+      this.myFormGroup.get('chietKhauKhachHang').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('chiPhiKhac').value) {
+      this.myFormGroup.get('chiPhiKhac').setValue(0);
+    }
+
+    if (!this.myFormGroup.get('cuocVanChuyenThucTe').value) {
+      this.myFormGroup.get('cuocVanChuyenThucTe').setValue(0);
+    }
+  }
+  tinhTien() {
+    const data = this.myFormGroup.getRawValue();
+    const money = data.money;
+    const nameType = data.nameType;
+    // const price = data.chietKhauKhachHang;
+    // const cuocVanChuyenThucTe = data.cuocVanChuyenThucTe;
+    // const cuocVanChuyenDuKien = data.cuocVanChuyenDuKien;
+    // const chiPhiKhac = data.chiPhiKhac;
+    // const soLuongThucTe = data.soLuongThucTe;
+    // const retailPrice = data.retailPrice;
+    if(nameType=="VIP"){
+      this.myFormGroup.get('price').setValue(money*0.9);
+    }
+    if(nameType=="Thường"){
+      this.myFormGroup.get('price').setValue(money);
+    }
+  }
+  
+  // tinhNgayHetHan() {
+  //   var now = new Date();
+  //   const data = this.myFormGroup.getRawValue();
+  //   var toDate = new Date();
+  //   toDate = data.toDate;
+  //   console.log(toDate);
+  //   var fromDate = new Date();
+  //   fromDate = data.fromDate;
+  //   const serviceId = data.serviceId;
+
+  //   // const price = data.chietKhauKhachHang;
+  //   // const cuocVanChuyenThucTe = data.cuocVanChuyenThucTe;
+  //   // const cuocVanChuyenDuKien = data.cuocVanChuyenDuKien;
+  //   // const chiPhiKhac = data.chiPhiKhac;
+  //   // const soLuongThucTe = data.soLuongThucTe;
+  //   // const retailPrice = data.retailPrice;
+  //   if(serviceId=="afd87f47-30c8-4133-85d9-7020876bcd95"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setMonth(fromDate.getMonth()+2));
+  //   }
+  //   if(serviceId=="2fed1699-a05f-46e4-b7bd-ad7eda85e30e"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setMonth(fromDate.getMonth()+3));
+  //   }
+  //   if(serviceId=="f09c5275-67f6-4035-89d1-dae665ceeafc"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setMonth(fromDate.getMonth()+4));
+  //   }
+ // }
+  // ontimmeChange(event){
+  //   var now = new Date();
+  //   const data = this.myFormGroup.getRawValue();
+  //   toDate = data.toDate;
+  //   console.log(toDate);
+  //   var fromDate = new Date(event)
+  //   fromDate = data.fromDate;
+  //   const serviceId = data.serviceId;
+  //   var toDate = new Date("dd//MM/yyyy");;
+  //   if(serviceId=="afd87f47-30c8-4133-85d9-7020876bcd95"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setFullYear(fromDate.getFullYear())&&fromDate.setMonth(fromDate.getMonth()+2)&&
+  //     fromDate.setDate(fromDate.getDate()));
+  //     console.log( this.myFormGroup.get('toDate'))
+  //   }
+  //   if(serviceId=="2fed1699-a05f-46e4-b7bd-ad7eda85e30e"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setMonth(fromDate.getMonth()+3));
+  //   }
+  //   if(serviceId=="f09c5275-67f6-4035-89d1-dae665ceeafc"){
+  //     this.myFormGroup.get('toDate').setValue(fromDate.setMonth(fromDate.getMonth()+4));
+  //   }
+  addDays(dateObj, numDays) {
+    dateObj.setDate(dateObj.getDate() + numDays);
+    return dateObj;
+ }
 }
