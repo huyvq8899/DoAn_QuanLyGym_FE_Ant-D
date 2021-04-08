@@ -5,6 +5,7 @@ import { ThongKeRoutingModule } from './thong-ke-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgZorroModule } from 'src/app/ng-zorro.module';
 import { SharedModule } from 'src/app/shared.module';
+import { ThongKeSoLuongTheTapComponent } from './thong-ke-so-luong-the-tap/thong-ke-so-luong-the-tap.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { SharedModule } from 'src/app/shared.module';
     FormsModule,
   ],
   exports: [],
-  declarations: [ThongKeSoLuongKhachHangComponent],
-  entryComponents: [ThongKeSoLuongKhachHangComponent],
+  declarations: [ThongKeSoLuongKhachHangComponent,ThongKeSoLuongTheTapComponent],
+  entryComponents: [ThongKeSoLuongKhachHangComponent,ThongKeSoLuongTheTapComponent],
 })
 export class ThongKeModule { }

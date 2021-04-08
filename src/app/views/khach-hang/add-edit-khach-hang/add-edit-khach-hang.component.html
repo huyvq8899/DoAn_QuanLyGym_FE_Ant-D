@@ -15,8 +15,8 @@
             </ng-container>
           </ng-template>
         </nz-form-control>
-      </nz-form-item>    
-        <nz-form-item>
+      </nz-form-item>
+      <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="customerName">Tên khách hàng</nz-form-label>
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
           <input nz-input nzSize="small" formControlName="customerName" />
@@ -31,20 +31,19 @@
 
       <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="doB">Ngày sinh </nz-form-label>
-        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
-          <textarea nzSize="small" nz-input formControlName="doB"></textarea>
+        <nz-form-control  [nzSm]="15" [nzXs]="24" class="fcontrol">
+          <nz-date-picker [nzFormat]="'dd/MM/yyyy'" formControlName="doB"
+            nzPlaceHolder="Chọn ngày"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
-
       <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="jobId">Công việc</nz-form-label>
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
           <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign2">
-            <nz-select style="width:100%" (ngModelChange)="onJobChange($event)" nzShowSearch nzAllowClear
-              id="id" nzServerSearch (nzOnSearch)="searchJob($event)" formControlName="jobId"
-              nzPlaceHolder="Chọn loại thẻ">
+            <nz-select style="width:100%" (ngModelChange)="onJobChange($event)" nzShowSearch nzAllowClear id="id"
+              nzServerSearch (nzOnSearch)="searchJob($event)" formControlName="jobId" nzPlaceHolder="Chọn nghề ghiệp hiện tại">
               <nz-option *ngFor="let item of listJob" [nzLabel]="item.placeWork" [nzValue]="item.id">
-                {{item.jobName}}- {{item.placeWork}}
+                {{item.jobName}}- {{item.placeWork}}()
               </nz-option>
             </nz-select>
           </nz-input-group>
@@ -55,9 +54,7 @@
           </ng-template>
         </nz-form-control>
 
-
       </nz-form-item>
-
       <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="numberPhone">Số điện thoại</nz-form-label>
         <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
@@ -89,6 +86,18 @@
           <input nz-input nzSize="small" formControlName="healthStatus" />
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="healthStatus">Tình trạng sức khỏe</nz-form-label>
+        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+          <nz-select nzAllowClear id="healthStatus" formControlName="healthStatus"
+            nzPlaceHolder="Chọn trạng thái ">
+            <nz-option *ngFor="let item of loaiTinhTrang" [nzLabel]="item.loai" [nzValue]="item.loai">
+              {{item.loai}}
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
 
       <nz-form-item>
         <nz-form-label nzRequired [nzSm]="8" [nzXs]="24" nzFor="email">Email

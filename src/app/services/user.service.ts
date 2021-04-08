@@ -123,6 +123,13 @@ export class UserService {
     // console.log(str);
     return this.http.get(str, this.getHeader());
   }
+  GetBySoLuongCard(data: PagingParams) {
+    const str = `${this.apiURL}User/GetBySoLuongCard?&userId=` + data.userId
+      + `&fromDate=` + data.fromDate
+      + `&toDate=` + data.toDate
+    // console.log(str);
+    return this.http.get(str, this.getHeader());
+  }
   ExportExcelBaoCao(data: PagingParams) {
     // return this.http.get(`${this.apiURL}Role/GetRoleByUserId/` + userId, this.getHeader());
   //console.log(data);
@@ -158,6 +165,13 @@ export class UserService {
   GetAddKHByNhanVienByMonth(data: any,id:string,selectedId: string) {
     return this.http.post(
       `${this.apiURL}User/GetAddKhachHangByNhanVien?Id=`+id,
+      data,
+      this.getHeader()
+    );
+  }
+  GetAddTheTapByNhanVien(data: any,id:string,selectedId: string) {
+    return this.http.post(
+      `${this.apiURL}User/GetAddTheTapByNhanVien?Id=`+id,
       data,
       this.getHeader()
     );

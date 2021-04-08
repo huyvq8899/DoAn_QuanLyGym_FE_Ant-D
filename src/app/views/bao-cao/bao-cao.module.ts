@@ -15,6 +15,8 @@ import {
 } from '@syncfusion/ej2-angular-charts';
 import { BaoCaoThemKhachHangTheoNhanVienComponent } from './bao-cao-them-khach-hang-theo-nhan-vien/bao-cao-them-khach-hang-theo-nhan-vien.component';
 import { BaoCaoThemKHTheoNVKDComponent } from './bao-cao-them-KH-theo-NVKD/bao-cao-them-KH-theo-NVKD.component';
+import { BaoCaoThemTheTapTheoNvComponent } from './bao-cao-them-the-tap-theo-nv/bao-cao-them-the-tap-theo-nv.component';
+import { BaoCaoDoanhThuComponent } from './bao-cao-doanh-thu/bao-cao-doanh-thu.component';
 
 @NgModule({
   imports: [
@@ -29,12 +31,16 @@ import { BaoCaoThemKHTheoNVKDComponent } from './bao-cao-them-KH-theo-NVKD/bao-c
     BaoCaoComponent,
     BaoCaoThemKhachHangComponent,
     BaoCaoThemKhachHangTheoNhanVienComponent,
-    BaoCaoThemKHTheoNVKDComponent
+    BaoCaoThemKHTheoNVKDComponent,
+    BaoCaoThemTheTapTheoNvComponent,
+    BaoCaoDoanhThuComponent,
   ],
   entryComponents: [
     BaoCaoThemKhachHangComponent,
     BaoCaoThemKhachHangTheoNhanVienComponent,
-    BaoCaoThemKHTheoNVKDComponent
+    BaoCaoThemKHTheoNVKDComponent,
+    BaoCaoThemTheTapTheoNvComponent,
+    BaoCaoDoanhThuComponent,
   ],
   exports: [],
   providers: [CategoryService, DateTimeService, ScrollBarService, LineSeriesService,

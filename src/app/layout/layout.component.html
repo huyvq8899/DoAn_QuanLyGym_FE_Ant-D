@@ -178,6 +178,14 @@
                         </a>
                     </li>
                 </ul>
+                <ul>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/thong-ke/thong-ke-so-luong-the-tap']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Số lượng thẻ tập</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li nz-submenu nzTitle="Báo cáo" nzIcon="stock" *ngIf="CheckFunction('BAO-CAO')">
                 <ul>
@@ -197,6 +205,18 @@
                         <a [routerLink]="['/bao-cao/bao-cao-them-khach-hang-theo-nhan-vien-KD']">
                             <i nz-icon nzType="file"></i>
                             <span>Báo cáo thêm KH nhân viên</span>
+                        </a>
+                    </li>
+                    <li *ngIf="this.check===true" nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/bao-cao/bao-cao-the-tap-theo-nhan-vien']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Báo cáo thêm thẻ tập</span>
+                        </a>
+                    </li>
+                    <li *ngIf="this.check===true" nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/bao-cao/bao-cao-doanh-thu']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Báo cáo doanh thu</span>
                         </a>
                     </li>
                 </ul>

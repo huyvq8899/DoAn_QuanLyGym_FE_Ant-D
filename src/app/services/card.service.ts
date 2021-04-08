@@ -105,4 +105,11 @@ export class CardService {
 
     return this.http.get(str, this.getHeader());
   }
+  GetDoanhThuNhanVien(data: any,id:string,selectedId: string) {
+    return this.http.post(
+      `${this.apiURL}Card/GetDoanhThu?Id=`+id,
+      data,
+      this.getHeader()
+    );
+  }
 }

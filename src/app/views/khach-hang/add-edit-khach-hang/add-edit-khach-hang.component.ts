@@ -36,6 +36,21 @@ export class AddEditKhachHangModalComponent implements OnInit {
   myFormGroup: FormGroup;
   selectedloaiKhachHang:any;
   selectedId:any;
+  loaiTinhTrang=[
+    {
+      ma:1,
+      loai:'Sức khỏe tốt'
+    },
+    {
+      ma:2,
+      loai:'Sức khỏe bình thường'
+    }
+    ,
+    {
+      ma:3,
+      loai:'Có các vấn đề về sức khỏe cầ lưu ý'
+    }
+  ]
   displayData: PagingParams = {
     PageNumber: 1,
     PageSize: 20,
@@ -165,17 +180,17 @@ export class AddEditKhachHangModalComponent implements OnInit {
       id: [0],
       customerName: [null, [Validators.required]],
       customerCode: [
-        null,[Validators.required],[ValidatorsDupcateMaKhachHang(this.khachhang,""),],
+        "MKH00",[Validators.required],[ValidatorsDupcateMaKhachHang(this.khachhang,""),],
       ],
       address: [null, [Validators.required]],
-      doB:["08/08/1999"],
+      doB:[null],
       jobId:[null],
       numberPhone: [null],
       note:[null],
       height:[null],
-      weight:[null],
+      weight:[1],
       healthStatus: [0],
-      email: [null],
+      email: ["@gmail.com"],
       createdBy:this.selectedId,
     });
   }else{
