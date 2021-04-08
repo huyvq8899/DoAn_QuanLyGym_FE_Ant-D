@@ -27,10 +27,10 @@
           <input nz-input nzSize="small" formControlName="cardCode" id="cardCode" autocomplete="new-cardCode" />
           <ng-template #errorMa let-control>
             <ng-container *ngIf="control.hasError('required')">
-              Vui lòng nhập mã khách hàng !
+              Vui lòng nhập mã thẻ tập hàng !
             </ng-container>
             <ng-container *ngIf="control.hasError('checkMa')">
-              Mã khách hàng đã tồn tại vui lòng kiểm tra lại!
+              Mã thẻ tập đã tồn tại vui lòng kiểm tra lại!
             </ng-container>
           </ng-template>
         </nz-form-control>

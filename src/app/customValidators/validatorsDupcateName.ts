@@ -6,6 +6,7 @@ import { toUnSign } from '../shared/searchEngine';
 import { RoleService } from '../services/role.service';
 import { KhachHangService } from 'src/app/services/khach-hang.service';
 import { ProductService } from '../services/product.service';
+import { CardService } from '../services/card.service';
 export function ValidatorsDupcateName(userService: UserService): AsyncValidatorFn {
     return (control: AbstractControl):
         Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
@@ -56,6 +57,24 @@ export function ValidatorsDupcateProductCode(
       c: AbstractControl
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return KhachHangService.CheckTrungMa(c.value).pipe(
+        map((res) => {
+          if (c.value.toLowerCase().trim() === currentMa.toLowerCase().trim()) {
+            return null;
+          }
+          // tslint:disable-next-line: object-literal-key-quotes
+          return res ? { checkMa: true } : null;
+        })
+      );
+    };
+  }
+  export function ValidatorsDupcateCardCode(
+    cardService: CardService,
+    currentMa: string
+  ): AsyncValidatorFn {
+    return (
+      c: AbstractControl
+    ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+      return cardService.CheckTrungMa(c.value).pipe(
         map((res) => {
           if (c.value.toLowerCase().trim() === currentMa.toLowerCase().trim()) {
             return null;

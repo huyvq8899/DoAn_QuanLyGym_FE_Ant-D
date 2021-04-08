@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { ValidatorsDupcateMaKhachHang } from 'src/app/customValidators/validatorsDupcateName';
+import { ValidatorsDupcateCardCode, ValidatorsDupcateMaKhachHang } from 'src/app/customValidators/validatorsDupcateName';
 import { PagingParams } from 'src/app/models/PagingParams';
 import { CardTypeService } from 'src/app/services/card-type.service';
 import { KhachHangService } from 'src/app/services/khach-hang.service';
@@ -404,7 +404,9 @@ export class AddEditCardComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       createdDate:[null],
-      cardCode: ["MTT00", [Validators.required]],
+      cardCode: [
+        "MTT00",[Validators.required],[ValidatorsDupcateCardCode(this.cardsv,""),],
+      ],
       customerId: [
         null,[Validators.required],
       ],
@@ -425,7 +427,14 @@ export class AddEditCardComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       createdDate:[null],
-      cardCode: [null, [Validators.required]],
+      cardCode: [
+        null,[Validators.required],  [
+          ValidatorsDupcateCardCode(
+            this.cardsv,
+            this.khachHangData.cardCode
+          ),
+        ],,
+      ],
       customerId: [
         null,[Validators.required],
       ],
