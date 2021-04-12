@@ -16,7 +16,7 @@
                 </ul>
             </li>
 
-            <li nz-submenu nzTitle="Xin nghỉ" nzIcon="user">
+            <!-- <li nz-submenu nzTitle="Xin nghỉ" nzIcon="user">
                 <ul>
 
                     <li nz-menu-item nzMatchRouter>
@@ -26,7 +26,7 @@
                         <a routerLink="/xin-nghi/thong-ke-xin-nghi">Thống kê xin nghỉ</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <li nz-submenu nzTitle="Thẻ tập" nzIcon="user">
                 <ul>
 
@@ -56,36 +56,36 @@
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/facility">Cơ sở</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/kho-hang">Kho hàng</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
+                    </li> -->
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/product">Sản phẩm</a>
-                    </li>
+                    </li> -->
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/equipment">Trang thiết bị</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/dich-vu">Dịch vụ</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/lai-xe">Lái xe</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
+                    </li> -->
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/chiet-khau">Chiết khấu</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/vung">Vùng</a>
-                    </li>
+                    </li> -->
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/job">Nghề nghiệp</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/phong-ban">Phòng ban</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/phuong-an-nhap">Phương án nhập</a>
-                    </li>
+                    </li> -->
 
 
                     <!-- <li nz-menu-item nzMatchRouter>
@@ -95,22 +95,20 @@
             </li>
             <li *ngIf="this.roleId === 'DX'"nz-submenu nzTitle="Danh mục" nzIcon="hdd">
                 <ul>
-                    <li nz-menu-item nzMatchRouter>
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/cuoc-van-chuyen">Cước vận chuyển</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/danh-muc/lai-xe">Lái xe</a>
-                    </li>
+                    </li> -->
                     <!-- <li nz-menu-item nzMatchRouter>
             <a routerLink="/danh-muc/bao-gia">Báo giá</a>
           </li> -->
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Bán hàng" nzIcon="shop">
+            <!-- <li nz-submenu nzTitle="Bán hàng" nzIcon="shop">
                 <ul>
-                    <!--<li nz-menu-item nzMatchRouter>Theo quy trình
-             <a routerLink="/quan-ly-ban-hang/quan-ly-ban-hang-theo-quy-trinh">Theo quy trình</a>
-          </li>  -->
+                    
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/quan-ly-ban-hang/don-hang-thong-thuong">Đơn hàng công nghiệp</a>
                     </li>
@@ -118,9 +116,9 @@
                         <a routerLink="/quan-ly-ban-hang/don-hang-thuong-mai">Đơn hàng thương mại</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
-            <li *ngIf="checkxemMua === true" nz-submenu nzTitle="Mua hàng" nzIcon="shopping-cart">
+            <!-- <li *ngIf="checkxemMua === true" nz-submenu nzTitle="Mua hàng" nzIcon="shopping-cart">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/quan-ly-mua-hang/don-mua-hang">Đơn mua hàng công nghiệp</a>
@@ -129,7 +127,7 @@
                         <a routerLink="/quan-ly-mua-hang/mua-hang-gui-kho">Đơn mua hàng thương mại</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
             <!--<li nz-submenu nzTitle="QL tài chính - kế toán" nzIcon="dollar">
         <ul>
@@ -174,7 +172,7 @@
                     <li nz-menu-item [nzMatchRouter]="true">
                         <a [routerLink]="['/thong-ke/thong-ke-so-luong-khach-hang']">
                             <i nz-icon nzType="file"></i>
-                            <span>Số lượng khách hàng</span>
+                            <span>Thống kke số lượng khách hàng</span>
                         </a>
                     </li>
                 </ul>
@@ -182,7 +180,15 @@
                     <li nz-menu-item [nzMatchRouter]="true">
                         <a [routerLink]="['/thong-ke/thong-ke-so-luong-the-tap']">
                             <i nz-icon nzType="file"></i>
-                            <span>Số lượng thẻ tập</span>
+                            <span>Thống kê số lượng thẻ tập</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a [routerLink]="['/thong-ke/thong-ke-doanh-thu']">
+                            <i nz-icon nzType="file"></i>
+                            <span>Thống kê doanh thu</span>
                         </a>
                     </li>
                 </ul>
