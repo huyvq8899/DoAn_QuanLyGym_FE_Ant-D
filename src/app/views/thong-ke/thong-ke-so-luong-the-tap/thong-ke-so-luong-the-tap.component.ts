@@ -87,12 +87,12 @@ export class ThongKeSoLuongTheTapComponent implements OnInit {
     const sec = ("0" + (dateOb.getSeconds() + 1)).slice(-2);
 
     this.loadingExportExcel = true;
-    this.userService.ExportExcelBaoCao(this.displayData).subscribe(
+    this.userService.ExportExcelThongKeTheTap(this.displayData).subscribe(
       (res: any) => {
         this.loadingExportExcel = false;
         const element = document.createElement("a");
         element.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${res.base64String}`;
-        element.download = `Thong_ke_so_luong_khach_hang_da_them_${year}-${month}-${day}${hours}${minute}${sec}.xlsx`;
+        element.download = `Thong_ke_so_luong_the_tap ${year}-${month}-${day}${hours}${minute}${sec}.xlsx`;
         element.click();
       },
       (err) => {

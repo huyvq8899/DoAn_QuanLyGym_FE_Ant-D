@@ -146,6 +146,24 @@ export class UserService {
     // console.log(str);
     return this.http.get(str, this.getHeader());
   }
+  ExportExcelThongKeTheTap(data: PagingParams) {
+    // return this.http.get(`${this.apiURL}Role/GetRoleByUserId/` + userId, this.getHeader());
+  //console.log(data);
+    const str = `${this.apiURL}User/ExportExcelThongKeTheTap?&userId=` + data.userId
+      + `&fromDate=` + data.fromDate
+      + `&toDate=` + data.toDate
+    // console.log(str);
+    return this.http.get(str, this.getHeader());
+  }
+  ExportExcelThongKeDoanhThu(data: PagingParams) {
+    // return this.http.get(`${this.apiURL}Role/GetRoleByUserId/` + userId, this.getHeader());
+  //console.log(data);
+    const str = `${this.apiURL}User/ExportExcelThongKeDoanhThu?&userId=` + data.userId
+      + `&fromDate=` + data.fromDate
+      + `&toDate=` + data.toDate
+    // console.log(str);
+    return this.http.get(str, this.getHeader());
+  }
   GetYears() {
     return this.http.get(`${this.apiURL}User/GetYears`, this.getHeader());
   }
