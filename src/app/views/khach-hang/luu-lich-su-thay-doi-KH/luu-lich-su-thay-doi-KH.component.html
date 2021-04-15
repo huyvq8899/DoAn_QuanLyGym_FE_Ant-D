@@ -78,19 +78,19 @@
                 </nz-dropdown-menu>
             </th>
 
-            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="maKhachHang" [nzSortFn]="true">Mã khách hàng
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="customerCode" [nzSortFn]="true">Mã khách hàng
                 <nz-filter-trigger [nzDropdownMenu]="menu1">
                     <i nz-icon nzType="search"></i>
                 </nz-filter-trigger>
                 <nz-dropdown-menu #menu1="nzDropdownMenu">
                     <div class="ant-table-filter-dropdown">
                         <div class="search-box">
-                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('maKhachHang',$event)" />
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('customerCode',$event)" />
                         </div>
                     </div>
                 </nz-dropdown-menu>
             </th>
-            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="tenKhachHang" [nzSortFn]="true">
+            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="customerName" [nzSortFn]="true">
                 Tên khách hàng
                 <nz-filter-trigger [nzDropdownMenu]="menu2">
                     <i nz-icon nzType="search"></i>
@@ -98,19 +98,7 @@
                 <nz-dropdown-menu #menu2="nzDropdownMenu">
                     <div class="ant-table-filter-dropdown">
                         <div class="search-box">
-                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('tenKhachHang',$event)" />
-                        </div>
-                    </div>
-                </nz-dropdown-menu>
-            </th>
-            <th nzWidth="50px" nzAlign="center" nzCustomFilter nzColumnKey="maSoThue" [nzSortFn]="true">Mã số thuế
-                <nz-filter-trigger [nzDropdownMenu]="menu20">
-                    <i nz-icon nzType="search"></i>
-                </nz-filter-trigger>
-                <nz-dropdown-menu #menu20="nzDropdownMenu">
-                    <div class="ant-table-filter-dropdown">
-                        <div class="search-box">
-                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('maSoThue',$event)" />
+                            <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue" (ngModelChange)="onChangeSearch('customerName',$event)" />
                         </div>
                     </div>
                 </nz-dropdown-menu>
@@ -173,9 +161,8 @@
             <td nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
             <td nzAlign="center">{{ data?.createdBy }}</td>
             <td nzAlign="center">{{ data?.createdDate | date:'dd/MM/yyyy HH:mm' }}</td>
-            <td nzAlign="center">{{ data.maKhachHang }}</td>
-            <td nzAlign="center">{{ data.tenKhachHang }}</td>
-            <td nzAlign="center">{{ data.maSoThue }}</td>
+            <td nzAlign="center">{{ data.customerCode }}</td>
+            <td nzAlign="center">{{ data.customerName }}</td>
             <td nzAlign="center">{{ data.tenTruongThayDoi }}</td>
             <td nzAlign="center">{{ data.dienGiai }}</td>
             <td nzAlign="center">{{ data.duLieuCu }}</td>

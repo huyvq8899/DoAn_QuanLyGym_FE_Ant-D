@@ -95,10 +95,10 @@ export class AddEditFacilityComponent implements OnInit {
       id: [null],
       facilityName: [null, [Validators.required]],
       taxCode: [null, [Validators.required]],
-      email: [null,],
+      email: [null],
       address: [null, [Validators.required]],
       numberPhone: [null, [Validators.required]],
-      fax: [null,],
+      fax: [null],
       establishedDay: ["02/08/1999", [Validators.required]],
       userId: this.selectedId,
     });

@@ -86,7 +86,7 @@ export class AddEditDichVuComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       serviceName: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      description: [null],
       money: [null, [Validators.required]],
     });
   }

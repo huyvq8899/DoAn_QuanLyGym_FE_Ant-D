@@ -44,6 +44,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 @NgModule({
     exports: [
         NzTreeModule,
@@ -90,7 +91,8 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
         NzCommentModule,
         NzResultModule,
         NzCollapseModule,
-        NzStatisticModule
+        NzStatisticModule,
+        NzCascaderModule
     ]
 })
 export class NgZorroModule { }

@@ -252,7 +252,7 @@ export class CardComponent implements OnInit {
       nzContent: AddEditCardComponent,
       nzClosable: true,
       nzFooter: 'null',
-      nzWidth: '75%',
+      nzWidth: '50%',
       nzStyle: {
         top: '10px'
       },

@@ -94,7 +94,7 @@ export class AddEditEquipmentComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [null],
       name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      description: [null],
       amount: [null, [Validators.required]],
       userId: this.selectedId,
     });

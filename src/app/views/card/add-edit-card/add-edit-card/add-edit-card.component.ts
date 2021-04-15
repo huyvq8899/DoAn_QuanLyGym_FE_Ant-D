@@ -3,24 +3,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { ValidatorsDupcateCardCode, ValidatorsDupcateMaKhachHang } from 'src/app/customValidators/validatorsDupcateName';
+import { ValidatorsDupcateCardCode } from 'src/app/customValidators/validatorsDupcateName';
 import { PagingParams } from 'src/app/models/PagingParams';
 import { CardTypeService } from 'src/app/services/card-type.service';
 import { KhachHangService } from 'src/app/services/khach-hang.service';
 import { UserService } from 'src/app/services/user.service';
 import { SearchEngine } from 'src/app/shared/searchEngine';
 import { AddEditCardTypeComponent } from 'src/app/views/danh-muc/card-type/add-edit-card-type/add-edit-card-type/add-edit-card-type.component';
-import { AddEditNganhNgheComponent } from 'src/app/views/danh-muc/nganh-nghe/modal/add-edit-nganh-nghe/add-edit-nganh-nghe.component';
-import { NganhNgheService } from 'src/app/services/nganh-nghe.service';
 import { FacilityService } from 'src/app/services/facility.service';
 import { AddEditFacilityComponent } from 'src/app/views/danh-muc/facility/add-edit-facility/add-edit-facility/add-edit-facility.component';
 import { CardService } from 'src/app/services/card.service';
 import { DichVuService } from 'src/app/services/dich-vu.service';
 import { AddEditDichVuComponent } from 'src/app/views/danh-muc/dich-vu/add-edit-dich-vu/add-edit-dich-vu/add-edit-dich-vu.component';
 import { AddEditKhachHangModalComponent } from 'src/app/views/khach-hang/add-edit-khach-hang/add-edit-khach-hang.component';
-import { ConvertDateTime } from 'src/app/shared/get-selected-array';
-import { DateTime } from '@syncfusion/ej2-charts';
-import { formatDate } from 'src/app/shared/moment';
 
 @Component({
   selector: 'app-add-edit-card',
@@ -41,8 +36,6 @@ export class AddEditCardComponent implements OnInit {
   listCardTypeTmp:any[]=[];
   listDichVu:any[]=[];
   listDichVuTmp:any[]=[];
-  listNganh:any[]=[];
-  listNganhTmp:any[]=[];
   myFormGroup: FormGroup;
   selectedloaiKhachHang:any;
   selectedId:any;
@@ -85,7 +78,6 @@ export class AddEditCardComponent implements OnInit {
     private router: Router,
     private modal: NzModalRef,
     private cardTypeService : CardTypeService,
-    private NganhNgheService:NganhNgheService,
     private modalz :NzModalService,
     private FacilityService:FacilityService,
     private userService:UserService,
@@ -157,24 +149,11 @@ export class AddEditCardComponent implements OnInit {
               money:service.money
             });
             console.log(service.id)
-            this.tinhTien();
+            this.onchangePrice(service.money);
          //   this.tinhNgayHetHan();
           }
         }
         }
-    onNganhChange(event){
-      const nganh = this.listNganh.find(x => x.nganhNgheId === event);
-  console.log(nganh);
-    if (this.myFormGroup.dirty) {
-      if (nganh) {
-        this.myFormGroup.patchValue({
-          tenNganhNghe:nganh.tenNganhNghe,
-          maNganhNghe:nganh.maNganhNghe
-        });
-
-      }
-    }
-    }
   ngOnInit() {
     this.selectedId=localStorage.getItem('userId');;
     this.createForm();
@@ -219,14 +198,6 @@ export class AddEditCardComponent implements OnInit {
       //   this.myFormGroup.get('maKhachHang').setValue(rs[0].macardType);
       // }
     })
-    this.NganhNgheService.getAll().subscribe((rs:any)=>{
-      this.listNganh=rs;
-      this.listNganhTmp=rs;
-      // if(this.isAddNew && rs.length > 0) { 
-      //   this.myFormGroup.get('nganhNgheId').setValue(rs[0].nganhNgheId);
-      // }
-    })
-    this.tinhTien();
   }
   addFacility() {
     const modal = this.modalz.create({
@@ -266,18 +237,18 @@ export class AddEditCardComponent implements OnInit {
     });
     modal.afterClose.subscribe((rs: any) => {
       if (rs) {
-        this.ngOnInit();
+        //this.ngOnInit();
        
       }
     });
   }
-  addCustomer() {
+  addNewCustomer() {
     const modal = this.modalz.create({
-      nzTitle: 'Thêm mới',
+      nzTitle: 'Thêm',
       nzContent: AddEditKhachHangModalComponent,
       nzClosable: false,
       nzFooter: 'null',
-      nzWidth: '50%',
+      nzWidth: '70%',
       nzStyle: {
         top: '10px'
       },
@@ -304,28 +275,6 @@ export class AddEditCardComponent implements OnInit {
       },
       nzComponentParams: {
         idNew: this.listCardType.length + 1,
-        isAddNew: true
-      },
-    });
-    modal.afterClose.subscribe((rs: any) => {
-      if (rs) {
-        this.ngOnInit();
-      }
-    });
-  }
-
-  addNganh() {
-    const modal = this.modalz.create({
-      nzTitle: 'Thêm mới',
-      nzContent: AddEditNganhNgheComponent,
-      nzClosable: false,
-      nzFooter: 'null',
-      nzWidth: '30%',
-      nzStyle: {
-        top: '10px'
-      },
-      nzComponentParams: {
-        idNew: this.listNganh.length + 1,
         isAddNew: true
       },
     });
@@ -383,10 +332,6 @@ export class AddEditCardComponent implements OnInit {
     const arrCondition = ["nameType"];
     this.listCardType = SearchEngine(this.listCardTypeTmp, arrCondition, event);
   }
-  searchNganh(event){
-    const arrCondition = ["tenNganhNghe"];
-    this.listNganh = SearchEngine(this.listNganhTmp, arrCondition, event);
-  }
   searchFacility(event){
     const arrCondition = ["facilityName"];
     this.listFacility = SearchEngine(this.listFacilityTmp, arrCondition, event);
@@ -414,9 +359,9 @@ export class AddEditCardComponent implements OnInit {
       cardTypeId: [null, [Validators.required]],
       facilityId:[null],
       serviceId:[null],
-      note: [null],
+      note: ["none"],
       // toDate:[null],
-      fromDate:[null],
+      fromDate:"08/08/2021",
       createdBy:localStorage.getItem('userId'),
       money:0,
       address:[null],
@@ -458,34 +403,27 @@ export class AddEditCardComponent implements OnInit {
     this.modelRef.destroy(null);
   }
   blurTien() {
-    if (!this.myFormGroup.get('money').value) {
-      this.myFormGroup.get('money').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('soLuongDuKien').value) {
-      this.myFormGroup.get('soLuongDuKien').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('soLuongThucTe').value) {
-      this.myFormGroup.get('soLuongThucTe').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('chietKhauCongTy').value) {
-      this.myFormGroup.get('chietKhauCongTy').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('chietKhauKhachHang').value) {
-      this.myFormGroup.get('chietKhauKhachHang').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('chiPhiKhac').value) {
-      this.myFormGroup.get('chiPhiKhac').setValue(0);
-    }
-
-    if (!this.myFormGroup.get('cuocVanChuyenThucTe').value) {
-      this.myFormGroup.get('cuocVanChuyenThucTe').setValue(0);
-    }
+    
+    var a=this.myFormGroup.get('money').value;
+      this.myFormGroup.get('price').setValue(a);
   }
+  onchangePrice(event){
+    const data = this.myFormGroup.getRawValue();
+    const money = data.money;
+    const nameType = data.nameType;
+    // const price = data.chietKhauKhachHang;
+    // const cuocVanChuyenThucTe = data.cuocVanChuyenThucTe;
+    // const cuocVanChuyenDuKien = data.cuocVanChuyenDuKien;
+    // const chiPhiKhac = data.chiPhiKhac;
+    // const soLuongThucTe = data.soLuongThucTe;
+    // const retailPrice = data.retailPrice;
+    if(nameType=="VIP"){
+      this.myFormGroup.get('price').setValue(parseFloat(event)*0.9);
+    }
+    if(nameType=="Thường"){
+      this.myFormGroup.get('price').setValue(money);
+  }
+}
   tinhTien() {
     const data = this.myFormGroup.getRawValue();
     const money = data.money;
@@ -502,7 +440,11 @@ export class AddEditCardComponent implements OnInit {
     if(nameType=="Thường"){
       this.myFormGroup.get('price').setValue(money);
     }
+    else{
+      this.myFormGroup.get('price').setValue(money);
+    }
   }
+  
   
   // tinhNgayHetHan() {
   //   var now = new Date();

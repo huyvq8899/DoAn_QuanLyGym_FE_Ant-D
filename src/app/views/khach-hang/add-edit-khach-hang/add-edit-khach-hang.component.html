@@ -43,7 +43,7 @@
             <nz-select style="width:100%" (ngModelChange)="onJobChange($event)" nzShowSearch nzAllowClear id="id"
               nzServerSearch (nzOnSearch)="searchJob($event)" formControlName="jobId" nzPlaceHolder="Chọn nghề ghiệp hiện tại">
               <nz-option *ngFor="let item of listJob" [nzLabel]="item.placeWork" [nzValue]="item.id">
-                {{item.jobName}}- {{item.placeWork}}()
+                {{item.jobName}} - {{item.placeWork}}()
               </nz-option>
             </nz-select>
           </nz-input-group>
@@ -62,9 +62,9 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="note">Chú ý
+        <nz-form-label [nzSm]="8" [nzXs]="24"  nzFor="note">Chú ý
         </nz-form-label>
-        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
+        <nz-form-control [nzSm]="15" [nzXs]="24">
           <input nz-input nzSize="small" formControlName="note" />
         </nz-form-control>
       </nz-form-item>

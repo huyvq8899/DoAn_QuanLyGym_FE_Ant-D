@@ -17,6 +17,49 @@ import { PagingParams } from 'src/app/models/PagingParams';
 import { UserService } from 'src/app/services/user.service';
 import { JobService } from 'src/app/services/job.service';
 import { AddEditJobComponent } from '../../danh-muc/job/add-edit-job/add-edit-job/add-edit-job.component';
+import { NzCascaderOption } from 'ng-zorro-antd/cascader';
+  
+const options = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+      {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+          {
+            value: 'xihu',
+            label: 'West Lake',
+            isLeaf: true
+          }
+        ]
+      },
+      {
+        value: 'ningbo',
+        label: 'Ningbo',
+        isLeaf: true
+      }
+    ]
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+      {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+          {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men',
+            isLeaf: true
+          }
+        ]
+      }
+    ]
+  }
+];
 @Component({
   selector: 'app-add-edit-khach-hang',
   templateUrl: './add-edit-khach-hang.component.html',
@@ -39,7 +82,12 @@ export class AddEditKhachHangModalComponent implements OnInit {
   loaiTinhTrang=[
     {
       ma:1,
-      loai:'Sức khỏe tốt'
+      loai:'Sức khỏe tốt',
+      children: [
+        {
+          loai: 'nanjing',
+          label: 'Nanjing',
+        }]
     },
     {
       ma:2,
@@ -51,6 +99,8 @@ export class AddEditKhachHangModalComponent implements OnInit {
       loai:'Có các vấn đề về sức khỏe cầ lưu ý'
     }
   ]
+  
+  
   displayData: PagingParams = {
     PageNumber: 1,
     PageSize: 20,
@@ -182,13 +232,13 @@ export class AddEditKhachHangModalComponent implements OnInit {
       customerCode: [
         "MKH00",[Validators.required],[ValidatorsDupcateMaKhachHang(this.khachhang,""),],
       ],
-      address: [null, [Validators.required]],
-      doB:[null],
+      address: [",Tứ Kỳ, Hải Dương", [Validators.required]],
+      doB:["08/04/2000"],
       jobId:[null],
       numberPhone: [null],
       note:[null],
-      height:[null],
-      weight:[1],
+      height:[150],
+      weight:[50],
       healthStatus: [0],
       email: ["@gmail.com"],
       createdBy:this.selectedId,
@@ -221,5 +271,23 @@ export class AddEditKhachHangModalComponent implements OnInit {
 
   closeModal() {
     this.modelRef.destroy(null);
+  }
+  nzOptions: NzCascaderOption[] = options;
+
+  values: string[] = ['zhejiang', 'hangzhou', 'xihu'];
+  /* // or like this:
+  values: any[] = [{
+    value: 'zhejiang',
+    label: 'Zhejiang'
+  }, {
+    value: 'hangzhou',
+    label: 'Hangzhou'
+  }, {
+    value: 'xihu',
+    label: 'West Lake'
+  }]; */
+
+  onChanges(values: string[]): void {
+    console.log(values, this.values);
   }
 }

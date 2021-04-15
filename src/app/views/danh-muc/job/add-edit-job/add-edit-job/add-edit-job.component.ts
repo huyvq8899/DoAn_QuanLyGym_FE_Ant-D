@@ -86,7 +86,7 @@ export class AddEditJobComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       jobName: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      description: [null],
       placeWork: [null],
     });
   }

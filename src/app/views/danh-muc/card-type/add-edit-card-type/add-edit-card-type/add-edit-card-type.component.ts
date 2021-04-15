@@ -86,7 +86,7 @@ export class AddEditCardTypeComponent implements OnInit {
     this.myFormGroup = this.fb.group({
       id: [0],
       nameType: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      description: [null],
     });
   }
 
