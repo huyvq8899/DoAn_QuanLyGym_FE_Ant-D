@@ -70,29 +70,12 @@ export class NotificationsComponent implements OnInit {
   ReadNotic(event: any) {
   //console.log(event);
   //console.log(this.router.url);
-    const _url = this.router.url
-    if(event.type === 1 ) {
-      if(this.isMobile==true){
-        this.router.navigate(['m-layout/m-quan-ly-ban-hang/m-don-hang-thuong-mai']);
-      }else{
-        this.router.navigate(['quan-ly-ban-hang/don-hang-thuong-mai']);
-      }
-        
-
-      
-    } 
+    const _url = this.router.url;
     if(event.type ===2 ) {
       if(this.isMobile==true){
-        this.router.navigate(['m-layout/m-quan-ly-ban-hang/m-don-hang-cong-nghiep']);
+        this.router.navigate(['/card']);
       }else{
-        this.router.navigate(['quan-ly-ban-hang/don-hang-thong-thuong']);
-      }
-    }
-    if(event.type ===3 ) {
-      if (_url.includes('/hop-dong')){
-       
-      } else {
-        this.router.navigate(['/hop-dong']);
+        this.router.navigate(['/card']);
       }
     }
     if(!event.read) {
