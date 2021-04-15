@@ -34,7 +34,7 @@ export class ThongBaoService {
         return this.http.get(`${this.apiURL}GetCountNotOpenYetByNguoiNhan/` + userId, this.getHeader());
     }
 
-    UpdateAllOpenedByNguoiNhan(userId) {
+    UpdateAllOpenedByNguoiNhan(userId) { 
         const data = { userId };
         return this.http.put(`${this.apiURL}UpdateAllOpenedByNguoiNhan`, data, this.getHeader());
     }
