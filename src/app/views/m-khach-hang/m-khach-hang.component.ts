@@ -33,8 +33,15 @@ export class MKhachHangComponent implements OnInit {
   valueModel = '';
   searchValue = "";
   displayData: PagingParams = {
+    PageNumber: 1,
+    PageSize: 20,
+    Keyword: '',
+    SortKey: '',
+    SortValue: '',
     fromDate: "",
     toDate: "",
+    KeywordCol: "",
+    ColName: "",
   };
   total = 0;
 
@@ -60,6 +67,9 @@ export class MKhachHangComponent implements OnInit {
   valueBegin = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
   //valueEnd = new Date(this.now.getFullYear(), this.now.getMonth() + 1, 0);
   valueEnd = this.now;
+  selectedId: string;
+  selectedUser: any;
+  pageSizeOptions: any[];
 
   currentDateFormat(date, format: string = 'yyyy-mm-dd HH:MM'): any {
     const pad = (n: number): string => (n < 10 ? `0${n}` : n.toString());
@@ -144,15 +154,40 @@ export class MKhachHangComponent implements OnInit {
   }
   LoadData() {
     this.loading = true;
-    this.khachhangsv.GetAllMobile(localStorage.getItem('userId') as any, this.displayData).subscribe((data: any) => {
-      this.listOfData = data;
+    this.displayData.userId = localStorage.getItem('userId');
+    this.selectedId="";
+    if(this.selectedUser){
+      this.selectedId=this.selectedUser
+    }
+    this.khachhangsv.GetAllPaging(this.displayData,localStorage.getItem('userId'),this.selectedId).subscribe((data: any) => {
+      this.listOfData = data.items;
+      console.log(this.listOfData);
+      this.listOfDatatmp = data.items;
       this.total = data.totalCount;
-      this.listOfDatatmp = data;
+      this.displayData.PageNumber = data.currentPage;
+      this.getPageSizeOption();
       this.loading = false;
-    }, _ => {
-      this.loading = false;
+      // delete all
+      if (this.listOfData.length === 0 && this.displayData.PageNumber > 1) {
+        this.displayData.PageNumber -= 1;
+        this.LoadData();
+      }
     });
   }
+  getPageSizeOption() {
+    const pageSizeOptions1 = [];
+    if (this.total > 20) {
+      for (let index = 20; index < this.total; index = (index * 2)) {
+        pageSizeOptions1.push(index);
+        // console.log(pageSizeOptions1);
+      }
+    } else {
+      this.displayData.PageSize = 20;
+    }
+    pageSizeOptions1.push(this.total);
+    this.pageSizeOptions = pageSizeOptions1;
+  }
+
   changeSearch(event: any) {
 
     const arrCondition = ['tenKhachHang', 'diaChi', 'nganhNghe', 'soDienThoai', 'tenNganhNghe', 'maKhachHang', 'tenVung', 'loaiKhachHang', 'trangThaiKhachHang', 'nguoiLienHe', 'maSoThue', 'cacVanDeCuaNhaCCCu', 'nhaCungCapHienTai', 'nguoiThem', 'nguoiDaiDienPhapLuat', 'soDienThoaiNguoiDaiDien', 'keToan', 'soDienThoaiKeToan', 'congNo', 'checkCIC', 'hanMuc', 'createdDate', 'thoiHanNo', 'diaChiGiaoHang', 'vanPhongGiaoDich', 'email', 'deXuatNhanVien'];
@@ -175,7 +210,7 @@ export class MKhachHangComponent implements OnInit {
   }
   chiTietKH(data: any) {
     this.sharedService.sendData(data);
-    this.router.navigate(['m-layout/m-khach-hang/m-add-edit-khach-hang']);
+    this.router.navigate(['m-layout/m-khach-hang/m-add-khach-hang']);
   }
 
   removeItem(id: any) {

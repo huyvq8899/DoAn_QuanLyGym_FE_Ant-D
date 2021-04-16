@@ -125,67 +125,13 @@ export class MAddKhachHangComponent implements OnInit {
       this.sharedService.currentData.subscribe(data => this.khachHangData = data);
       console.log(this.khachHangData);
       this.myFormGroup.patchValue({
-        tenNganhNghe: this.khachHangData.tenNganhNghe,
-        tenVung: this.khachHangData.tenVung,
         ...this.khachHangData
       });
     }
-    this.PhuongAnNhapService.getAll().subscribe((rs: any) => {
-      this.listPhuongAnNhap = rs;
-      this.listPhuongAnNhapTmp = rs;
-    })
-    this.VungService.getAll().subscribe((rs: any) => {
-      this.listVung = rs;
-      this.listVungTmp = rs;
-    })
-    this.myFormGroup.get('loaiKhachHang').setValue(this.cacLoaiKhachHang[0].loai);
-    this.myFormGroup.get('trangThaiKhachHang').setValue(this.cacLoaiTrangThai[0].loai);
-    this.NganhNgheService.getAll().subscribe((rs: any) => {
-      this.listNganh = rs;
-      this.listNganhTmp = rs;
-    })
   }
   addPhuongAnNhap() {
-    // const modal = this.modalz.create({
-    //   nzTitle: 'Thêm mới',
-    //   nzContent: AddEditPhuongAnNhapComponent,
-    //   nzClosable: false,
-    //   nzFooter: 'null',
-    //   nzWidth: '30%',
-    //   nzStyle: {
-    //     top: '10px'
-    //   },
-    //   nzComponentParams: {
-    //     idNew: this.listPhuongAnNhap.length + 1,
-    //     isAddNew: true
-    //   },
-    // });
-    // modal.afterClose.subscribe((rs: any) => {
-    //   if (rs) {
-    //     this.ngOnInit();
-    //   }
-    // });
   }
   addVung() {
-    // const modal = this.modalz.create({
-    //   nzTitle: 'Thêm mới',
-    //   nzContent: AddEditVungComponent,
-    //   nzClosable: false,
-    //   nzFooter: 'null',
-    //   nzWidth: '30%',
-    //   nzStyle: {
-    //     top: '10px'
-    //   },
-    //   nzComponentParams: {
-    //     idNew: this.listVung.length + 1,
-    //     isAddNew: true
-    //   },
-    // });
-    // modal.afterClose.subscribe((rs: any) => {
-    //   if (rs) {
-    //     this.ngOnInit();
-    //   }
-    // });
   }
 
   addNganh() {
@@ -262,94 +208,43 @@ export class MAddKhachHangComponent implements OnInit {
       this.myFormGroup = this.fb.group({
         id: [0],
         createdDate: [null],
-        tenKhachHang: [null, [Validators.required]],
-        maKhachHang: [
+        customerName: [null, [Validators.required]],
+        customerCode: [
           null, [Validators.required], [ValidatorsDupcateMaKhachHang(this.khachhang, ""),],
         ],
-        diaChi: [null, [Validators.required]],
-        vanPhongGiaoDich: [null],
-        diaChiGiaoHang: [null],
-        email: [null],
-        hanMuc: [null],
-        thoiHanNo: [null],
-        deXuatNhanVien: [null],
-        sanLuongHangThang: [0],
-        phuongAnNhapId: [null],
-        nhaCungCapHienTai: [null],
-        giaTrietKhau: [null],
-        mongMuonKhachHang: [null],
-        cacVanDeCuaNhaCCCu: [null],
-        nguoiLienHe: [null, [Validators.required]],
-        chucVu: [null],
-        soDienThoai: [null, [Validators.required]],
-        luuY: [null],
-        danhGiaChung: [null],
-        loaiKhachHang: [null, [Validators.required]],
-        trangThaiKhachHang: [null, [Validators.required]],
-        vungId: [null],
-        nganhNgheId: [null],
-        tenVung: [null, [Validators.required]],
-        tenNganhNghe: [null, [Validators.required]],
-        maSoThue: [null],
-        nguoiDaiDienPhapLuat: [null, [Validators.required]],
-        congNo: [null, [Validators.required]],
-        checkCIC: [null, [Validators.required]],
-        baoLanhThanhToan: [null],
-        soDienThoaiNguoiDaiDien: [null, [Validators.required]],
-        keToan: [null],
-        soDienThoaiKeToan: [null],
-        giamDoc: [null],
-
-
+        address: [null, [Validators.required]],
+        doB: [null],
+        placeWork: [null],
+        numberPhone: [null],
+        note: [null],
+        height: [null],
+        weight: [null],
+        healthStatus: [0],
+        email: [null]
       });
     } else {
       this.myFormGroup = this.fb.group({
         id: [0],
-        tenKhachHang: [null, [Validators.required]],
-        maKhachHang: [
+        customerName: [null, [Validators.required]],
+        customerCode: [
           null,
           [Validators.required],
           [
             ValidatorsDupcateMaKhachHang(
               this.khachhang,
-              this.khachHangData.maKhachHang
+              this.khachHangData.customerCode
             ),
           ],
         ],
-        diaChi: [null, [Validators.required]],
-        vanPhongGiaoDich: [null],
-        diaChiGiaoHang: [null],
-        email: [null],
-        hanMuc: [null],
-        thoiHanNo: [null],
-        deXuatNhanVien: [null],
-        sanLuongHangThang: [null],
-        phuongAnNhapId: [null],
-        nhaCungCapHienTai: [null],
-        giaTrietKhau: [null],
-        mongMuonKhachHang: [null],
-        cacVanDeCuaNhaCCCu: [null],
-        nguoiLienHe: [null, [Validators.required]],
-        chucVu: [null],
-        soDienThoai: [null, [Validators.required]],
-        luuY: [null],
-        danhGiaChung: [null],
-        loaiKhachHang: [null, [Validators.required]],
-        trangThaiKhachHang: [null, [Validators.required]],
-        vungId: [null],
-        nganhNgheId: [null],
-        tenVung: [null, [Validators.required]],
-        tenNganhNghe: [null, [Validators.required]],
-        maSoThue: [null],
-        nguoiDaiDienPhapLuat: [null, [Validators.required]],
-        congNo: [null, [Validators.required]],
-        checkCIC: [null, [Validators.required]],
-        baoLanhThanhToan: [null],
-        soDienThoaiNguoiDaiDien: [null, [Validators.required]],
-        keToan: [null],
-        soDienThoaiKeToan: [null],
-        giamDoc: [null],
-        ModifiedBy: this.selectedId
+        address: [null, [Validators.required]],
+        doB: [null],
+        placeWork: [null],
+        numberPhone: [null],
+        note: [null],
+        height: [null],
+        weight: [null],
+        healthStatus: [0],
+        email: [null]
       });
     }
   }
