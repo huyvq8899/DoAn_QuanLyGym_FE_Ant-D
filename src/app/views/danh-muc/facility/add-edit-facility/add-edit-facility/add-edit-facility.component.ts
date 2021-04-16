@@ -99,7 +99,7 @@ export class AddEditFacilityComponent implements OnInit {
       address: [null, [Validators.required]],
       numberPhone: [null, [Validators.required]],
       fax: [null],
-      establishedDay: ["02/08/1999", [Validators.required]],
+      establishedDay: ["02/08/2018", [Validators.required]],
       userId: this.selectedId,
     });
   }
