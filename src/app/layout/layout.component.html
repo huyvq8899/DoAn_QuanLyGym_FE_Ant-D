@@ -172,7 +172,7 @@
                     <li nz-menu-item [nzMatchRouter]="true">
                         <a [routerLink]="['/thong-ke/thong-ke-so-luong-khach-hang']">
                             <i nz-icon nzType="file"></i>
-                            <span>Thống kke số lượng khách hàng</span>
+                            <span>Thống kê số lượng khách hàng</span>
                         </a>
                     </li>
                 </ul>
@@ -247,7 +247,7 @@
               <div class="inline-component" nz-dropdown [nzDropdownMenu]="accountMenu">
                 <nz-avatar nzIcon="user" nzSrc="{{currentUser.avatar}}">
                 </nz-avatar>
-                <span style="margin-left: 10px;">{{currentUser?.userName}}</span>
+                <span style="margin-left: 10px;">{{currentUser?.fullName}}</span>
               </div>
               <nz-dropdown-menu #accountMenu="nzDropdownMenu">
                 <ul nz-menu>

@@ -27,6 +27,8 @@ import { MPhongBanComponent } from './m-phong-ban/m-phong-ban.component';
 import { MAddEditPhongBanModalComponent } from './m-phong-ban/m-modal/m-add-edit-phong-ban/m-add-edit-phong-ban.component';
 import { MPhuongAnNhapComponent } from './m-phuong-an-nhap/m-phuong-an-nhap.component';
 import { MAddEditPhuongAnNhapComponent } from './m-phuong-an-nhap/m-modal/m-add-edit-phuong-an-nhap/m-add-edit-phuong-an-nhap.component';
+import { MCardTypeComponent } from './m-card-type/m-card-type.component';
+import { MAddEditCardTypeComponent } from './m-card-type/modal/m-add-edit-card-type/m-add-edit-card-type.component';
 
 @NgModule({
   imports: [
@@ -46,7 +48,8 @@ import { MAddEditPhuongAnNhapComponent } from './m-phuong-an-nhap/m-modal/m-add-
     MLaiXeComponent,MAddEditLaiXeComponent,
     MNganhNgheComponent,MAddEditNganhNgheModalComponent,
     MPhongBanComponent,MAddEditPhongBanModalComponent,
-    MPhuongAnNhapComponent,MAddEditPhuongAnNhapComponent
+    MPhuongAnNhapComponent,MAddEditPhuongAnNhapComponent,
+    MCardTypeComponent,MAddEditCardTypeComponent,
   ]
 })
 export class MDanhMucModule { }

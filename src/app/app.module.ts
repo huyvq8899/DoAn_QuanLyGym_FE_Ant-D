@@ -37,6 +37,8 @@ import {
 } from '@syncfusion/ej2-angular-charts';
 import { AddEditCardComponent } from './views/card/add-edit-card/add-edit-card/add-edit-card.component';
 import { CardComponent } from './views/card/card.component';
+import { MCardComponent } from './views/m-card/m-card.component';
+import { MAddEditCardComponent } from './views/m-card/modal/m-add-edit-card/m-add-edit-card.component';
 
 registerLocaleData(en);
 export function tokenGetter() {
@@ -56,7 +58,8 @@ export function tokenGetter() {
       BaoCaoXinNghiComponent,
       CardComponent,
       AddEditCardComponent,
-      
+      MCardComponent,
+      MAddEditCardComponent,
    ],
    imports: [
       BrowserModule,

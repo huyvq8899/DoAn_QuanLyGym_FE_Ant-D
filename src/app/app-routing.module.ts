@@ -8,6 +8,8 @@ import { DesktopGuard, MobileGuard } from './device-guard';
 import { MLayoutComponent } from './m-layout/m-layout.component';
 import { XinNghiComponent } from './views/xin-nghi/xin-nghi.component';
 import { CardComponent } from './views/card/card.component';
+import { MCardComponent } from './views/m-card/m-card.component';
+import { MAddEditCardComponent } from './views/m-card/modal/m-add-edit-card/m-add-edit-card.component';
 
 // {
 //     path: '',
@@ -86,6 +88,15 @@ const routes: Routes = [
             {
                 path: 'm-bao-cao',
                 loadChildren: () => import('./views/m-bao-cao/m-bao-cao.module').then(m => m.MBaoCaoModule),
+            },
+             {
+                path: 'm-card',
+                component:MCardComponent
+            },
+            {
+                //path:'m-khach-hang',
+                path:'m-add-edit-card',
+                component: MAddEditCardComponent
             },
           
         ]

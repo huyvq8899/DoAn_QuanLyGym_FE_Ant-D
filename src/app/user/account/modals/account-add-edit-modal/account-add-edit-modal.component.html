@@ -46,16 +46,6 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phongBanPhongId">Phòng</nz-form-label>
-    <nz-form-control [nzSm]="18" [nzXs]="24" >
-      <nz-select nzSize="small" nzShowSearch nzAllowClear formControlName="phongBanPhongId">
-      <nz-option *ngFor="let option of phongs" [nzLabel]="option.phongName"
-        [nzValue]="option.phongBanPhongId">
-      </nz-option>
-    </nz-select>
-    </nz-form-control>
-</nz-form-item>
-  <nz-form-item>
     <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="roleId">Phân quyền sử dụng</nz-form-label>
     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Vui lòng chọn quyền thành viên !"
       nzExtra="Phân quyền sử dụng hệ thống">

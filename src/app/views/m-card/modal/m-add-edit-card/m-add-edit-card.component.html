@@ -1,4 +1,9 @@
-<form nz-form [formGroup]="myFormGroup" class="login-form">
+<nz-button-group style="padding-bottom: 10px;">
+  <button style="margin-left: 5px" nz-button nzType="primary" (click)="BackPages()"><i nz-icon nzType="left"></i>
+      Quay lại</button>
+</nz-button-group>
+
+<form style="margin-left: 5px;margin-right: 5px;" nz-form [formGroup]="myFormGroup" class="login-form">
   <div nz-row>
     <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
       <nz-form-item>
@@ -126,48 +131,9 @@
             nzPlaceHolder="Chọn ngày"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
-      <!-- <nz-form-item>
-        <nz-form-label  [nzSm]="8" [nzXs]="24" class="flabel1" nzFor="toDate">Đến ngày</nz-form-label>
-        <nz-form-control  [nzSm]="15" [nzXs]="24" class="fcontrol">
-          <nz-date-picker  [nzFormat]="'dd/MM/yyyy'" formControlName="toDate"
-            nzPlaceHolder="Chọn ngày"></nz-date-picker>
-        </nz-form-control>
-      </nz-form-item> -->
-   
-
-      <!-- <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cardTypeId">Loại thẻ </nz-form-label>
-        <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Phải nhập!">
-          <nz-input-group [nzAddOnAfter]="beforeIconSubTaskAssign3">
-
-            <nz-select style="width:100%" (ngModelChange)="onCardTypeChange($event)" nzShowSearch nzServerSearch
-              (nzOnSearch)="searchCardType($event)" nzAllowClear id="cardTypeId" formControlName="cardTypeId"
-              nzPlaceHolder="Chọn phương án nhập ">
-              <nz-option *ngFor="let item of listCardType" [nzLabel]="item.cardCode"
-                [nzValue]="item.cardTypeId">
-                {{item.cardTypeName}}
-              </nz-option>
-            </nz-select>
-          </nz-input-group>
-
-          <ng-template #beforeIconSubTaskAssign3>
-             <a (click)="addPhuongAnNhap()">
-              <i nz-icon nzType="plus" nzTheme="outline" style="cursor: pointer;"></i>
-            </a> 
-          </ng-template>
-
-        </nz-form-control>
-      </nz-form-item> -->
     </div>
   </div>
-  <div style="text-align: center;font-weight: bold;">
-    <nz-alert nzType="error"
-        nzMessage="Tổng phí: {{myFormGroup.getRawValue()?.price | formatPrice}}">
-    </nz-alert>
-</div>
 </form>
-
-<div *nzModalFooter>
-  <button nz-button nzType="default" (click)="closeModal()">Hủy bỏ</button>
-  <button nz-button nzType="primary" (click)="saveChanges()">Lưu</button>
+<div style="margin: 10px 5px 10px 0px; text-align: right; padding-bottom:20px;">
+  <button nz-button nzType="primary" (click)="saveChanges()" style=" margin-left: 2%;width:20%;max-width: 100px; ">Lưu</button>
 </div>

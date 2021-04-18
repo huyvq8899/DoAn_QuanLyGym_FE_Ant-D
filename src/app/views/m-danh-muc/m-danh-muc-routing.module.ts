@@ -24,6 +24,7 @@ import { MChietKhauComponent } from './m-chiet-khau/m-chiet-khau.component';
 import { MAddEditChietKhauComponent } from './m-chiet-khau/m-modal/m-add-edit-chiet-khau/m-add-edit-chiet-khau.component';
 import { MLaiXeComponent } from './m-lai-xe/m-lai-xe.component';
 import { MAddEditLaiXeComponent } from './m-lai-xe/m-modal/m-add-edit-chiet-khau/m-add-edit-lai-xe.component';
+import { MCardTypeComponent } from './m-card-type/m-card-type.component';
 
 const routes: Routes = [
     {
@@ -91,8 +92,8 @@ const routes: Routes = [
         component: MAddEditLoiNhuanComponent
     },
     {
-        path: 'm-chenh-lech',
-        component: MChenhLechComponent
+        path: 'm-card-type',
+        component: MCardTypeComponent
     },
     {
         path: 'm-chenh-lech/m-add-edit-chenh-lech',

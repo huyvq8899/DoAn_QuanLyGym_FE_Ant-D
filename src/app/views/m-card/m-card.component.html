@@ -1,0 +1,72 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueBegin, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueBegin" (onOk)="onOkBegin($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px; width: 32%;max-width: 120px;">
+    <List [className]="'date-picker-list'">
+      <ListItem DatePicker [extra]="currentDateFormat(valueEnd, 'yyyy-mm-dd')" [arrow]="'horizontal'" [mode]="'date'"
+        [(ngModel)]="valueEnd" (onOk)="onOkEnd($event)">
+        <Brief>{{ name }}</Brief>
+      </ListItem>
+    </List>
+  </div>
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+    <button nz-button nzSize="small" nzType="primary"
+      style="margin-left: 10px; margin-top: 5%;height:70%; color: #ffff !important;" (click)="filterTable()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
+  </div>
+</div>
+<div nz-row style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+  <div nz-col nzSpan="100" style="text-align: left; padding-left: 3px;">
+  <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+    <i nz-icon nzType="plus"></i>Thêm mới</button>
+  </div>
+
+  <div nz-col nzSpan="100" style="text-align: right; padding-left: 3px; right: 0px; position: absolute; margin-right: 5px;">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-input-group>
+  </div>
+</div>
+
+<PullToRefresh [ngStyle]="dtPullToRefreshStyle" [direction]="state.direction"
+    [endReachedRefresh]="state.endReachedRefresh" (onRefresh)="pullToRefresh($event)">
+    <nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageLimit" [nzShowPagination]="false" nzSize="small"
+      [nzLoading]="loading" nzBordered="true" [nzScroll]="{ x: '1000px'}" nzShowTotal [nzTotal]="total"
+      [nzShowTotal]="rangeTemplate">
+      <ng-template #rangeTemplate let-range="range" let-total>
+    {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+  </ng-template>
+  <thead>
+    <tr>
+      <th nzLeft="0px" nzWidth="40px" nzAlign="center">STT</th>
+      <th nzLeft="40px" nzWidth="140px" nzAlign="center" nzColumnKey="nguoiThem" >Người tạo</th>
+      <th nzWidth="100px" nzAlign="center"  nzColumnKey="cardCode" >Mã thẻ tập</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="customerCode" >Mã khách hàng</th>
+      <th nzWidth="250px" nzAlign="center"  nzColumnKey="customerName" >Tên khách hàng</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="address" >Địa chỉ</th>
+      <th nzWidth="200px" nzAlign="center"  nzColumnKey="numberPhone" >Số điện thoại</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data; let i = index"  long-press (onLongPress)="showActionSheet(data)">
+      <td nzLeft="0px" nzWidth="40px" nzAlign="center">{{ i + 1 }}</td>
+      <td nzLeft="40px" nzWidth="140px" nzAlign="left">{{ data?.nguoiThem }}</td>
+      <td nzWidth="100px" nzAlign="left">{{ data.cardCode }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.customerCode }}</td>
+      <td nzWidth="250px" nzAlign="left">{{ data.customerName }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.address }}</td>
+      <td nzWidth="200px" nzAlign="left">{{ data.numberPhone }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+</PullToRefresh>
